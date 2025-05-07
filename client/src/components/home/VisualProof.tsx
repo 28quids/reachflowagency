@@ -3,34 +3,34 @@ import { fadeInUp, staggerContainer } from "@/lib/utils";
 
 export default function VisualProof() {
   return (
-    <section className="py-12 bg-gray-50/70 relative overflow-hidden">
+    <section className="py-16 bg-gradient-to-b from-blue-50/60 to-slate-50 relative overflow-hidden">
       {/* Background decorations */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 w-96 h-96 bg-orange-200 rounded-full opacity-30 blur-[100px]"></div>
-      <div className="absolute -bottom-20 right-1/4 w-64 h-64 bg-blue-100 rounded-full opacity-20 blur-[80px]"></div>
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 w-96 h-96 bg-orange-200 rounded-full opacity-20 blur-[120px]"></div>
+      <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-white to-transparent"></div>
       
       <div className="container mx-auto px-4 relative">
         {/* Rating Header */}
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-14"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <div className="flex text-yellow-400">
+          <div className="flex items-center justify-center mb-1">
+            <div className="flex text-blue-500">
               {[...Array(5)].map((_, i) => (
-                <svg key={i} className="w-5 h-5" fill={i < 4 ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={i < 4 ? 0 : 1.5} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                <svg key={i} className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                 </svg>
               ))}
             </div>
-            <span className="font-medium text-gray-700">Rated 4.9/5 by 30+ businesses</span>
           </div>
+          <div className="text-gray-700 font-medium">Rated 4.9/5 by 30+ businesses</div>
         </motion.div>
         
         <motion.div
-          className="flex flex-col lg:flex-row gap-8 items-center justify-center max-w-5xl mx-auto"
+          className="flex flex-col lg:flex-row gap-6 items-center justify-center max-w-5xl mx-auto"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -38,34 +38,26 @@ export default function VisualProof() {
         >
           {/* Left Card - Calendar */}
           <motion.div 
-            className="bg-white p-6 rounded-xl shadow-lg max-w-xs w-full order-2 lg:order-1"
+            className="bg-white py-5 px-6 rounded-2xl shadow-lg max-w-[240px] w-full order-2 lg:order-1 shadow-blue-100/50"
             variants={fadeInUp}
           >
-            <div className="text-center mb-3 pb-2 border-b border-gray-100">
-              <h3 className="font-semibold text-gray-700">Meeting Calendar</h3>
-              <p className="text-sm text-gray-500">December 2023</p>
+            <div className="mb-4">
+              <div className="w-24 h-5 bg-gray-300 rounded-full mb-2"></div>
             </div>
             
-            <div className="grid grid-cols-5 gap-2 mb-2">
-              {/* Calendar day headers */}
-              {['M', 'T', 'W', 'T', 'F'].map((day, i) => (
-                <div key={i} className="text-center text-xs font-medium text-gray-500">
-                  {day}
-                </div>
-              ))}
-              
+            <div className="grid grid-cols-5 gap-2">
               {/* Calendar grid cells */}
               {[...Array(25)].map((_, i) => {
                 // Define which cells have checkmarks (booked meetings)
-                const hasCheckmark = [2, 7, 10, 14, 19, 23].includes(i);
+                const hasCheckmark = [1, 6, 8, 12, 16, 21].includes(i);
                 
                 return (
                   <div 
                     key={i} 
-                    className={`flex items-center justify-center rounded-md h-8 text-xs font-medium ${
+                    className={`flex items-center justify-center rounded-md h-8 w-8 ${
                       hasCheckmark 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'bg-gray-100 text-gray-500'
+                        ? 'bg-blue-500 text-white' 
+                        : 'bg-gray-200'
                     }`}
                   >
                     {hasCheckmark && (
@@ -77,124 +69,134 @@ export default function VisualProof() {
                 );
               })}
             </div>
-            
-            <div className="text-center mt-4">
-              <div className="text-sm text-gray-500">6 new meetings booked this week</div>
-            </div>
           </motion.div>
           
           {/* Center - Phone Mockup */}
           <motion.div 
-            className="relative order-1 lg:order-2 max-w-[260px] w-full"
+            className="relative order-1 lg:order-2 max-w-[300px] w-full"
             variants={fadeInUp}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.1 }}
           >
-            <div className="bg-gray-900 rounded-[40px] pt-2 pb-6 px-3 shadow-2xl relative overflow-hidden">
+            <div className="bg-[#1D1D1D] rounded-[40px] pt-1 pb-6 px-2 shadow-2xl relative overflow-hidden border-4 border-gray-800">
               {/* Phone notch */}
-              <div className="w-1/2 h-6 bg-black rounded-b-xl absolute top-0 left-1/2 transform -translate-x-1/2"></div>
+              <div className="w-1/2 h-6 bg-black rounded-b-2xl absolute top-0 left-1/2 transform -translate-x-1/2"></div>
               
               {/* Screen */}
-              <div className="bg-gray-100 rounded-[28px] overflow-hidden p-3 h-[480px]">
-                {/* Screen Content */}
-                <div className="text-center mt-16 mb-8">
-                  <div className="text-4xl font-light">11:56</div>
-                  <div className="text-sm text-gray-600 mt-1">Dec 11, Monday</div>
-                </div>
-                
-                {/* Notification 1 */}
-                <div className="bg-white rounded-xl p-3 mb-3 shadow-sm flex items-start animate-pulse-subtle">
-                  <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center mr-3 flex-shrink-0">
-                    <svg className="w-4 h-4 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                    </svg>
+              <div className="rounded-[32px] overflow-hidden h-[500px] bg-blue-600">
+                <div className="px-4 pt-12 pb-4 h-full flex flex-col">
+                  {/* Screen Content */}
+                  <div className="text-center mb-auto mt-6">
+                    <div className="text-[72px] font-extralight text-white tracking-tighter leading-tight">11:56</div>
+                    <div className="text-white/80 mt-1 font-light tracking-wider">Dec 11, Monday</div>
                   </div>
-                  <div className="flex-1">
-                    <div className="flex justify-between">
-                      <div className="font-medium text-sm">ReachFlow</div>
-                      <div className="text-xs text-gray-500">now</div>
+                  
+                  {/* Notifications */}
+                  <div className="space-y-3 mb-6">
+                    {/* Notification 1 */}
+                    <div className="bg-blue-200/90 backdrop-blur-sm rounded-xl p-3 flex items-start animate-pulse-subtle">
+                      <div className="w-8 h-8 bg-blue-100 rounded-md flex items-center justify-center mr-3 flex-shrink-0">
+                        <svg className="w-5 h-5 text-blue-800" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 2L1 21h22L12 2z"/>
+                        </svg>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex justify-between">
+                          <div className="font-semibold text-sm text-blue-900">LEAD CHOICE</div>
+                          <div className="text-xs text-blue-800/70">1m ago</div>
+                        </div>
+                        <div className="text-sm text-blue-800 font-medium">You've booked a new qualified meeting!</div>
+                      </div>
                     </div>
-                    <div className="text-xs">You've booked a new qualified meeting!</div>
-                  </div>
-                </div>
-                
-                {/* Notification 2 */}
-                <div className="bg-white rounded-xl p-3 shadow-sm flex items-start">
-                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3 flex-shrink-0">
-                    <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex justify-between">
-                      <div className="font-medium text-sm">Calendar</div>
-                      <div className="text-xs text-gray-500">1m ago</div>
+                    
+                    {/* Notification 2 */}
+                    <div className="bg-blue-200/90 backdrop-blur-sm rounded-xl p-3 flex items-start">
+                      <div className="w-8 h-8 bg-blue-100 rounded-md flex items-center justify-center mr-3 flex-shrink-0">
+                        <svg className="w-5 h-5 text-blue-800" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 2L1 21h22L12 2z"/>
+                        </svg>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex justify-between">
+                          <div className="font-semibold text-sm text-blue-900">LEAD CHOICE</div>
+                          <div className="text-xs text-blue-800/70">1m ago</div>
+                        </div>
+                        <div className="text-sm text-blue-800 font-medium">You've booked a new qualified meeting!</div>
+                      </div>
                     </div>
-                    <div className="text-xs">Meeting with John confirmed for 2pm</div>
                   </div>
                 </div>
               </div>
             </div>
             
             {/* Bottom pill */}
-            <div className="w-1/3 h-1 bg-white/60 absolute bottom-2 left-1/2 transform -translate-x-1/2 rounded-full mx-auto"></div>
+            <div className="w-1/3 h-1 bg-white/80 absolute -bottom-0.5 left-1/2 transform -translate-x-1/2 rounded-full mx-auto"></div>
           </motion.div>
           
           {/* Right Card - Contact Verification */}
           <motion.div 
-            className="bg-white p-6 rounded-xl shadow-lg max-w-xs w-full order-3"
+            className="bg-white py-5 px-5 rounded-2xl shadow-lg max-w-[240px] w-full order-3 shadow-blue-100/50"
             variants={fadeInUp}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: 0.05 }}
           >
-            <div className="text-center mb-4 pb-2 border-b border-gray-100">
-              <h3 className="font-semibold text-gray-700">Lead Verification</h3>
-              <p className="text-sm text-gray-500">Today's contacts</p>
-            </div>
-            
-            {/* Contact 1 */}
-            <div className="flex items-center p-3 border border-gray-100 rounded-lg mb-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 flex items-center justify-center text-white font-bold text-sm mr-3">
-                JS
+            <div className="space-y-4">
+              {/* Contact 1 */}
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full overflow-hidden mr-3 flex-shrink-0">
+                  <img 
+                    src="https://randomuser.me/api/portraits/women/44.jpg" 
+                    alt="Contact" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex-1">
+                  <div className="w-24 h-3 bg-gray-300 rounded-full mb-2"></div>
+                  <div className="w-32 h-2 bg-gray-200 rounded-full"></div>
+                </div>
+                <div className="ml-2 bg-blue-500 w-6 h-6 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
               </div>
-              <div className="flex-1">
-                <div className="font-medium text-sm">John Smith</div>
-                <div className="text-xs text-gray-500">Tech Director at Acme Inc</div>
+              
+              {/* Contact 2 */}
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full overflow-hidden mr-3 flex-shrink-0">
+                  <img 
+                    src="https://randomuser.me/api/portraits/men/32.jpg" 
+                    alt="Contact" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex-1">
+                  <div className="w-20 h-3 bg-gray-300 rounded-full mb-2"></div>
+                  <div className="w-28 h-2 bg-gray-200 rounded-full"></div>
+                </div>
+                <div className="ml-2 bg-blue-500 w-6 h-6 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
               </div>
-              <div className="bg-green-100 w-6 h-6 rounded-full flex items-center justify-center">
-                <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-            </div>
-            
-            {/* Contact 2 */}
-            <div className="flex items-center p-3 border border-gray-100 rounded-lg mb-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-purple-500 flex items-center justify-center text-white font-bold text-sm mr-3">
-                EJ
-              </div>
-              <div className="flex-1">
-                <div className="font-medium text-sm">Emma Johnson</div>
-                <div className="text-xs text-gray-500">Marketing VP at TechCorp</div>
-              </div>
-              <div className="bg-green-100 w-6 h-6 rounded-full flex items-center justify-center">
-                <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-            </div>
-            
-            {/* Contact 3 (Unverified) */}
-            <div className="flex items-center p-3 border border-gray-100 rounded-lg opacity-60">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-gray-400 to-gray-500 flex items-center justify-center text-white font-bold text-sm mr-3">
-                RB
-              </div>
-              <div className="flex-1">
-                <div className="font-medium text-sm">Robert Brown</div>
-                <div className="text-xs text-gray-500">Pending verification...</div>
-              </div>
-              <div className="bg-gray-100 w-6 h-6 rounded-full flex items-center justify-center">
-                <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+              
+              {/* Contact 3 (Unverified) */}
+              <div className="flex items-center opacity-60">
+                <div className="w-10 h-10 rounded-full overflow-hidden mr-3 flex-shrink-0">
+                  <img 
+                    src="https://randomuser.me/api/portraits/men/68.jpg" 
+                    alt="Contact" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex-1">
+                  <div className="w-16 h-3 bg-gray-300 rounded-full mb-2"></div>
+                  <div className="w-24 h-2 bg-gray-200 rounded-full"></div>
+                </div>
+                <div className="ml-2 bg-gray-200 w-6 h-6 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
               </div>
             </div>
           </motion.div>
