@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/utils";
+// Import the Facebook Ads image
+import facebookAdsImage from "../../assets/images/facebook-ads.png";
 
 // Service card data with phone mockups
 const services = [
@@ -308,64 +310,125 @@ export default function Services() {
               
               {/* Phone Mockup Side */}
               <div className="w-full md:w-1/2 flex justify-center">
-                <motion.div 
-                  className="max-w-[220px] w-full"
-                  initial={{ opacity: 0, y: 30, rotate: service.alignment === "right" ? -5 : 5 }}
-                  whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, type: "spring" }}
-                  whileHover={{ scale: 1.03, rotate: service.alignment === "right" ? -2 : 2 }}
-                >
-                  <div className="relative">
-                    {/* Phone frame */}
-                    <div className="bg-gray-900 rounded-[36px] pt-6 pb-8 px-3 shadow-[0_8px_40px_rgba(249,115,22,0.15)] border-[12px] border-gray-800">
-                      {/* Phone screen with service-specific content */}
-                      <div className="rounded-[18px] overflow-hidden h-[320px]">
-                        {service.phoneContent}
+                {index === 1 ? (
+                  // Facebook Ads image for Targeted Paid Traffic section
+                  <motion.div 
+                    className="max-w-[300px] w-full"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, type: "spring" }}
+                    whileHover={{ scale: 1.03 }}
+                  >
+                    <div className="relative">
+                      {/* Facebook Ads Image */}
+                      <div className="bg-white rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(249,115,22,0.15)]">
+                        <img 
+                          src={facebookAdsImage} 
+                          alt="Facebook Ads Manager" 
+                          className="w-full h-auto"
+                        />
                       </div>
                       
-                      {/* Phone home button */}
-                      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-1/4 h-1 bg-gray-700 rounded-full"></div>
-                    </div>
-                    
-                    {/* Floating elements */}
-                    <motion.div 
-                      className={`absolute ${service.alignment === "right" ? "-left-8 -bottom-4" : "-right-8 -bottom-4"} bg-white p-2 rounded-lg shadow-lg z-10 shadow-orange-100/30`}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.6 }}
-                    >
-                      <div className="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center text-orange-500">
-                        {index === 0 ? (
-                          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                          </svg>
-                        ) : index === 1 ? (
+                      {/* Floating Facebook logo */}
+                      <motion.div 
+                        className="absolute -right-4 -top-4 bg-white w-16 h-16 rounded-full shadow-lg z-10 p-2 flex items-center justify-center"
+                        initial={{ opacity: 0, scale: 0 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                      >
+                        <svg className="text-[#1877F2] w-10 h-10" viewBox="0 0 36 36">
+                          <path fill="currentColor" d="M20.181 35.87C29.094 34.791 36 27.202 36 18c0-9.941-8.059-18-18-18S0 8.059 0 18c0 8.442 5.811 15.525 13.652 17.471L14 35h6.181l.13.87z" />
+                          <path fill="#fff" d="M13.651 35.471v-12.937H9.936V18h3.715v-2.37c0-6.127 2.772-8.964 8.784-8.964 1.138 0 3.103.223 3.91.446v4.983c-.425-.043-1.167-.064-2.081-.064-2.952 0-4.09 1.116-4.09 4.025V18h5.883l-1.008 4.534h-4.875v12.992c.446.026.896.039 1.349.039.454 0 .904-.013 1.35-.039v-12.992h4.875l1.007-4.534h-5.882v-3.944c0-2.908 1.137-4.024 4.09-4.024.914 0 1.656.021 2.08.064V7.11c-.806-.223-2.771-.446-3.91-.446-6.012 0-8.784 2.836-8.784 8.963V18H9.935v4.534h3.715v12.937z" />
+                        </svg>
+                      </motion.div>
+                      
+                      {/* Floating elements */}
+                      <motion.div 
+                        className="absolute -left-8 -bottom-4 bg-white p-2 rounded-lg shadow-lg z-10 shadow-orange-100/30"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.6 }}
+                      >
+                        <div className="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center text-orange-500">
                           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                           </svg>
-                        ) : (
-                          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                          </svg>
-                        )}
+                        </div>
+                      </motion.div>
+                      
+                      <motion.div 
+                        className="absolute -left-6 top-1/3 bg-orange-500 w-7 h-7 rounded-full flex items-center justify-center shadow-lg z-10"
+                        initial={{ opacity: 0, scale: 0 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: 0.7 }}
+                      >
+                        <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                ) : (
+                  // Original phone mockup for other services
+                  <motion.div 
+                    className="max-w-[220px] w-full"
+                    initial={{ opacity: 0, y: 30, rotate: service.alignment === "right" ? -5 : 5 }}
+                    whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, type: "spring" }}
+                    whileHover={{ scale: 1.03, rotate: service.alignment === "right" ? -2 : 2 }}
+                  >
+                    <div className="relative">
+                      {/* Phone frame */}
+                      <div className="bg-gray-900 rounded-[36px] pt-6 pb-8 px-3 shadow-[0_8px_40px_rgba(249,115,22,0.15)] border-[12px] border-gray-800">
+                        {/* Phone screen with service-specific content */}
+                        <div className="rounded-[18px] overflow-hidden h-[320px]">
+                          {service.phoneContent}
+                        </div>
+                        
+                        {/* Phone home button */}
+                        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-1/4 h-1 bg-gray-700 rounded-full"></div>
                       </div>
-                    </motion.div>
-                    
-                    <motion.div 
-                      className={`absolute ${service.alignment === "right" ? "-left-6 top-1/3" : "-right-6 top-1/3"} bg-orange-500 w-7 h-7 rounded-full flex items-center justify-center shadow-lg z-10`}
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.7 }}
-                    >
-                      <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </motion.div>
-                  </div>
-                </motion.div>
+                      
+                      {/* Floating elements */}
+                      <motion.div 
+                        className={`absolute ${service.alignment === "right" ? "-left-8 -bottom-4" : "-right-8 -bottom-4"} bg-white p-2 rounded-lg shadow-lg z-10 shadow-orange-100/30`}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.6 }}
+                      >
+                        <div className="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center text-orange-500">
+                          {index === 0 ? (
+                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                          ) : (
+                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                          )}
+                        </div>
+                      </motion.div>
+                      
+                      <motion.div 
+                        className={`absolute ${service.alignment === "right" ? "-left-6 top-1/3" : "-right-6 top-1/3"} bg-orange-500 w-7 h-7 rounded-full flex items-center justify-center shadow-lg z-10`}
+                        initial={{ opacity: 0, scale: 0 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: 0.7 }}
+                      >
+                        <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                )}
               </div>
             </motion.div>
           ))}
