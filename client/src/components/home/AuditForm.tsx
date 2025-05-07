@@ -63,67 +63,63 @@ export default function AuditForm() {
   };
 
   return (
-    <section id="audit" className="py-20 bg-white relative">
-      <div className="absolute inset-0 geometric-pattern opacity-5"></div>
-      
+    <section id="audit" className="py-24 relative overflow-hidden bg-gray-50">
       {/* Abstract background elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-orange-100 rounded-full opacity-30 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-orange-300/30 rounded-full opacity-30 blur-3xl"></div>
+      <div className="absolute inset-0 geometric-pattern opacity-5"></div>
+      <div className="absolute -top-40 right-0 w-96 h-96 bg-orange-200 rounded-full opacity-20 blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-white/40 to-transparent"></div>
+      <div className="absolute bottom-10 left-1/3 w-96 h-96 bg-orange-300/30 rounded-full opacity-20 blur-3xl"></div>
       
       <div className="container mx-auto px-4 relative">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-12">
-            <motion.h2 
-              className="font-poppins font-bold text-3xl md:text-4xl mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              Get Your Free Marketing Audit
-            </motion.h2>
-            <motion.p 
-              className="text-gray-600"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              Discover untapped opportunities to grow your business in less than 48 hours.
-            </motion.p>
-          </div>
-          
-          <motion.div 
-            className="bg-white rounded-xl shadow-xl overflow-hidden"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
+        <motion.div 
+          className="text-center mb-14 max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-5">
+            Get Your Free Marketing Audit
+          </h2>
+          <p className="text-gray-600 text-lg">
+            Discover untapped opportunities to grow your business in less than 48 hours.
+          </p>
+        </motion.div>
+        
+        <motion.div 
+          className="max-w-4xl mx-auto"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
+          <div className="bg-white rounded-xl shadow-xl overflow-hidden">
             {isSubmitted ? (
-              <div className="p-6 md:p-10 text-center">
-                <svg className="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <h3 className="font-poppins font-bold text-2xl mb-2">Thank You!</h3>
-                <p className="text-gray-600 mb-6">Your audit request has been received. Our team will analyze your marketing and get back to you within 48 hours.</p>
+              <div className="p-10 text-center">
+                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-10 h-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="font-poppins font-bold text-2xl mb-3">Thank You!</h3>
+                <p className="text-gray-600 mb-8 max-w-md mx-auto">Your audit request has been received. Our team will analyze your marketing and get back to you within 48 hours.</p>
                 <button
                   onClick={() => setIsSubmitted(false)}
-                  className="gradient-bg text-white font-medium px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all"
+                  className="gradient-bg text-white font-medium px-8 py-3 rounded-lg shadow-lg hover:shadow-xl hover:brightness-110 transition-all"
                 >
                   Submit Another Request
                 </button>
               </div>
             ) : (
-              <form className="p-6 md:p-10" onSubmit={form.handleSubmit(onSubmit)}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <form className="p-8 md:p-10" onSubmit={form.handleSubmit(onSubmit)}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div>
                     <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Full Name</label>
                     <input 
                       type="text" 
                       id="name" 
                       {...form.register("name")} 
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-orange-600 transition-all" 
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
                       placeholder="John Smith" 
                     />
                     {form.formState.errors.name && (
@@ -137,7 +133,7 @@ export default function AuditForm() {
                       type="email" 
                       id="email" 
                       {...form.register("email")} 
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-orange-600 transition-all" 
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
                       placeholder="john@yourcompany.com" 
                     />
                     {form.formState.errors.email && (
@@ -151,7 +147,7 @@ export default function AuditForm() {
                       type="tel" 
                       id="phone" 
                       {...form.register("phone")} 
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-orange-600 transition-all" 
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
                       placeholder="(555) 123-4567" 
                     />
                   </div>
@@ -162,7 +158,7 @@ export default function AuditForm() {
                       type="url" 
                       id="website" 
                       {...form.register("website")} 
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-orange-600 transition-all" 
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
                       placeholder="https://yourcompany.com" 
                     />
                     {form.formState.errors.website && (
@@ -171,66 +167,66 @@ export default function AuditForm() {
                   </div>
                 </div>
                 
-                <div className="mb-6">
+                <div className="mb-8">
                   <label htmlFor="business" className="block text-gray-700 font-medium mb-2">Tell us about your business</label>
                   <textarea 
                     id="business" 
                     {...form.register("business")} 
                     rows={3} 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-orange-600 transition-all" 
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
                     placeholder="What products/services do you offer? Who is your target audience?" 
                   />
                 </div>
                 
-                <div className="mb-6">
-                  <label className="block text-gray-700 font-medium mb-2">What are your primary marketing goals?</label>
+                <div className="mb-8">
+                  <label className="block text-gray-700 font-medium mb-3">What are your primary marketing goals?</label>
                   
-                  <div className="space-y-2">
-                    <div className="flex items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-200 hover:bg-orange-50/30 transition-colors">
                       <input 
                         type="checkbox" 
                         id="goal1" 
                         onChange={() => handleCheckboxChange("lead_generation")} 
-                        className="w-4 h-4 text-orange-600 focus:ring-orange-600 rounded" 
+                        className="w-5 h-5 text-orange-500 focus:ring-orange-500 rounded border-gray-300" 
                       />
-                      <label htmlFor="goal1" className="ml-2 text-gray-700">Generate more leads</label>
+                      <label htmlFor="goal1" className="ml-3 text-gray-700 cursor-pointer">Generate more leads</label>
                     </div>
                     
-                    <div className="flex items-center">
+                    <div className="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-200 hover:bg-orange-50/30 transition-colors">
                       <input 
                         type="checkbox" 
                         id="goal2" 
                         onChange={() => handleCheckboxChange("conversion_rate")} 
-                        className="w-4 h-4 text-orange-600 focus:ring-orange-600 rounded" 
+                        className="w-5 h-5 text-orange-500 focus:ring-orange-500 rounded border-gray-300" 
                       />
-                      <label htmlFor="goal2" className="ml-2 text-gray-700">Improve conversion rates</label>
+                      <label htmlFor="goal2" className="ml-3 text-gray-700 cursor-pointer">Improve conversion rates</label>
                     </div>
                     
-                    <div className="flex items-center">
+                    <div className="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-200 hover:bg-orange-50/30 transition-colors">
                       <input 
                         type="checkbox" 
                         id="goal3" 
                         onChange={() => handleCheckboxChange("brand_awareness")} 
-                        className="w-4 h-4 text-orange-600 focus:ring-orange-600 rounded" 
+                        className="w-5 h-5 text-orange-500 focus:ring-orange-500 rounded border-gray-300" 
                       />
-                      <label htmlFor="goal3" className="ml-2 text-gray-700">Increase brand awareness</label>
+                      <label htmlFor="goal3" className="ml-3 text-gray-700 cursor-pointer">Increase brand awareness</label>
                     </div>
                     
-                    <div className="flex items-center">
+                    <div className="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-200 hover:bg-orange-50/30 transition-colors">
                       <input 
                         type="checkbox" 
                         id="goal4" 
                         onChange={() => handleCheckboxChange("roi")} 
-                        className="w-4 h-4 text-orange-600 focus:ring-orange-600 rounded" 
+                        className="w-5 h-5 text-orange-500 focus:ring-orange-500 rounded border-gray-300" 
                       />
-                      <label htmlFor="goal4" className="ml-2 text-gray-700">Improve marketing ROI</label>
+                      <label htmlFor="goal4" className="ml-3 text-gray-700 cursor-pointer">Improve marketing ROI</label>
                     </div>
                   </div>
                 </div>
                 
                 <button 
                   type="submit" 
-                  className="w-full gradient-bg text-white font-medium py-4 rounded-lg shadow-lg hover:shadow-xl transition-all text-center"
+                  className="w-full gradient-bg text-white font-medium py-4 rounded-lg shadow-lg hover:shadow-xl hover:brightness-110 transition-all text-center"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -243,19 +239,18 @@ export default function AuditForm() {
                     </div>
                   ) : (
                     <>
-                      Submit Your Audit Request
-                      <span className="block text-sm mt-1 opacity-90">(You'll hear back within 48 hours)</span>
+                      Get My Free Audit – Delivered in 48hrs
                     </>
                   )}
                 </button>
               </form>
             )}
-          </motion.div>
+          </div>
           
           <div className="mt-8 text-center text-gray-500 text-sm">
-            <p>By submitting this form, you agree to our <a href="#" className="text-orange-600 underline">Privacy Policy</a> and <a href="#" className="text-orange-600 underline">Terms of Service</a>.</p>
+            <p>By submitting this form, you agree to our <a href="#" className="text-orange-600 hover:text-orange-700 transition-colors">Privacy Policy</a> and <a href="#" className="text-orange-600 hover:text-orange-700 transition-colors">Terms of Service</a>.</p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
