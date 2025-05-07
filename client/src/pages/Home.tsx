@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/home/Hero";
+import BrandLogoRow from "@/components/home/BrandLogoRow";
 import Services from "@/components/home/Services";
 import Portfolio from "@/components/home/Portfolio";
 import AuditForm from "@/components/home/AuditForm";
@@ -22,6 +23,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <BrandLogoRow />
         <Services />
         <Portfolio />
         <AuditForm />
