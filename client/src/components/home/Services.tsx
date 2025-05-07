@@ -1,12 +1,30 @@
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/utils";
 
-// Service card data
+// Service card data with phone mockups
 const services = [
   {
     id: 1,
     title: "Landing Page & Funnel Design",
     description: "We design high-converting landing pages and sales funnels that turn visitors into customers.",
+    alignment: "left",
+    phoneContent: (
+      <div className="bg-gradient-to-b from-orange-500 to-rose-500 h-full rounded-lg p-3">
+        <div className="flex justify-between mb-2">
+          <div className="w-10 h-2 bg-white/20 rounded-full"></div>
+          <div className="w-6 h-2 bg-white/20 rounded-full"></div>
+        </div>
+        <div className="w-full h-24 bg-white/10 rounded-lg mb-3"></div>
+        <div className="space-y-1 mb-3">
+          <div className="w-full h-2 bg-white/20 rounded-full"></div>
+          <div className="w-5/6 h-2 bg-white/20 rounded-full"></div>
+          <div className="w-4/6 h-2 bg-white/20 rounded-full"></div>
+        </div>
+        <div className="flex justify-center">
+          <div className="w-1/3 h-6 bg-white/30 rounded-lg"></div>
+        </div>
+      </div>
+    ),
     icon: (
       <svg className="w-8 h-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -22,6 +40,28 @@ const services = [
     id: 2,
     title: "Targeted Paid Traffic",
     description: "We drive qualified leads to your business through strategic ad campaigns across multiple platforms.",
+    alignment: "right",
+    phoneContent: (
+      <div className="bg-gradient-to-br from-blue-500 to-indigo-600 h-full rounded-lg p-3">
+        <div className="grid grid-cols-2 gap-2 mb-3">
+          <div className="w-full h-5 bg-white/20 rounded-md"></div>
+          <div className="w-full h-5 bg-white/20 rounded-md"></div>
+          <div className="w-full h-5 bg-white/20 rounded-md"></div>
+          <div className="w-full h-5 bg-white/20 rounded-md"></div>
+        </div>
+        <div className="h-14 bg-white/10 rounded-lg flex items-center px-2 mb-3">
+          <div className="w-8 h-8 rounded-full bg-white/20 mr-2"></div>
+          <div className="flex-1">
+            <div className="w-16 h-2 bg-white/30 rounded-full mb-1"></div>
+            <div className="w-24 h-2 bg-white/20 rounded-full"></div>
+          </div>
+        </div>
+        <div className="space-y-2">
+          <div className="w-full h-2 bg-orange-200/50 rounded-full"></div>
+          <div className="w-2/3 h-2 bg-orange-200/30 rounded-full"></div>
+        </div>
+      </div>
+    ),
     icon: (
       <svg className="w-8 h-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
@@ -37,6 +77,35 @@ const services = [
     id: 3,
     title: "Lead Nurturing",
     description: "We help you build relationships with prospects through personalized communication that guides them toward purchase.",
+    alignment: "left",
+    phoneContent: (
+      <div className="bg-gradient-to-br from-green-500 to-emerald-600 h-full rounded-lg p-3">
+        <div className="mb-2 w-1/2 h-3 bg-white/20 rounded-full mx-auto"></div>
+        <div className="space-y-3">
+          <div className="w-full h-12 bg-white/10 rounded-lg px-2 py-2 flex">
+            <div className="w-8 h-8 rounded-full bg-white/30 mr-2"></div>
+            <div className="w-full">
+              <div className="w-16 h-2 bg-white/30 rounded-full mb-1"></div>
+              <div className="w-24 h-2 bg-white/20 rounded-full"></div>
+            </div>
+          </div>
+          <div className="w-full h-12 bg-white/10 rounded-lg px-2 py-2 flex">
+            <div className="w-8 h-8 rounded-full bg-white/30 mr-2"></div>
+            <div className="w-full">
+              <div className="w-16 h-2 bg-white/30 rounded-full mb-1"></div>
+              <div className="w-24 h-2 bg-white/20 rounded-full"></div>
+            </div>
+          </div>
+          <div className="w-full h-12 bg-white/10 rounded-lg px-2 py-2 flex">
+            <div className="w-8 h-8 rounded-full bg-white/30 mr-2"></div>
+            <div className="w-full">
+              <div className="w-16 h-2 bg-white/30 rounded-full mb-1"></div>
+              <div className="w-24 h-2 bg-white/20 rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
     icon: (
       <svg className="w-8 h-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -50,51 +119,135 @@ const services = [
   }
 ];
 
-// Process steps data
+// Process path data - The ReachFlow Experience
 const processSteps = [
   {
     id: 1,
-    title: "Discovery",
-    description: "We learn about your business, goals, and target audience to create a tailored strategy.",
+    title: "Real-Time Slack Feedback",
+    description: "Live updates. Fast turnarounds. Clear priorities.",
     icon: (
       <svg className="w-8 h-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
       </svg>
+    ),
+    uiMockup: (
+      <div className="w-full h-24 sm:h-32 bg-white rounded-lg p-3 relative overflow-hidden border border-gray-200 shadow-md shadow-orange-100/10">
+        <div className="absolute left-0 top-0 h-full w-1 bg-green-500"></div>
+        <div className="flex mb-2">
+          <div className="w-6 h-6 rounded-md bg-[#611f69] mr-2 flex items-center justify-center text-white text-[10px] font-bold">S</div>
+          <div className="w-32 h-3 bg-gray-300 rounded-full"></div>
+        </div>
+        <div className="space-y-2">
+          <div className="flex items-start">
+            <div className="w-5 h-5 rounded-full bg-gray-300 mr-2 mt-0.5"></div>
+            <div>
+              <div className="w-32 h-2 bg-gray-300 rounded-full mb-1"></div>
+              <div className="w-48 h-2 bg-gray-200 rounded-full"></div>
+            </div>
+          </div>
+          <div className="flex items-start">
+            <div className="w-5 h-5 rounded-full bg-gray-300 mr-2 mt-0.5"></div>
+            <div>
+              <div className="w-40 h-2 bg-gray-300 rounded-full mb-1"></div>
+              <div className="w-56 h-2 bg-gray-200 rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     )
   },
   {
     id: 2,
-    title: "Implementation",
-    description: "We build your marketing assets, set up campaigns, and launch according to our strategy.",
+    title: "Loom Breakdowns",
+    description: "We explain every decision in plain English — no mystery.",
     icon: (
       <svg className="w-8 h-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
       </svg>
+    ),
+    uiMockup: (
+      <div className="w-full h-24 sm:h-32 bg-white rounded-lg p-3 border border-gray-200 overflow-hidden relative shadow-md shadow-orange-100/10">
+        <div className="absolute left-0 top-0 h-8 w-full bg-gradient-to-r from-gray-900 to-gray-800"></div>
+        <div className="absolute left-1/2 top-4 -translate-x-1/2 w-8 h-8 rounded-full bg-red-500 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+          </svg>
+        </div>
+        <div className="h-full flex items-end pb-2">
+          <div className="w-full flex items-center">
+            <div className="w-12 h-3 bg-gray-300 rounded-full"></div>
+            <div className="flex-1 h-1 bg-gray-200 mx-2 rounded-full relative">
+              <div className="absolute left-1/3 top-0 h-1 w-8 bg-red-500 rounded-full"></div>
+            </div>
+            <div className="w-10 h-3 bg-gray-300 rounded-full"></div>
+          </div>
+        </div>
+      </div>
     )
   },
   {
     id: 3,
-    title: "Optimization",
-    description: "We continuously analyze data to refine and improve your marketing for better results.",
+    title: "Iteration-Driven Execution",
+    description: "We launch, learn, and optimize — daily.",
     icon: (
       <svg className="w-8 h-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
       </svg>
+    ),
+    uiMockup: (
+      <div className="w-full h-24 sm:h-32 bg-white rounded-lg p-3 border border-gray-200 overflow-hidden shadow-md shadow-orange-100/10">
+        <div className="flex items-center justify-between mb-2">
+          <div className="w-20 h-3 bg-gray-300 rounded-full"></div>
+          <div className="flex space-x-1">
+            <div className="w-6 h-6 rounded-md bg-green-500 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+              </svg>
+            </div>
+            <div className="w-6 h-6 rounded-md bg-red-500 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div className="flex space-x-2 h-12">
+          <div className="w-1/4 bg-green-200 rounded-md h-full"></div>
+          <div className="w-1/5 bg-green-300 rounded-md h-3/4 self-end"></div>
+          <div className="w-1/6 bg-green-400 rounded-md h-1/2 self-end"></div>
+          <div className="w-1/5 bg-red-300 rounded-md h-1/3 self-end"></div>
+          <div className="w-1/4 bg-green-500 rounded-md h-full"></div>
+        </div>
+      </div>
     )
   }
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="py-20 bg-white relative">
+    <section id="services" className="py-20 relative overflow-hidden">
       {/* Background decorations */}
-      <div className="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-gray-50 to-white"></div>
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-orange-100 rounded-full opacity-20 blur-3xl -translate-x-1/2 translate-y-1/4"></div>
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-orange-200 rounded-full opacity-10 blur-3xl translate-x-1/3"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-50/80 to-white"></div>
+      
+      {/* Grid pattern */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f97316' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E\")"
+      }}></div>
+      
+      {/* Decorative blurs */}
+      <div className="absolute -bottom-40 left-0 w-96 h-96 bg-orange-200 rounded-full opacity-20 blur-[100px]"></div>
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-orange-200 rounded-full opacity-20 blur-[100px] translate-x-1/3"></div>
+      
+      {/* Orange wave */}
+      <div className="absolute left-0 right-0 bottom-0 h-32 opacity-[0.03] overflow-hidden">
+        <svg viewBox="0 0 1440 320" className="absolute w-full">
+          <path fill="#f97316" fillOpacity="1" d="M0,288L48,272C96,256,192,224,288,213.3C384,203,480,213,576,229.3C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+      </div>
       
       <div className="container mx-auto px-4 relative">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -106,91 +259,182 @@ export default function Services() {
           </p>
         </motion.div>
         
-        {/* Service Cards */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        {/* Services in Zig-Zag Layout */}
+        <div className="space-y-24 mb-32">
           {services.map((service, index) => (
             <motion.div
               key={service.id}
-              className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
-              variants={fadeInUp}
+              className={`flex flex-col-reverse ${service.alignment === "right" ? "md:flex-row-reverse" : "md:flex-row"} gap-8 md:gap-16 items-center`}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7 }}
             >
-              <div className="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mb-6">
-                {service.icon}
+              {/* Content Side */}
+              <div className="w-full md:w-1/2">
+                <motion.div 
+                  className="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mb-6 shadow-orange-100/50 shadow-lg"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                >
+                  {service.icon}
+                </motion.div>
+                
+                <h3 className="font-poppins font-bold text-2xl mb-4">{service.title}</h3>
+                <p className="text-gray-600 mb-6 text-lg">{service.description}</p>
+                
+                <ul className="space-y-3">
+                  {service.features.map((feature, idx) => (
+                    <motion.li 
+                      key={idx} 
+                      className="flex items-start"
+                      initial={{ opacity: 0, x: service.alignment === "right" ? 20 : -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.2 + (idx * 0.1) }}
+                    >
+                      <div className="bg-orange-100 rounded-full p-1 mr-3 mt-0.5 flex-shrink-0">
+                        <svg className="w-4 h-4 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-gray-700">{feature}</span>
+                    </motion.li>
+                  ))}
+                </ul>
               </div>
               
-              <h3 className="font-poppins font-bold text-xl mb-3">{service.title}</h3>
-              <p className="text-gray-600 mb-6">{service.description}</p>
-              
-              <ul className="space-y-2">
-                {service.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start">
-                    <svg className="w-5 h-5 text-orange-600 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
+              {/* Phone Mockup Side */}
+              <div className="w-full md:w-1/2 flex justify-center">
+                <motion.div 
+                  className="max-w-[220px] w-full"
+                  initial={{ opacity: 0, y: 30, rotate: service.alignment === "right" ? -5 : 5 }}
+                  whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, type: "spring" }}
+                  whileHover={{ scale: 1.03, rotate: service.alignment === "right" ? -2 : 2 }}
+                >
+                  <div className="relative">
+                    {/* Phone frame */}
+                    <div className="bg-gray-900 rounded-[36px] pt-6 pb-8 px-3 shadow-[0_8px_40px_rgba(249,115,22,0.15)] border-[12px] border-gray-800">
+                      {/* Phone screen with service-specific content */}
+                      <div className="rounded-[18px] overflow-hidden h-[320px]">
+                        {service.phoneContent}
+                      </div>
+                      
+                      {/* Phone home button */}
+                      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-1/4 h-1 bg-gray-700 rounded-full"></div>
+                    </div>
+                    
+                    {/* Floating elements */}
+                    <motion.div 
+                      className={`absolute ${service.alignment === "right" ? "-left-8 -bottom-4" : "-right-8 -bottom-4"} bg-white p-2 rounded-lg shadow-lg z-10 shadow-orange-100/30`}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.6 }}
+                    >
+                      <div className="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center text-orange-500">
+                        {index === 0 ? (
+                          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                          </svg>
+                        ) : index === 1 ? (
+                          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                          </svg>
+                        ) : (
+                          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                        )}
+                      </div>
+                    </motion.div>
+                    
+                    <motion.div 
+                      className={`absolute ${service.alignment === "right" ? "-left-6 top-1/3" : "-right-6 top-1/3"} bg-orange-500 w-7 h-7 rounded-full flex items-center justify-center shadow-lg z-10`}
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.7 }}
+                    >
+                      <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
         
-        {/* Process Steps */}
+        {/* The ReachFlow Experience - Process Path */}
         <motion.div 
-          className="mt-24"
+          className="mt-24 md:mt-32"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h3 className="text-center font-poppins font-bold text-2xl mb-12">Our Process</h3>
+          <h3 className="text-center font-poppins font-bold text-2xl mb-3">The ReachFlow Experience</h3>
+          <p className="text-center text-gray-600 max-w-2xl mx-auto mb-16">
+            When you work with us, you get a transparent, collaborative process that delivers results.
+          </p>
           
           <div className="relative">
-            {/* Process connecting line (desktop only) */}
-            <div className="hidden md:block absolute top-24 left-0 w-full h-0.5 bg-gray-200"></div>
+            {/* Process path connector */}
+            <div className="hidden lg:block absolute top-1/2 transform -translate-y-1/2 left-0 right-0 h-1 bg-gradient-to-r from-orange-100 via-orange-200 to-orange-100 rounded-full"></div>
             
-            <motion.div 
-              className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 relative z-10">
               {processSteps.map((step, index) => (
                 <motion.div
                   key={step.id}
-                  className="bg-white rounded-xl p-6 shadow-lg relative"
-                  variants={{
-                    hidden: { opacity: 0, x: -50 },
-                    visible: { 
-                      opacity: 1, 
-                      x: 0,
-                      transition: {
-                        duration: 0.5,
-                        delay: index * 0.2,
-                        ease: "easeOut"
-                      }
-                    }
-                  }}
+                  className="relative"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
                 >
-                  <div className="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-6 shadow-lg">
-                    {step.id}
+                  {/* Step counter dot on path */}
+                  <div className="hidden lg:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                    <div className="w-10 h-10 rounded-full bg-white border-4 border-orange-500 shadow-lg flex items-center justify-center text-sm font-bold text-orange-600">{step.id}</div>
                   </div>
-                  <h4 className="font-poppins font-semibold text-xl text-center mb-3">{step.title}</h4>
-                  <p className="text-gray-600 text-center">{step.description}</p>
+                  
+                  <div className="bg-white rounded-xl p-6 shadow-xl transition-all duration-300 hover:shadow-2xl group border border-gray-100 hover:border-orange-200 shadow-orange-100/5 hover:shadow-orange-100/20">
+                    <div className="flex lg:hidden items-center mb-3">
+                      <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold mr-3">{step.id}</div>
+                      <h4 className="font-poppins font-semibold text-xl">{step.title}</h4>
+                    </div>
+                    
+                    <div className="hidden lg:block w-16 h-16 bg-orange-50 rounded-full flex-shrink-0 flex items-center justify-center mb-5 mx-auto group-hover:bg-orange-100 transition-colors">
+                      {step.icon}
+                    </div>
+                    
+                    <h4 className="hidden lg:block font-poppins font-semibold text-xl text-center mb-3">{step.title}</h4>
+                    <p className="text-gray-600 mb-6 lg:text-center">{step.description}</p>
+                    
+                    {/* UI mockup visual for each experience step */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.3 + (index * 0.1) }}
+                    >
+                      {step.uiMockup}
+                    </motion.div>
+                  </div>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </div>
           
           <div className="mt-12 text-center">
-            <p className="text-gray-600 italic">We offer both one-time marketing solutions and ongoing optimization retainers to suit your needs.</p>
+            <p className="text-gray-600 italic max-w-2xl mx-auto">
+              We bring together marketing expertise and a results-focused approach to deliver qualified leads that grow your business.
+            </p>
           </div>
         </motion.div>
       </div>
