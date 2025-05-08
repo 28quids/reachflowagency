@@ -70,23 +70,16 @@
   }
 
   .grid-pattern-bg {
-    background-color: #ffffff;
+    background-color: #fcfcfc;
     background-image: 
-      linear-gradient(rgba(255, 107, 44, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 107, 44, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(255, 107, 44, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 107, 44, 0.05) 1px, transparent 1px);
     background-size: 30px 30px;
     background-position: center center;
     position: relative;
   }
 
-  .grid-pattern-bg::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, transparent, #ffffff 100%);
-    opacity: 0.7;
-    pointer-events: none;
-  }
+  /* Removing the ::after pseudo-element that was creating the white overlay */
 
   .dot-pattern-bg {
     background-color: #f7f7f7;

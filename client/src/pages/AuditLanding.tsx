@@ -316,7 +316,7 @@ export default function AuditLanding() {
   );
 
   return (
-    <div className="relative bg-white">
+    <div className="grid-pattern-bg relative">
       {/* Floating UI elements - site-wide */}
       <div className="fixed top-1/3 left-[5%] w-8 h-8 opacity-20 hidden lg:block z-0">
         <div className="w-full h-full rounded-full bg-orange-100 animate-float"></div>
