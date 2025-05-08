@@ -117,6 +117,10 @@
   .animate-float-delayed {
     animation: float 6s ease-in-out 1.5s infinite;
   }
+  
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
 
   .animate-spin-slow {
     animation: spin 12s linear infinite;
