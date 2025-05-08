@@ -468,12 +468,33 @@ export default function Services() {
         
         {/* The ReachFlow Experience - Process Path */}
         <motion.div 
-          className="mt-24 md:mt-32"
+          className="mt-24 md:mt-32 py-16 px-4 relative bg-gradient-to-b from-orange-50/70 to-transparent rounded-2xl overflow-hidden"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
+          {/* Orange grid background */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 opacity-15" style={{ 
+              backgroundImage: `linear-gradient(to right, rgba(251, 146, 60, 0.1) 1px, transparent 1px), 
+                              linear-gradient(to bottom, rgba(251, 146, 60, 0.1) 1px, transparent 1px)`,
+              backgroundSize: '32px 32px',
+              backgroundPosition: 'center center'
+            }}></div>
+            
+            {/* Diagonal lines */}
+            <div className="absolute inset-0 opacity-10" style={{ 
+              backgroundImage: `linear-gradient(45deg, rgba(251, 146, 60, 0.1) 25%, transparent 25%, transparent 50%, 
+                              rgba(251, 146, 60, 0.1) 50%, rgba(251, 146, 60, 0.1) 75%, transparent 75%, transparent)`,
+              backgroundSize: '64px 64px',
+              backgroundPosition: 'center center'
+            }}></div>
+            
+            {/* Glowing circles */}
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-orange-400/20 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-orange-300/20 rounded-full blur-3xl"></div>
+          </div>
           <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full mx-auto text-center">OUR APPROACH</span>
           <h3 className="text-center font-poppins font-bold text-3xl md:text-[36px] leading-tight mb-4 tracking-tight">The ReachFlow <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Experience</span></h3>
           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-16 text-lg">
