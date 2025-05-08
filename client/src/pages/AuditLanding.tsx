@@ -316,9 +316,20 @@ export default function AuditLanding() {
   );
 
   return (
-    <div className="bg-white">
+    <div className="grid-pattern-bg relative">
+      {/* Floating UI elements - site-wide */}
+      <div className="fixed top-1/3 left-[5%] w-8 h-8 opacity-20 hidden lg:block z-0">
+        <div className="w-full h-full rounded-full bg-orange-100 animate-float"></div>
+      </div>
+      <div className="fixed bottom-1/4 right-[8%] w-12 h-12 opacity-20 hidden lg:block z-0">
+        <div className="w-full h-full blob-effect bg-orange-100 animate-float-delayed"></div>
+      </div>
+      <div className="fixed top-2/3 right-[15%] w-6 h-6 opacity-15 hidden lg:block z-0">
+        <div className="w-full h-full rounded-full bg-orange-200 animate-pulse-subtle"></div>
+      </div>
+      
       {/* Hero Section */}
-      <section className="py-20 md:py-28 relative overflow-hidden">
+      <section className="py-24 md:py-32 relative overflow-hidden layer-depth">
         {/* Background elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-orange-200 rounded-full opacity-20 blur-3xl -z-10"></div>
         <div className="absolute bottom-20 left-0 w-80 h-80 bg-orange-300 rounded-full opacity-20 blur-3xl -z-10"></div>
@@ -643,6 +654,17 @@ export default function AuditLanding() {
       
       {/* Our Audit Process */}
       <section className="py-24 relative overflow-hidden">
+        {/* Grid background overlay */}
+        <div className="absolute inset-0 opacity-15 z-0">
+          <div className="h-full w-full" style={{ 
+            backgroundImage: 
+              `linear-gradient(rgba(255, 107, 44, 0.05) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 107, 44, 0.05) 1px, transparent 1px)`,
+            backgroundSize: '30px 30px',
+            backgroundPosition: 'center center',
+          }}></div>
+        </div>
+        
         {/* Background decorative wave */}
         <div className="absolute bottom-0 left-0 right-0 h-64 overflow-hidden -z-10">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="absolute bottom-0 w-full h-64 text-gray-50" preserveAspectRatio="none">
@@ -650,15 +672,19 @@ export default function AuditLanding() {
           </svg>
         </div>
         
+        {/* Radial gradients */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-orange-400/5 to-orange-300/10 rounded-full blur-3xl -z-10"></div>
+        <div className="absolute bottom-1/3 right-1/3 w-80 h-80 bg-gradient-to-tr from-orange-300/10 to-orange-400/5 rounded-full blur-3xl -z-10"></div>
+        
         {/* Floating elements */}
         <motion.div 
-          className="absolute top-1/4 right-[10%] hidden lg:block"
+          className="absolute top-1/4 right-[10%] hidden lg:block z-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 1 }}
         >
-          <div className="bg-white p-3 rounded-full shadow-xl">
+          <div className="bg-white p-3 rounded-full shadow-xl animate-float">
             <svg className="w-6 h-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
@@ -666,13 +692,13 @@ export default function AuditLanding() {
         </motion.div>
         
         <motion.div 
-          className="absolute bottom-1/4 left-[8%] hidden lg:block"
+          className="absolute bottom-1/4 left-[8%] hidden lg:block z-10"
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 1.3 }}
         >
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400/20 to-orange-300/10 backdrop-blur-sm border border-orange-200/30"></div>
+          <div className="w-16 h-16 blob-effect bg-gradient-to-br from-orange-400/20 to-orange-300/10 backdrop-blur-sm border border-orange-200/30 animate-float-delayed"></div>
         </motion.div>
         
         <div className="container max-w-6xl mx-auto px-4 relative">
@@ -703,23 +729,25 @@ export default function AuditLanding() {
             {auditProcess.map((step, index) => (
               <motion.div
                 key={step.id}
-                className="bg-white rounded-xl p-8 shadow-xl border border-gray-100 text-center relative transition-all duration-500 hover:shadow-2xl hover:border-orange-100"
+                className="bg-white rounded-xl p-8 shadow-xl border border-gray-100 text-center relative transition-all duration-500 hover:shadow-2xl hover:border-orange-100 hover-lift"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                whileHover={{ y: -5 }}
               >
                 {/* Number badge */}
-                <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full text-white flex items-center justify-center text-sm font-bold shadow-lg z-10">
+                <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full text-white flex items-center justify-center text-sm font-bold shadow-lg z-10 animate-pulse-subtle">
                   {step.id}
                 </div>
+                
+                {/* Glowing object behind card */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-orange-400/5 to-orange-300/10 blur-xl -z-10 rounded-xl opacity-75"></div>
                 
                 {/* Light gradient background */}
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 to-white rounded-xl opacity-50"></div>
                 
                 <div className="relative">
-                  <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl border border-orange-200">
+                  <div className="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl border border-orange-200 animate-glow">
                     <div className="text-orange-500 w-10 h-10">
                       {step.icon}
                     </div>
@@ -740,23 +768,87 @@ export default function AuditLanding() {
             <div className="absolute -left-1 -top-1.5 w-4 h-4 bg-orange-400 rounded-full"></div>
             <div className="absolute -right-1 -top-1.5 w-4 h-4 bg-orange-400 rounded-full"></div>
           </div>
+          
+          {/* Floating UI elements */}
+          <motion.div 
+            className="absolute -bottom-2 right-[25%] hidden lg:block z-0"
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 0.8, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 1.5 }}
+          >
+            <div className="w-5 h-5 rounded-full bg-gradient-to-br from-orange-400 to-orange-300 animate-float"></div>
+          </motion.div>
         </div>
       </section>
       
       {/* Why Trust ReachFlow */}
-      <section className="py-24 bg-gray-50 relative overflow-hidden">
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-5" style={{ 
-          backgroundImage: `radial-gradient(circle, rgba(251, 146, 60, 0.3) 1px, transparent 1px)`,
-          backgroundSize: '30px 30px',
-          backgroundPosition: 'center center'
-        }}></div>
+      <section className="py-24 relative overflow-hidden">
+        {/* Background pattern - subtle dot pattern */}
+        <div className="absolute inset-0 dot-pattern-bg opacity-80"></div>
+        
+        {/* Background grid overlay - more visible */}
+        <div className="absolute inset-0 opacity-10 z-0">
+          <div className="h-full w-full" style={{ 
+            backgroundImage: 
+              `radial-gradient(circle, rgba(255, 107, 44, 0.15) 1px, transparent 1px)`,
+            backgroundSize: '25px 25px',
+            backgroundPosition: 'center center',
+          }}></div>
+        </div>
         
         {/* Background gradient */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-orange-300/10 to-orange-400/5 rounded-full opacity-80 blur-3xl -z-10"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-br from-orange-200/10 to-orange-300/5 rounded-full opacity-80 blur-3xl -z-10"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 radial-blur-orange blur-3xl -z-10"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 radial-blur-peach blur-3xl -z-10"></div>
         
-        <div className="container max-w-6xl mx-auto px-4 relative">
+        {/* Floating trust badge */}
+        <motion.div 
+          className="absolute top-1/3 right-[15%] hidden lg:block z-10"
+          initial={{ opacity: 0, rotate: -10, scale: 0.7 }}
+          whileInView={{ opacity: 0.9, rotate: 0, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <div className="bg-white rounded-xl p-4 shadow-xl border border-orange-100 backdrop-blur-sm rotate-6 animate-float-delayed">
+            <div className="flex items-center space-x-2">
+              <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+              <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+              <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+              <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+              <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+            </div>
+            <p className="text-gray-700 text-xs font-medium mt-1">UK's Leading</p>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          className="absolute bottom-1/3 left-[8%] hidden lg:block z-10"
+          initial={{ opacity: 0, rotate: 10, scale: 0.7 }}
+          whileInView={{ opacity: 0.9, rotate: 0, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+        >
+          <div className="bg-white rounded-xl p-3 shadow-xl border border-orange-100 backdrop-blur-sm -rotate-6 animate-float">
+            <div className="flex items-center space-x-2">
+              <svg className="w-6 h-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <p className="text-gray-700 text-xs font-medium">Verified Results</p>
+            </div>
+          </div>
+        </motion.div>
+
+        <div className="container max-w-6xl mx-auto px-4 relative z-10">
           <motion.div 
             className="text-center mb-4"
             initial={{ opacity: 0, y: 10 }}
@@ -785,14 +877,16 @@ export default function AuditLanding() {
               {trustItems.map((item, index) => (
                 <motion.div
                   key={item.title}
-                  className="bg-white rounded-xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl hover:border-orange-100 transition-all duration-300"
+                  className="bg-white rounded-xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl hover:border-orange-100 transition-all duration-300 hover-lift relative"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
-                  whileHover={{ y: -5 }}
                 >
-                  <div className="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mb-6 shadow-lg border border-orange-200/50">
+                  {/* Glowing background effect */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-orange-400/5 to-orange-300/10 blur-lg -z-10 rounded-xl opacity-75"></div>
+                  
+                  <div className="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mb-6 shadow-lg border border-orange-200/50 animate-glow">
                     <div className="text-orange-500 w-8 h-8">
                       {item.icon}
                     </div>
@@ -804,16 +898,15 @@ export default function AuditLanding() {
             </div>
             
             <motion.div
-              className="bg-gradient-to-br from-white to-orange-50/50 rounded-xl p-8 shadow-xl border border-orange-100/50 relative overflow-hidden"
+              className="bg-gradient-to-br from-white to-orange-50/50 rounded-xl p-8 shadow-xl border border-orange-100/50 relative overflow-hidden hover-lift"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              whileHover={{ y: -5 }}
             >
               {/* Decorative elements */}
-              <div className="absolute -top-12 -right-12 w-24 h-24 bg-gradient-to-br from-orange-300/20 to-orange-200/10 rounded-full blur-xl"></div>
-              <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-gradient-to-tr from-orange-300/20 to-orange-200/10 rounded-full blur-xl"></div>
+              <div className="absolute -top-12 -right-12 w-24 h-24 bg-gradient-to-br from-orange-300/20 to-orange-200/10 rounded-full blur-xl animate-pulse-subtle"></div>
+              <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-gradient-to-tr from-orange-300/20 to-orange-200/10 rounded-full blur-xl animate-pulse-subtle"></div>
               
               <motion.div
                 initial={{ scale: 0.9 }}
@@ -822,11 +915,11 @@ export default function AuditLanding() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="relative"
               >
-                <h3 className="font-poppins font-bold text-2xl mb-4 bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">10,000+ Leads Generated</h3>
+                <h3 className="font-poppins font-bold text-2xl mb-4 bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent animate-pulse-subtle">10,000+ Leads Generated</h3>
                 
                 <ul className="space-y-4 mb-6">
                   <li className="flex items-start">
-                    <div className="bg-gradient-to-br from-orange-400 to-orange-500 rounded-full p-1.5 mr-3 mt-0.5 flex-shrink-0 shadow-lg">
+                    <div className="bg-gradient-to-br from-orange-400 to-orange-500 rounded-full p-1.5 mr-3 mt-0.5 flex-shrink-0 shadow-lg animate-pulse-subtle">
                       <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
@@ -835,7 +928,7 @@ export default function AuditLanding() {
                   </li>
                   
                   <li className="flex items-start">
-                    <div className="bg-gradient-to-br from-orange-400 to-orange-500 rounded-full p-1.5 mr-3 mt-0.5 flex-shrink-0 shadow-lg">
+                    <div className="bg-gradient-to-br from-orange-400 to-orange-500 rounded-full p-1.5 mr-3 mt-0.5 flex-shrink-0 shadow-lg animate-pulse-subtle">
                       <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
@@ -844,7 +937,7 @@ export default function AuditLanding() {
                   </li>
                   
                   <li className="flex items-start">
-                    <div className="bg-gradient-to-br from-orange-400 to-orange-500 rounded-full p-1.5 mr-3 mt-0.5 flex-shrink-0 shadow-lg">
+                    <div className="bg-gradient-to-br from-orange-400 to-orange-500 rounded-full p-1.5 mr-3 mt-0.5 flex-shrink-0 shadow-lg animate-pulse-subtle">
                       <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
@@ -864,22 +957,49 @@ export default function AuditLanding() {
       
       {/* No More Leads Left on the Table */}
       <section id="audit-form" className="py-24 relative overflow-hidden">
+        {/* Grid background overlay */}
+        <div className="absolute inset-0 opacity-10 z-0">
+          <div className="h-full w-full" style={{ 
+            backgroundImage: 
+              `linear-gradient(rgba(255, 107, 44, 0.05) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 107, 44, 0.05) 1px, transparent 1px)`,
+            backgroundSize: '30px 30px',
+            backgroundPosition: 'center center',
+          }}></div>
+        </div>
+        
         {/* Background elements */}
-        <div className="absolute -top-20 -right-20 w-80 h-80 bg-gradient-to-br from-orange-300/10 to-orange-200/5 rounded-full opacity-80 blur-3xl -z-10"></div>
-        <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-gradient-to-br from-orange-200/10 to-orange-300/5 rounded-full opacity-80 blur-3xl -z-10"></div>
+        <div className="absolute -top-20 -right-20 w-96 h-96 bg-gradient-to-br from-orange-300/10 to-orange-200/5 rounded-full opacity-80 blur-3xl -z-10"></div>
+        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-gradient-to-br from-orange-200/10 to-orange-300/5 rounded-full opacity-80 blur-3xl -z-10"></div>
+        <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-gradient-to-br from-orange-300/10 to-orange-400/5 rounded-full opacity-60 blur-2xl -z-10"></div>
         
         {/* Floating UI elements */}
         <motion.div 
-          className="absolute top-1/4 left-[8%] hidden lg:block"
+          className="absolute top-1/4 left-[8%] hidden lg:block z-10"
           initial={{ opacity: 0, scale: 0 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 1 }}
         >
-          <div className="bg-white p-2 rounded-full shadow-xl opacity-70">
+          <div className="bg-white p-2 rounded-full shadow-xl backdrop-blur-sm animate-float">
             <svg className="w-5 h-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
+          </div>
+        </motion.div>
+        
+        <motion.div 
+          className="absolute bottom-1/4 right-[20%] hidden lg:block z-10"
+          initial={{ opacity: 0, scale: 0 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 1.3 }}
+        >
+          <div className="bg-white px-4 py-2 rounded-lg shadow-xl backdrop-blur-sm border border-gray-100 animate-float-delayed">
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <p className="text-gray-600 text-xs font-medium">28 online</p>
+            </div>
           </div>
         </motion.div>
         
@@ -901,7 +1021,10 @@ export default function AuditLanding() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="font-poppins font-bold text-3xl md:text-[42px] mb-4 leading-tight tracking-tight text-gray-900">No More Leads Left on the Table</h2>
+            <h2 className="font-poppins font-bold text-3xl md:text-[42px] mb-4 leading-tight tracking-tight text-gray-900">No More Leads Left on the <span className="relative inline-block">
+              <span className="absolute inset-x-0 bottom-2 h-3 bg-orange-200/50 -z-10 rounded"></span>
+              Table
+            </span></h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               You don't need to learn funnels or hire a team. Just let us show you what's broken.
             </p>
@@ -912,14 +1035,16 @@ export default function AuditLanding() {
               {noMoreLeadsSteps.map((step, index) => (
                 <motion.div
                   key={step.number}
-                  className="flex"
+                  className="flex group hover-lift"
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
                 >
-                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-500 text-white rounded-full flex items-center justify-center text-xl font-bold mr-5 shadow-xl">
-                    {step.number}
+                  <div className="relative flex-shrink-0 w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-500 text-white rounded-full flex items-center justify-center text-xl font-bold mr-5 shadow-xl group-hover:shadow-orange-200/50">
+                    {/* Glow effect */}
+                    <div className="absolute inset-0 rounded-full bg-orange-400 opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-700"></div>
+                    <span className="relative z-10">{step.number}</span>
                   </div>
                   <div>
                     <h3 className="font-poppins font-semibold text-xl md:text-2xl mb-2 text-gray-800">{step.title}</h3>
@@ -927,6 +1052,9 @@ export default function AuditLanding() {
                   </div>
                 </motion.div>
               ))}
+              
+              {/* Floating arrows connecting steps */}
+              <div className="absolute left-8 top-[30%] h-[40%] w-0.5 bg-gradient-to-b from-orange-300 to-orange-400 hidden lg:block opacity-30"></div>
             </div>
             
             <motion.div
@@ -936,22 +1064,27 @@ export default function AuditLanding() {
               transition={{ duration: 0.7 }}
               className="relative"
             >
-              {/* Form glow */}
-              <div className="absolute -inset-6 bg-gradient-to-r from-orange-200/40 to-orange-400/30 opacity-70 blur-3xl -z-10 rounded-xl"></div>
+              {/* Form glow and background */}
+              <div className="absolute -inset-8 radial-blur-orange opacity-70 blur-3xl -z-10 rounded-xl"></div>
+              <div className="absolute inset-0 bg-white/30 backdrop-blur-sm rounded-xl -z-5"></div>
               
               {renderAuditForm("footer")}
               
-              <div className="flex justify-center items-center space-x-6 mt-8">
+              {/* Trust badges */}
+              <motion.div 
+                className="flex justify-center items-center space-x-6 mt-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.3 }}
+              >
                 <motion.div 
                   className="text-center"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  whileHover={{ y: -3 }}
+                  whileHover={{ y: -3, scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <div className="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border border-orange-200/50">
-                    <svg className="w-7 h-7 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border border-orange-200/50 animate-glow">
+                    <svg className="w-8 h-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                     </svg>
                   </div>
@@ -960,14 +1093,11 @@ export default function AuditLanding() {
                 
                 <motion.div 
                   className="text-center"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  whileHover={{ y: -3 }}
+                  whileHover={{ y: -3, scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <div className="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border border-orange-200/50">
-                    <svg className="w-7 h-7 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border border-orange-200/50 animate-glow">
+                    <svg className="w-8 h-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                   </div>
@@ -976,20 +1106,17 @@ export default function AuditLanding() {
                 
                 <motion.div 
                   className="text-center"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                  whileHover={{ y: -3 }}
+                  whileHover={{ y: -3, scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <div className="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border border-orange-200/50">
-                    <svg className="w-7 h-7 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border border-orange-200/50 animate-glow">
+                    <svg className="w-8 h-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                     </svg>
                   </div>
                   <p className="text-gray-700 text-sm font-medium">5-Star Rated Agency</p>
                 </motion.div>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -997,6 +1124,26 @@ export default function AuditLanding() {
       
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12 relative overflow-hidden">
+        {/* Grid background overlay - subtle dark grid */}
+        <div className="absolute inset-0 opacity-10 z-0">
+          <div className="h-full w-full" style={{ 
+            backgroundImage: 
+              `linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)`,
+            backgroundSize: '30px 30px',
+            backgroundPosition: 'center center',
+          }}></div>
+        </div>
+        
+        {/* Dot pattern background */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="h-full w-full" style={{
+            backgroundImage: 
+              `radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px)`,
+            backgroundSize: '20px 20px',
+          }}></div>
+        </div>
+        
         {/* Top wave divider */}
         <div className="absolute top-0 left-0 right-0 h-8 overflow-hidden">
           <svg className="absolute bottom-0 w-full h-16 text-white transform translate-y-1/2" preserveAspectRatio="none" viewBox="0 0 1200 120">
@@ -1004,13 +1151,35 @@ export default function AuditLanding() {
           </svg>
         </div>
         
-        {/* Orange gradient glow */}
-        <div className="absolute bottom-0 left-1/4 w-1/2 h-48 bg-orange-500 opacity-10 blur-[100px] rounded-full"></div>
+        {/* Orange gradient glows */}
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-orange-500 opacity-10 blur-[100px] rounded-full"></div>
+        <div className="absolute top-0 right-1/4 w-80 h-80 bg-orange-600 opacity-5 blur-[100px] rounded-full"></div>
         
-        <div className="container mx-auto px-4 relative">
+        {/* Floating UI elements */}
+        <motion.div 
+          className="absolute bottom-1/3 right-[10%] hidden lg:block"
+          initial={{ opacity: 0, scale: 0 }}
+          whileInView={{ opacity: 0.7, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.5 }}
+        >
+          <div className="w-4 h-4 bg-orange-500 rounded-full animate-float"></div>
+        </motion.div>
+        
+        <motion.div 
+          className="absolute top-1/3 left-[15%] hidden lg:block"
+          initial={{ opacity: 0, scale: 0 }}
+          whileInView={{ opacity: 0.4, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.7 }}
+        >
+          <div className="w-6 h-6 blob-effect bg-orange-400 animate-float-delayed"></div>
+        </motion.div>
+        
+        <div className="container max-w-6xl mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
             <Link href="/" className="flex items-center space-x-2 mb-6 md:mb-0">
-              <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center animate-pulse-subtle">
                 <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 10C3 9.05719 3 8.58579 3.29289 8.29289C3.58579 8 4.05719 8 5 8H19C19.9428 8 20.4142 8 20.7071 8.29289C21 8.58579 21 9.05719 21 10V16C21 16.9428 21 17.4142 20.7071 17.7071C20.4142 18 19.9428 18 19 18H5C4.05719 18 3.58579 18 3.29289 17.7071C3 17.4142 3 16.9428 3 16V10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M3 14C6.6 14 8.4 17 12 17C15.6 17 17.4 14 21 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -1021,10 +1190,10 @@ export default function AuditLanding() {
             </Link>
             
             <div className="flex flex-wrap justify-center gap-6">
-              <a href="/#services" className="text-gray-400 hover:text-orange-400 transition-colors text-sm">Services</a>
-              <a href="/#audit" className="text-gray-400 hover:text-orange-400 transition-colors text-sm">Free Audit</a>
-              <a href="/#contact" className="text-gray-400 hover:text-orange-400 transition-colors text-sm">Contact</a>
-              <a href="/privacy" className="text-gray-400 hover:text-orange-400 transition-colors text-sm">Privacy</a>
+              <a href="/#services" className="text-gray-400 hover:text-orange-400 transition-colors text-sm hover:-translate-y-0.5 hover:scale-105 duration-200">Services</a>
+              <a href="/#audit" className="text-gray-400 hover:text-orange-400 transition-colors text-sm hover:-translate-y-0.5 hover:scale-105 duration-200">Free Audit</a>
+              <a href="/#contact" className="text-gray-400 hover:text-orange-400 transition-colors text-sm hover:-translate-y-0.5 hover:scale-105 duration-200">Contact</a>
+              <a href="/privacy" className="text-gray-400 hover:text-orange-400 transition-colors text-sm hover:-translate-y-0.5 hover:scale-105 duration-200">Privacy</a>
             </div>
           </div>
           
@@ -1039,8 +1208,11 @@ export default function AuditLanding() {
                 </p>
               </div>
               <div className="text-right">
-                <a href="mailto:hello@reachflow.com" className="text-orange-400 hover:text-orange-300 transition-colors">
-                  hello@reachflow.com
+                <a href="mailto:hello@reachflow.com" className="text-orange-400 hover:text-orange-300 transition-colors inline-flex items-center gap-1 hover:gap-2 duration-200">
+                  <span>hello@reachflow.com</span>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
                 </a>
                 <p className="text-gray-500 text-sm mt-2">
                   &copy; {new Date().getFullYear()} ReachFlow. All rights reserved.
