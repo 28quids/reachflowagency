@@ -70,10 +70,10 @@
   }
 
   .grid-pattern-bg {
-    background-color: #fdf2eb;
+    background-color: #ffffff;
     background-image: 
-      linear-gradient(rgba(255, 107, 44, 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 107, 44, 0.08) 1px, transparent 1px);
+      linear-gradient(rgba(255, 107, 44, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 107, 44, 0.03) 1px, transparent 1px);
     background-size: 30px 30px;
     background-position: center center;
     position: relative;
@@ -83,7 +83,8 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, transparent 50%, #fdf2eb 100%);
+    background: radial-gradient(circle at center, transparent, #ffffff 100%);
+    opacity: 0.7;
     pointer-events: none;
   }
 
@@ -159,13 +160,13 @@
     100% { filter: drop-shadow(0 0 15px rgba(255, 107, 44, 0.5)); }
   }
 
-  /* Blobs and radial glows */
+  /* Blobs and radial glows - reduced intensity */
   .radial-blur-orange {
-    background: radial-gradient(circle at center, rgba(255, 107, 44, 0.15) 0%, rgba(255, 107, 44, 0) 70%);
+    background: radial-gradient(circle at center, rgba(255, 107, 44, 0.07) 0%, rgba(255, 107, 44, 0) 70%);
   }
 
   .radial-blur-peach {
-    background: radial-gradient(circle at center, rgba(255, 175, 144, 0.15) 0%, rgba(255, 175, 144, 0) 70%);
+    background: radial-gradient(circle at center, rgba(255, 175, 144, 0.07) 0%, rgba(255, 175, 144, 0) 70%);
   }
 
   .blob-effect {

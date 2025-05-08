@@ -330,11 +330,22 @@ export default function AuditLanding() {
       
       {/* Hero Section */}
       <section className="py-24 md:py-32 relative overflow-hidden layer-depth">
-        {/* Background elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-orange-200 rounded-full opacity-20 blur-3xl -z-10"></div>
-        <div className="absolute bottom-20 left-0 w-80 h-80 bg-orange-300 rounded-full opacity-20 blur-3xl -z-10"></div>
-        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-gradient-to-br from-orange-300/30 to-orange-400/20 rounded-full opacity-30 blur-2xl -z-10"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-72 h-72 bg-gradient-to-tl from-orange-400/20 to-orange-300/30 rounded-full opacity-30 blur-2xl -z-10"></div>
+        {/* Background elements - reduced opacity and blur for better contrast */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-orange-200 rounded-full opacity-10 blur-2xl -z-10 transform translate-x-1/4"></div>
+        <div className="absolute bottom-20 left-0 w-80 h-80 bg-orange-300 rounded-full opacity-10 blur-2xl -z-10 transform -translate-x-1/4"></div>
+        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-gradient-to-br from-orange-300/10 to-orange-400/5 rounded-full opacity-20 blur-xl -z-10"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-72 h-72 bg-gradient-to-tl from-orange-400/5 to-orange-300/10 rounded-full opacity-20 blur-xl -z-10"></div>
+        
+        {/* Grid pattern for better visual structure */}
+        <div className="absolute inset-0 opacity-5 z-0">
+          <div className="h-full w-full" style={{ 
+            backgroundImage: 
+              `linear-gradient(rgba(255, 107, 44, 0.03) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 107, 44, 0.03) 1px, transparent 1px)`,
+            backgroundSize: '30px 30px',
+            backgroundPosition: 'center center',
+          }}></div>
+        </div>
         
         {/* Floating UI Elements */}
         <motion.div 
@@ -403,8 +414,10 @@ export default function AuditLanding() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="relative"
             >
-              {/* Form glow effect */}
-              <div className="absolute -inset-6 bg-gradient-to-r from-orange-200/40 to-orange-400/30 opacity-60 blur-3xl -z-10 rounded-xl"></div>
+              {/* Form glow effect - reduced opacity and blur for better readability */}
+              <div className="absolute -inset-6 bg-gradient-to-r from-orange-200/20 to-orange-400/10 opacity-30 blur-2xl -z-10 rounded-xl"></div>
+              {/* Add solid background to ensure form contrast */}
+              <div className="absolute inset-0 bg-white/95 rounded-xl -z-5"></div>
               
               {/* Floating elements */}
               <motion.div 
