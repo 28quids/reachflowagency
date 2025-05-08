@@ -224,6 +224,12 @@
   .hideScrollbar::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
   }
+  
+  /* 3D perspective container for cards */
+  .perspective {
+    perspective: 1600px;
+    transform-style: preserve-3d;
+  }
 }
 
 @font-face {
