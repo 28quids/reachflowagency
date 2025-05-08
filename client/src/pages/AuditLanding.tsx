@@ -6,6 +6,7 @@ import { z } from "zod";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
+import Navbar from "@/components/layout/Navbar";
 
 // AuditForm Schema
 const auditFormSchema = z.object({
@@ -317,6 +318,7 @@ export default function AuditLanding() {
 
   return (
     <div className="grid-pattern-bg relative">
+      <Navbar />
       {/* Floating UI elements - site-wide */}
       <div className="fixed top-1/3 left-[5%] w-8 h-8 opacity-20 hidden lg:block z-0">
         <div className="w-full h-full rounded-full bg-orange-100 animate-float"></div>
@@ -329,7 +331,7 @@ export default function AuditLanding() {
       </div>
       
       {/* Hero Section */}
-      <section className="py-24 md:py-32 relative overflow-hidden layer-depth">
+      <section className="pt-28 pb-24 md:pt-36 md:pb-32 relative overflow-hidden layer-depth">
         {/* Background elements - reduced opacity and blur for better contrast */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-orange-200 rounded-full opacity-10 blur-2xl -z-10 transform translate-x-1/4"></div>
         <div className="absolute bottom-20 left-0 w-80 h-80 bg-orange-300 rounded-full opacity-10 blur-2xl -z-10 transform -translate-x-1/4"></div>
@@ -492,7 +494,7 @@ export default function AuditLanding() {
       </section>
       
       {/* The Best Businesses Often Have the Worst Funnels */}
-      <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-b from-gray-50 via-white to-transparent relative overflow-hidden -mt-10">
         {/* Background patterns - made more prominent */}
         <div className="absolute inset-0 opacity-15" style={{ 
           backgroundImage: `linear-gradient(45deg, rgba(251, 146, 60, 0.15) 25%, transparent 25%, transparent 50%, 
@@ -666,7 +668,7 @@ export default function AuditLanding() {
       </section>
       
       {/* Our Audit Process */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-24 mt-6 relative overflow-hidden bg-gradient-to-b from-white to-transparent">
         {/* Grid background overlay - more prominent */}
         <div className="absolute inset-0 opacity-15 z-0">
           <div className="h-full w-full" style={{ 
@@ -796,7 +798,7 @@ export default function AuditLanding() {
       </section>
       
       {/* Why Trust ReachFlow */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-24 relative overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white -mt-12">
         {/* Background pattern - subtle dot pattern */}
         <div className="absolute inset-0 dot-pattern-bg opacity-80"></div>
         
@@ -969,7 +971,7 @@ export default function AuditLanding() {
       </section>
       
       {/* No More Leads Left on the Table */}
-      <section id="audit-form" className="py-24 relative overflow-hidden">
+      <section id="audit-form" className="py-24 relative overflow-hidden bg-gradient-to-b from-gray-50 to-white -mt-10">
         {/* Grid background overlay */}
         <div className="absolute inset-0 opacity-10 z-0">
           <div className="h-full w-full" style={{ 
