@@ -70,16 +70,16 @@
   }
 
   .grid-pattern-bg {
-    background-color: #fcfcfc;
+    background-color: #fefefe;
     background-image: 
-      linear-gradient(rgba(255, 107, 44, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 107, 44, 0.05) 1px, transparent 1px);
+      linear-gradient(rgba(255, 107, 44, 0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 107, 44, 0.15) 1px, transparent 1px);
     background-size: 30px 30px;
     background-position: center center;
     position: relative;
   }
 
-  /* Removing the ::after pseudo-element that was creating the white overlay */
+  /* Removed the ::after pseudo-element that was creating the white overlay */
 
   .dot-pattern-bg {
     background-color: #f7f7f7;

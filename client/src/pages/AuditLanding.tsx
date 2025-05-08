@@ -336,12 +336,12 @@ export default function AuditLanding() {
         <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-gradient-to-br from-orange-300/10 to-orange-400/5 rounded-full opacity-20 blur-xl -z-10"></div>
         <div className="absolute bottom-1/3 right-1/4 w-72 h-72 bg-gradient-to-tl from-orange-400/5 to-orange-300/10 rounded-full opacity-20 blur-xl -z-10"></div>
         
-        {/* Grid pattern for better visual structure */}
-        <div className="absolute inset-0 opacity-5 z-0">
+        {/* Grid pattern for better visual structure - made more prominent */}
+        <div className="absolute inset-0 opacity-10 z-0">
           <div className="h-full w-full" style={{ 
             backgroundImage: 
-              `linear-gradient(rgba(255, 107, 44, 0.03) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255, 107, 44, 0.03) 1px, transparent 1px)`,
+              `linear-gradient(rgba(255, 107, 44, 0.2) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 107, 44, 0.2) 1px, transparent 1px)`,
             backgroundSize: '30px 30px',
             backgroundPosition: 'center center',
           }}></div>
@@ -493,10 +493,10 @@ export default function AuditLanding() {
       
       {/* The Best Businesses Often Have the Worst Funnels */}
       <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-        {/* Background patterns */}
-        <div className="absolute inset-0 opacity-10" style={{ 
-          backgroundImage: `linear-gradient(45deg, rgba(251, 146, 60, 0.05) 25%, transparent 25%, transparent 50%, 
-                          rgba(251, 146, 60, 0.05) 50%, rgba(251, 146, 60, 0.05) 75%, transparent 75%, transparent)`,
+        {/* Background patterns - made more prominent */}
+        <div className="absolute inset-0 opacity-15" style={{ 
+          backgroundImage: `linear-gradient(45deg, rgba(251, 146, 60, 0.15) 25%, transparent 25%, transparent 50%, 
+                          rgba(251, 146, 60, 0.15) 50%, rgba(251, 146, 60, 0.15) 75%, transparent 75%, transparent)`,
           backgroundSize: '64px 64px',
           backgroundPosition: 'center center'
         }}></div>
@@ -667,12 +667,12 @@ export default function AuditLanding() {
       
       {/* Our Audit Process */}
       <section className="py-24 relative overflow-hidden">
-        {/* Grid background overlay */}
+        {/* Grid background overlay - more prominent */}
         <div className="absolute inset-0 opacity-15 z-0">
           <div className="h-full w-full" style={{ 
             backgroundImage: 
-              `linear-gradient(rgba(255, 107, 44, 0.05) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255, 107, 44, 0.05) 1px, transparent 1px)`,
+              `linear-gradient(rgba(255, 107, 44, 0.2) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 107, 44, 0.2) 1px, transparent 1px)`,
             backgroundSize: '30px 30px',
             backgroundPosition: 'center center',
           }}></div>
