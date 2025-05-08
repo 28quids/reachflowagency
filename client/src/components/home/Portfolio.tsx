@@ -143,12 +143,8 @@ export default function Portfolio() {
           >
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden h-[450px] md:h-full border border-orange-100 shadow-orange-100/10">
               <div className="p-8 h-full">
-                <div className="mb-6">
-                  <span className="text-sm text-orange-600 font-medium uppercase tracking-wider">Our Work</span>
-                </div>
-                
                 {/* Visible list container with overflow mask */}
-                <div className="relative h-[calc(100%-4rem)] overflow-hidden">
+                <div className="relative h-full overflow-hidden mt-2">
                   {/* Fade gradient at top and bottom */}
                   <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none"></div>
                   <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent z-10 pointer-events-none"></div>
