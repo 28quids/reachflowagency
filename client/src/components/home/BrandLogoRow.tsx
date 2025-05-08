@@ -13,6 +13,17 @@ export default function BrandLogoRow() {
   return (
     <section className="py-8 border-t border-gray-100 border-b">
       <div className="container mx-auto px-4">
+        {/* Mini title added above logos */}
+        <motion.div 
+          className="text-center mb-6"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="text-sm font-medium text-gray-500 italic">Some of our clients...</span>
+        </motion.div>
+        
         <motion.div
           className="flex flex-wrap justify-center items-center gap-8 md:gap-12"
           initial="hidden"

@@ -515,14 +515,9 @@ export default function Services() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
                 >
-                  {/* Step counter dot on path */}
-                  <div className="hidden lg:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-                    <div className="w-10 h-10 rounded-full bg-white border-4 border-orange-500 shadow-lg flex items-center justify-center text-sm font-bold text-orange-600">{step.id}</div>
-                  </div>
-                  
                   <div className="bg-white rounded-xl p-8 shadow-xl transition-all duration-300 hover:shadow-2xl group border border-gray-100 hover:border-orange-200 shadow-orange-100/5 hover:shadow-orange-100/20 hover:translate-y-[-5px]">
+                    {/* Removed step counter from mobile view to improve mobile appearance */}
                     <div className="flex lg:hidden items-center mb-3">
-                      <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold mr-3">{step.id}</div>
                       <h4 className="font-poppins font-semibold text-xl">{step.title}</h4>
                     </div>
                     
