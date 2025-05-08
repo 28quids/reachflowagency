@@ -144,21 +144,21 @@ export default function Hero() {
         
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           <motion.p 
-            className="text-sm font-medium text-orange-600 mb-4 tracking-wider"
+            className="uppercase text-xs font-semibold tracking-wider text-orange-600 mb-4 px-3 py-1 bg-orange-50 rounded-full"
             variants={fadeInUp}
           >
             ATTENTION BUSINESSES
           </motion.p>
           
           <motion.h1 
-            className="font-poppins font-bold text-4xl md:text-5xl lg:text-6xl leading-tight mb-8 relative"
+            className="font-poppins font-bold text-4xl md:text-5xl lg:text-[56px] leading-tight mb-8 relative tracking-tight"
             variants={fadeInUp}
           >
             We deliver you the customers you <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">want</span>
           </motion.h1>
           
           <motion.p 
-            className="text-lg text-gray-600 mb-10 max-w-2xl"
+            className="text-xl text-gray-600 mb-10 max-w-2xl"
             variants={fadeInUp}
           >
             Not the ones that waste your time.
@@ -166,14 +166,17 @@ export default function Hero() {
           
           <motion.div 
             variants={fadeInUp}
-            className="mb-16"
+            className="mb-16 relative"
           >
+            {/* Orange glow behind button */}
+            <div className="absolute -inset-4 bg-orange-400/20 blur-2xl rounded-full -z-10"></div>
+            
             <Link 
               href="/audit"
-              className="inline-block gradient-bg text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:brightness-110 transition-all animate-pulse-glow"
+              className="inline-block gradient-bg text-white font-semibold px-8 py-4 rounded-xl shadow-xl hover:shadow-2xl hover:brightness-110 transition-all hover:translate-y-[-2px] animate-pulse-glow"
             >
               Get A Free Marketing Audit
-              <span className="block text-sm mt-1 opacity-90">(in less than 48hrs)</span>
+              <span className="block text-sm mt-1 opacity-90 font-medium">(in less than 48hrs)</span>
             </Link>
           </motion.div>
         </div>
@@ -194,19 +197,22 @@ export default function Hero() {
                   x: index === 1 ? -10 : 10
                 }}
               >
-                <div className={`${notification.color} bg-opacity-95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-white/10`}>
+                <div className={`${notification.color} bg-opacity-95 backdrop-blur-sm rounded-xl p-3 shadow-xl border border-white/20 relative`}>
+                  {/* Glow Effect */}
+                  <div className={`absolute -inset-1 ${notification.color.replace('bg-', 'bg-')} opacity-30 blur-md -z-10 rounded-xl`}></div>
+                  
                   <div className="flex items-start text-white">
-                    <div className="w-8 h-8 bg-white/20 rounded-md flex items-center justify-center mr-3 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 shadow-inner">
+                      <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                       </svg>
                     </div>
                     <div className="flex-1">
                       <div className="flex justify-between">
-                        <div className="font-semibold text-sm">{notification.title}</div>
-                        <div className="text-xs text-white/70">{notification.time}</div>
+                        <div className="font-bold text-sm">{notification.title}</div>
+                        <div className="text-xs text-white/80">{notification.time}</div>
                       </div>
-                      <div className="text-sm font-medium">{notification.message}</div>
+                      <div className="text-sm font-medium mt-0.5">{notification.message}</div>
                     </div>
                   </div>
                 </div>

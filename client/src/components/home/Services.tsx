@@ -231,7 +231,7 @@ export default function Services() {
   return (
     <section id="services" className="py-20 relative overflow-hidden">
       {/* Background decorations */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-50/80 to-white"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-orange-50/60 via-orange-50/30 to-white"></div>
       
       {/* Grid pattern */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
@@ -257,8 +257,9 @@ export default function Services() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-4">What We Do</h2>
-          <p className="text-gray-600 max-w-xl mx-auto">
+          <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full">OUR SERVICES</span>
+          <h2 className="font-poppins font-bold text-3xl md:text-[40px] leading-tight mb-6 tracking-tight">What We Do</h2>
+          <p className="text-gray-600 max-w-xl mx-auto text-lg">
             We help businesses attract and convert high-quality leads through strategic digital marketing solutions.
           </p>
         </motion.div>
@@ -268,46 +269,49 @@ export default function Services() {
           {services.map((service, index) => (
             <motion.div
               key={service.id}
-              className={`flex flex-col-reverse ${service.alignment === "right" ? "md:flex-row-reverse" : "md:flex-row"} gap-8 md:gap-16 items-center`}
+              className={`flex flex-col-reverse ${service.alignment === "right" ? "md:flex-row-reverse" : "md:flex-row"} gap-10 md:gap-16 items-center`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7 }}
+              whileHover={{ y: -5 }}
             >
               {/* Content Side */}
               <div className="w-full md:w-1/2">
-                <motion.div 
-                  className="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mb-6 shadow-orange-100/50 shadow-lg"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                >
-                  {service.icon}
-                </motion.div>
-                
-                <h3 className="font-poppins font-bold text-2xl mb-4">{service.title}</h3>
-                <p className="text-gray-600 mb-6 text-lg">{service.description}</p>
-                
-                <ul className="space-y-3">
-                  {service.features.map((feature, idx) => (
-                    <motion.li 
-                      key={idx} 
-                      className="flex items-start"
-                      initial={{ opacity: 0, x: service.alignment === "right" ? 20 : -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.2 + (idx * 0.1) }}
-                    >
-                      <div className="bg-orange-100 rounded-full p-1 mr-3 mt-0.5 flex-shrink-0">
-                        <svg className="w-4 h-4 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <span className="text-gray-700">{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
+                <div className="bg-white rounded-xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                  <motion.div 
+                    className="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mb-6 shadow-orange-100/50 shadow-lg"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                  >
+                    {service.icon}
+                  </motion.div>
+                  
+                  <h3 className="font-poppins font-bold text-2xl md:text-3xl mb-4">{service.title}</h3>
+                  <p className="text-gray-600 mb-6 text-lg">{service.description}</p>
+                  
+                  <ul className="space-y-3">
+                    {service.features.map((feature, idx) => (
+                      <motion.li 
+                        key={idx} 
+                        className="flex items-start"
+                        initial={{ opacity: 0, x: service.alignment === "right" ? 20 : -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: 0.2 + (idx * 0.1) }}
+                      >
+                        <div className="bg-orange-100 rounded-full p-1 mr-3 mt-0.5 flex-shrink-0">
+                          <svg className="w-4 h-4 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">{feature}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </div>
               </div>
               
               {/* Image or Phone Mockup Side */}
@@ -470,8 +474,9 @@ export default function Services() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h3 className="text-center font-poppins font-bold text-2xl mb-3">The ReachFlow Experience</h3>
-          <p className="text-center text-gray-600 max-w-2xl mx-auto mb-16">
+          <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full mx-auto text-center">OUR APPROACH</span>
+          <h3 className="text-center font-poppins font-bold text-3xl md:text-[36px] leading-tight mb-4 tracking-tight">The ReachFlow Experience</h3>
+          <p className="text-center text-gray-600 max-w-2xl mx-auto mb-16 text-lg">
             When you work with us, you get a transparent, collaborative process that delivers results.
           </p>
           
@@ -494,17 +499,17 @@ export default function Services() {
                     <div className="w-10 h-10 rounded-full bg-white border-4 border-orange-500 shadow-lg flex items-center justify-center text-sm font-bold text-orange-600">{step.id}</div>
                   </div>
                   
-                  <div className="bg-white rounded-xl p-6 shadow-xl transition-all duration-300 hover:shadow-2xl group border border-gray-100 hover:border-orange-200 shadow-orange-100/5 hover:shadow-orange-100/20">
+                  <div className="bg-white rounded-xl p-8 shadow-xl transition-all duration-300 hover:shadow-2xl group border border-gray-100 hover:border-orange-200 shadow-orange-100/5 hover:shadow-orange-100/20 hover:translate-y-[-5px]">
                     <div className="flex lg:hidden items-center mb-3">
                       <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold mr-3">{step.id}</div>
                       <h4 className="font-poppins font-semibold text-xl">{step.title}</h4>
                     </div>
                     
-                    <div className="hidden lg:block w-16 h-16 bg-orange-50 rounded-full flex-shrink-0 flex items-center justify-center mb-5 mx-auto group-hover:bg-orange-100 transition-colors">
+                    <div className="hidden lg:flex w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex-shrink-0 items-center justify-center mb-6 mx-auto group-hover:from-orange-200 group-hover:to-orange-100 transition-colors shadow-lg shadow-orange-100/30">
                       {step.icon}
                     </div>
                     
-                    <h4 className="hidden lg:block font-poppins font-semibold text-xl text-center mb-3">{step.title}</h4>
+                    <h4 className="hidden lg:block font-poppins font-semibold text-xl text-center mb-4">{step.title}</h4>
                     <p className="text-gray-600 mb-6 lg:text-center">{step.description}</p>
                     
                     {/* UI mockup visual for each experience step */}
@@ -513,6 +518,7 @@ export default function Services() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: 0.3 + (index * 0.1) }}
+                      className="hover:shadow-lg transition-all duration-300"
                     >
                       {step.uiMockup}
                     </motion.div>
@@ -522,8 +528,8 @@ export default function Services() {
             </div>
           </div>
           
-          <div className="mt-12 text-center">
-            <p className="text-gray-600 italic max-w-2xl mx-auto">
+          <div className="mt-16 text-center">
+            <p className="text-gray-600 italic max-w-2xl mx-auto text-lg">
               We bring together marketing expertise and a results-focused approach to deliver qualified leads that grow your business.
             </p>
           </div>

@@ -63,12 +63,13 @@ export default function AuditForm() {
   };
 
   return (
-    <section id="audit" className="py-24 relative overflow-hidden bg-gray-50">
+    <section id="audit" className="py-24 relative overflow-hidden bg-gradient-to-b from-orange-50/60 via-white to-gray-50">
       {/* Abstract background elements */}
       <div className="absolute inset-0 geometric-pattern opacity-5"></div>
-      <div className="absolute -top-40 right-0 w-96 h-96 bg-orange-200 rounded-full opacity-20 blur-3xl"></div>
+      <div className="absolute -top-40 right-0 w-96 h-96 bg-orange-300 rounded-full opacity-20 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-white/40 to-transparent"></div>
-      <div className="absolute bottom-10 left-1/3 w-96 h-96 bg-orange-300/30 rounded-full opacity-20 blur-3xl"></div>
+      <div className="absolute bottom-10 left-1/3 w-96 h-96 bg-orange-300/30 rounded-full opacity-30 blur-3xl"></div>
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-orange-200 rounded-full opacity-20 blur-2xl"></div>
       
       <div className="container mx-auto px-4 relative">
         <motion.div 
@@ -78,7 +79,8 @@ export default function AuditForm() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-5">
+          <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full">FREE ANALYSIS</span>
+          <h2 className="font-poppins font-bold text-3xl md:text-[40px] leading-tight mb-5 tracking-tight">
             Get Your Free Marketing Audit
           </h2>
           <p className="text-gray-600 text-lg">
