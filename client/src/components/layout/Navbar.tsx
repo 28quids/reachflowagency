@@ -35,7 +35,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-8">
           <a href="#services" className="font-medium text-gray-700 hover:text-orange-600 transition-colors">Services</a>
           <a href="#work" className="font-medium text-gray-700 hover:text-orange-600 transition-colors">Our Work</a>
-          <a href="#audit" className="font-medium text-gray-700 hover:text-orange-600 transition-colors">Free Audit</a>
+          <Link href="/audit" className="font-medium text-gray-700 hover:text-orange-600 transition-colors">Free Audit</Link>
           <Link href="/audit" className="gradient-bg text-white px-4 py-2 rounded-lg font-medium hover:shadow-lg hover:brightness-110 transition-all">
             Contact Us
           </Link>
@@ -64,7 +64,7 @@ export default function Navbar() {
         <div className="flex flex-col space-y-4">
           <a href="#services" className="font-medium text-gray-700 hover:text-orange-600 transition-colors" onClick={() => setMobileMenuOpen(false)}>Services</a>
           <a href="#work" className="font-medium text-gray-700 hover:text-orange-600 transition-colors" onClick={() => setMobileMenuOpen(false)}>Our Work</a>
-          <a href="#audit" className="font-medium text-gray-700 hover:text-orange-600 transition-colors" onClick={() => setMobileMenuOpen(false)}>Free Audit</a>
+          <Link href="/audit" className="font-medium text-gray-700 hover:text-orange-600 transition-colors" onClick={() => setMobileMenuOpen(false)}>Free Audit</Link>
           <Link 
             href="/audit" 
             className="gradient-bg text-white px-4 py-2 rounded-lg font-medium text-center hover:shadow-lg hover:brightness-110 transition-all" 
