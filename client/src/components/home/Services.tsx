@@ -315,7 +315,7 @@ export default function Services() {
                 {index === 0 ? (
                   // Landing Pages image for Landing Page & Funnel Design section
                   <motion.div 
-                    className="max-w-[380px] w-full"
+                    className="max-w-[320px] w-full"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -363,7 +363,7 @@ export default function Services() {
                 ) : index === 1 ? (
                   // Facebook Ads image for Targeted Paid Traffic section
                   <motion.div 
-                    className="max-w-[300px] w-full"
+                    className="max-w-[320px] w-full"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -411,7 +411,7 @@ export default function Services() {
                 ) : (
                   // Lead Nurture image for Lead Nurturing section
                   <motion.div 
-                    className="max-w-[280px] w-full"
+                    className="max-w-[320px] w-full"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
