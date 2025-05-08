@@ -154,7 +154,7 @@ export default function Hero() {
             className="font-poppins font-bold text-4xl md:text-5xl lg:text-[56px] leading-tight mb-8 relative tracking-tight"
             variants={fadeInUp}
           >
-            We deliver you the customers you <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">want</span>
+            We deliver the customers you <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">actually want</span>
           </motion.h1>
           
           <motion.p 
