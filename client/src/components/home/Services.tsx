@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/utils";
 // Import the Facebook Ads image
-import facebookAdsImage from "../../assets/images/facebook-ads.png";
+import facebookCampaignsImage from "../../assets/images/facebook-campaigns.png";
 
 // Service card data with phone mockups
 const services = [
@@ -324,8 +324,8 @@ export default function Services() {
                       {/* Facebook Ads Image */}
                       <div className="bg-white rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(249,115,22,0.15)]">
                         <img 
-                          src={facebookAdsImage} 
-                          alt="Facebook Ads Manager" 
+                          src={facebookCampaignsImage} 
+                          alt="Facebook Campaigns Manager" 
                           className="w-full h-auto"
                         />
                       </div>
