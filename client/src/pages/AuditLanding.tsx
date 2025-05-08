@@ -395,8 +395,8 @@ export default function AuditLanding() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
             >
-              You Focus on Delivering <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Great Service</span><br/>
-              We'll Focus on Delivering <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Great Customers</span>
+              <div>You Focus on Delivering <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Great Service</span></div>
+              <div>We'll Focus on Delivering <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Great Customers</span></div>
             </motion.h1>
             
             <motion.p 
