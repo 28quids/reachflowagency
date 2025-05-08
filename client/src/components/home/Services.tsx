@@ -258,7 +258,7 @@ export default function Services() {
           transition={{ duration: 0.6 }}
         >
           <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full">OUR SERVICES</span>
-          <h2 className="font-poppins font-bold text-3xl md:text-[40px] leading-tight mb-6 tracking-tight">What We Do</h2>
+          <h2 className="font-poppins font-bold text-3xl md:text-[40px] leading-tight mb-6 tracking-tight">What We <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Do</span></h2>
           <p className="text-gray-600 max-w-xl mx-auto text-lg">
             We help businesses attract and convert high-quality leads through strategic digital marketing solutions.
           </p>
@@ -475,7 +475,7 @@ export default function Services() {
           transition={{ duration: 0.6 }}
         >
           <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full mx-auto text-center">OUR APPROACH</span>
-          <h3 className="text-center font-poppins font-bold text-3xl md:text-[36px] leading-tight mb-4 tracking-tight">The ReachFlow Experience</h3>
+          <h3 className="text-center font-poppins font-bold text-3xl md:text-[36px] leading-tight mb-4 tracking-tight">The ReachFlow <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Experience</span></h3>
           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-16 text-lg">
             When you work with us, you get a transparent, collaborative process that delivers results.
           </p>

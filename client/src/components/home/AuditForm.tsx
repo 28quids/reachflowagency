@@ -81,7 +81,7 @@ export default function AuditForm() {
         >
           <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full">FREE ANALYSIS</span>
           <h2 className="font-poppins font-bold text-3xl md:text-[40px] leading-tight mb-5 tracking-tight">
-            Get Your Free Marketing Audit
+            Get Your <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Free</span> Marketing Audit
           </h2>
           <p className="text-gray-600 text-lg">
             Discover untapped opportunities to grow your business in less than 48 hours.

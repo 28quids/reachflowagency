@@ -57,7 +57,7 @@ export default function Portfolio() {
           className="text-center mb-16"
           variants={fadeInUp}
         >
-          <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-4">Featured Projects</h2>
+          <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-4">Featured <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Projects</span></h2>
           <p className="text-gray-600 max-w-xl mx-auto">See how we've helped businesses like yours generate quality leads and grow their revenue.</p>
         </motion.div>
         
