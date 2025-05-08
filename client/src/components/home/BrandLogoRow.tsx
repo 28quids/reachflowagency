@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/utils";
+import { useEffect, useRef } from "react";
 
 // Project type definition
 type Project = {
@@ -19,48 +20,67 @@ const projects: Project[] = [
   { id: 7, name: "You?", label: "Next Success Story" }
 ];
 
-// Project Card component
-const ProjectCard = ({ project }: { project: Project }) => (
-  <motion.div 
-    className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:border-orange-200 border border-gray-100 group hover:translate-y-[-5px] relative overflow-hidden"
-    variants={fadeInUp}
-    whileHover={{ 
-      scale: 1.02,
-      boxShadow: "0 10px 30px rgba(249, 115, 22, 0.07)"
-    }}
-  >
-    {/* Background accent element that appears on hover */}
-    <div className="absolute -right-4 -bottom-4 w-20 h-20 bg-orange-100 rounded-full opacity-0 group-hover:opacity-80 transition-opacity duration-300 transform group-hover:scale-150"></div>
-    
-    <div className="relative z-10">
-      <h3 className="font-poppins font-bold text-xl text-gray-800 mb-2 group-hover:text-orange-500 transition-colors">
+// Create a duplicate set of projects to make the scrolling seamless
+const duplicatedProjects = [...projects, ...projects];
+
+// Brand Logo Item component for the scrolling display
+const BrandLogoItem = ({ project }: { project: Project }) => (
+  <div className="flex flex-col items-center justify-center mx-6 whitespace-nowrap grayscale hover:grayscale-0 transition-all duration-300 opacity-80 hover:opacity-100 group w-48">
+    <div className="text-center">
+      <h3 className="font-poppins font-semibold text-gray-800 text-lg mb-1 group-hover:text-orange-500 transition-colors">
         {project.name}
       </h3>
-      <div className="inline-block bg-gray-100 text-gray-600 text-xs font-medium px-3 py-1 rounded-full group-hover:bg-orange-100 group-hover:text-orange-600 transition-colors">
+      <span className="inline-block bg-gray-100 text-gray-600 text-xs font-medium px-3 py-1 rounded-full group-hover:bg-orange-100 group-hover:text-orange-600 transition-colors">
         {project.label}
-      </div>
+      </span>
     </div>
-  </motion.div>
+  </div>
 );
 
 export default function BrandLogoRow() {
+  // Animation controls for the scrolling effect
+  const controls = useAnimationControls();
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    // Calculate the total width needed for animation
+    if (scrollerRef.current) {
+      const scrollWidth = scrollerRef.current.scrollWidth / 2;
+      
+      // Start the animation sequence
+      const startAnimation = async () => {
+        await controls.start({
+          x: -scrollWidth,
+          transition: {
+            duration: 25, // Slightly slower for better readability
+            ease: "linear",
+            repeat: Infinity
+          }
+        });
+      };
+      
+      startAnimation();
+    }
+    
+    return () => {
+      controls.stop();
+    };
+  }, [controls]);
+
   return (
-    <section className="py-16 bg-white relative overflow-hidden">
+    <section className="py-16 border-t border-gray-100 border-b overflow-hidden relative">
       {/* Subtle floating elements in background */}
       <div className="absolute top-20 right-10 w-64 h-64 bg-orange-100 rounded-full opacity-20 blur-3xl"></div>
       <div className="absolute bottom-10 left-10 w-64 h-64 bg-orange-50 rounded-full opacity-20 blur-3xl"></div>
       
-      <motion.div 
-        className="container mx-auto px-4"
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-      >
+      <div className="container mx-auto px-4 relative">
         {/* Section header */}
         <motion.div 
-          className="text-center mb-12"
-          variants={fadeInUp}
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
         >
           <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-3">
             Brands We've Helped <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Grow</span>
@@ -68,24 +88,34 @@ export default function BrandLogoRow() {
           <p className="text-gray-600 max-w-xl mx-auto">From funded tech to local service operators</p>
         </motion.div>
         
-        {/* Project grid */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.1
-              }
-            }
-          }}
-        >
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </motion.div>
-      </motion.div>
+        {/* Automatic scrolling container */}
+        <div className="relative w-full overflow-hidden mt-8">
+          {/* Hide scrollbar but allow overflow */}
+          <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white to-transparent z-10"></div>
+          <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white to-transparent z-10"></div>
+          
+          <motion.div
+            ref={scrollerRef}
+            className="flex items-center py-4"
+            animate={controls}
+            initial={{ x: 0 }}
+          >
+            {/* First set of projects */}
+            <div className="flex items-center">
+              {projects.map((project) => (
+                <BrandLogoItem key={`first-${project.id}`} project={project} />
+              ))}
+            </div>
+            
+            {/* Duplicated set to create seamless loop */}
+            <div className="flex items-center">
+              {projects.map((project) => (
+                <BrandLogoItem key={`second-${project.id}`} project={project} />
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
 }
