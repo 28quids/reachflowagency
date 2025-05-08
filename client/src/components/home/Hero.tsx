@@ -71,7 +71,7 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
       >
-        {/* Floating Calendar Icons */}
+        {/* Floating Marketing Icons - Added more icons in dead space */}
         <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
           {/* Top right calendar icon */}
           <motion.div 
@@ -137,6 +137,72 @@ export default function Hero() {
                   </svg>
                 </div>
                 <div className="w-6 h-2 bg-gray-200 rounded-full mt-1"></div>
+              </div>
+            </div>
+          </motion.div>
+          
+          {/* Bottom right marketing icon - graph chart */}
+          <motion.div 
+            className="absolute bottom-32 right-8 md:right-[8%] lg:right-[18%] hidden md:block"
+            style={{ y: y2 }}
+            initial={{ opacity: 0, rotate: 8 }}
+            animate={{ opacity: 0.9, rotate: 6 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <div className="bg-white rounded-lg shadow-lg p-2 border border-orange-100 shadow-orange-100/50 transform rotate-3">
+              <div className="flex justify-between items-center mb-2">
+                <div className="w-10 h-2 bg-gray-200 rounded-full"></div>
+                <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+              </div>
+              <div className="flex items-end space-x-1 h-10">
+                {[40, 65, 35, 85, 50, 70].map((height, i) => (
+                  <div 
+                    key={i} 
+                    className="w-2 bg-orange-400 rounded-t"
+                    style={{ height: `${height}%` }}
+                  ></div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+          
+          {/* Top center marketing icon - user profiles */}
+          <motion.div 
+            className="absolute top-5 left-1/2 transform -translate-x-1/2 hidden md:block"
+            style={{ y: y1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.85 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+          >
+            <div className="bg-white rounded-lg shadow-lg p-2 border border-orange-100 shadow-orange-100/50">
+              <div className="flex space-x-2 mb-1">
+                <div className="w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center">
+                  <span className="text-[8px] text-white font-bold">+5</span>
+                </div>
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="w-5 h-5 bg-gray-200 rounded-full"></div>
+                ))}
+              </div>
+              <div className="w-16 h-2 bg-gray-200 rounded-full mt-1"></div>
+            </div>
+          </motion.div>
+          
+          {/* Bottom left marketing icon - engagement metrics */}
+          <motion.div 
+            className="absolute bottom-48 left-8 md:left-[12%] hidden md:block"
+            style={{ y: y3 }}
+            initial={{ opacity: 0, rotate: -5 }}
+            animate={{ opacity: 0.9, rotate: -3 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+          >
+            <div className="bg-white rounded-lg shadow-lg p-2 border border-orange-100 shadow-orange-100/50 transform rotate-3">
+              <div className="flex mb-1">
+                <div className="w-3 h-3 bg-orange-500 rounded-sm mr-1"></div>
+                <div className="w-8 h-2 bg-gray-200 rounded-full mt-0.5"></div>
+              </div>
+              <div className="flex items-center space-x-1 mt-1">
+                <div className="h-2 w-6 bg-orange-400 rounded-full"></div>
+                <div className="text-[8px] text-gray-500 font-medium">+87%</div>
               </div>
             </div>
           </motion.div>
