@@ -214,6 +214,16 @@
   .backdrop-blur-subtle {
     backdrop-filter: blur(2px);
   }
+  
+  /* Hide scrollbars but allow scrolling */
+  .hideScrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  .hideScrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 }
 
 @font-face {
