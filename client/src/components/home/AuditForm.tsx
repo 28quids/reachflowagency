@@ -27,7 +27,6 @@ export default function AuditForm() {
     defaultValues: {
       name: "",
       email: "",
-      phone: "",
       website: "",
       business: "",
       goals: [],
@@ -144,17 +143,6 @@ export default function AuditForm() {
                     {form.formState.errors.email && (
                       <p className="text-red-500 text-sm mt-1">{form.formState.errors.email.message}</p>
                     )}
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="phone" className="block text-gray-700 font-medium mb-2">Phone Number</label>
-                    <input 
-                      type="tel" 
-                      id="phone" 
-                      {...form.register("phone")} 
-                      className="w-full px-4 py-3 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 hover:border-orange-300 transition-all" 
-                      placeholder="(555) 123-4567" 
-                    />
                   </div>
                   
                   <div>
