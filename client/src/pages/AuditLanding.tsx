@@ -147,109 +147,168 @@ export default function AuditLanding() {
   };
 
   const renderAuditForm = (variant: "hero" | "footer" = "hero") => (
-    <div className={`bg-white rounded-xl shadow-xl border border-gray-200 ${variant === "hero" ? "p-6" : "p-8"}`}>
+    <div className={`bg-white rounded-xl shadow-xl border border-gray-200 ${variant === "hero" ? "p-6 md:p-8" : "p-8"}`}>
       {isSubmitted ? (
         <div className="text-center py-8">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="w-20 h-20 bg-gradient-to-br from-green-100 to-green-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg border border-green-200/50">
+            <svg className="w-10 h-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h3 className="font-poppins font-bold text-xl mb-2">Thank You!</h3>
-          <p className="text-gray-600 mb-6">Your audit request has been received. Our team will analyze your marketing and get back to you within 48 hours.</p>
-          <button
-            onClick={() => setIsSubmitted(false)}
-            className="gradient-bg text-white font-medium px-6 py-2 rounded-lg hover:shadow-lg transition-all"
-          >
-            Submit Another Request
-          </button>
+          <h3 className="font-poppins font-bold text-2xl mb-3 text-gray-800">Thank You!</h3>
+          <p className="text-gray-600 text-lg mb-8">Your audit request has been received. Our team will analyze your marketing and get back to you within 48 hours.</p>
+          
+          <div className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-green-400 to-green-500 opacity-30 blur-lg -z-10 rounded-lg"></div>
+            <button
+              onClick={() => setIsSubmitted(false)}
+              className="bg-gradient-to-r from-green-400 to-green-500 text-white font-medium px-6 py-3 rounded-lg hover:shadow-lg transition-all"
+            >
+              Submit Another Request
+            </button>
+          </div>
         </div>
       ) : (
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <h3 className={`font-bold text-xl mb-4 ${variant === "hero" ? "" : "text-center"}`}>Request Your Free Audit</h3>
+          <div className="relative mb-8">
+            {variant === "footer" && (
+              <div className="absolute -top-4 -right-4 hidden md:block z-10">
+                <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full text-white flex items-center justify-center text-sm font-bold shadow-lg">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+              </div>
+            )}
+            
+            <h3 className={`font-bold text-2xl ${variant === "hero" ? "" : "text-center"} text-gray-800`}>
+              Request Your <span className="text-gradient">Free Audit</span>
+            </h3>
+            
+            {variant === "hero" && (
+              <p className="text-gray-600 mt-2">Complete the form below and we'll analyze your current marketing.</p>
+            )}
+          </div>
           
-          <div className="space-y-4">
+          <div className="space-y-5">
             <div>
-              <label htmlFor={`name-${variant}`} className="block text-gray-700 font-medium mb-1 text-sm">Full Name</label>
-              <input 
-                type="text" 
-                id={`name-${variant}`}
-                {...form.register("name")} 
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
-                placeholder="John Smith" 
-              />
+              <label htmlFor={`name-${variant}`} className="block text-gray-700 font-medium mb-1.5 text-sm">Full Name</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <input 
+                  type="text" 
+                  id={`name-${variant}`}
+                  {...form.register("name")} 
+                  className="w-full pl-10 px-4 py-3 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
+                  placeholder="John Smith" 
+                />
+              </div>
               {form.formState.errors.name && (
                 <p className="text-red-500 text-xs mt-1">{form.formState.errors.name.message}</p>
               )}
             </div>
             
             <div>
-              <label htmlFor={`email-${variant}`} className="block text-gray-700 font-medium mb-1 text-sm">Business Email</label>
-              <input 
-                type="email" 
-                id={`email-${variant}`}
-                {...form.register("email")} 
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
-                placeholder="john@yourcompany.com" 
-              />
+              <label htmlFor={`email-${variant}`} className="block text-gray-700 font-medium mb-1.5 text-sm">Business Email</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <input 
+                  type="email" 
+                  id={`email-${variant}`}
+                  {...form.register("email")} 
+                  className="w-full pl-10 px-4 py-3 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
+                  placeholder="john@yourcompany.com" 
+                />
+              </div>
               {form.formState.errors.email && (
                 <p className="text-red-500 text-xs mt-1">{form.formState.errors.email.message}</p>
               )}
             </div>
             
             <div>
-              <label htmlFor={`website-${variant}`} className="block text-gray-700 font-medium mb-1 text-sm">Website URL</label>
-              <input 
-                type="url" 
-                id={`website-${variant}`}
-                {...form.register("website")} 
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
-                placeholder="https://yourcompany.com" 
-              />
+              <label htmlFor={`website-${variant}`} className="block text-gray-700 font-medium mb-1.5 text-sm">Website URL</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                  </svg>
+                </div>
+                <input 
+                  type="url" 
+                  id={`website-${variant}`}
+                  {...form.register("website")} 
+                  className="w-full pl-10 px-4 py-3 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
+                  placeholder="https://yourcompany.com" 
+                />
+              </div>
               {form.formState.errors.website && (
                 <p className="text-red-500 text-xs mt-1">{form.formState.errors.website.message}</p>
               )}
             </div>
             
             <div>
-              <label htmlFor={`business-${variant}`} className="block text-gray-700 font-medium mb-1 text-sm">Tell us about your goals</label>
-              <textarea 
-                id={`business-${variant}`}
-                {...form.register("business")} 
-                rows={2} 
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
-                placeholder="What are you looking to achieve?" 
-              />
+              <label htmlFor={`business-${variant}`} className="block text-gray-700 font-medium mb-1.5 text-sm">Tell us about your goals</label>
+              <div className="relative">
+                <div className="absolute top-3 left-3 flex items-start pointer-events-none">
+                  <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                </div>
+                <textarea 
+                  id={`business-${variant}`}
+                  {...form.register("business")} 
+                  rows={3} 
+                  className="w-full pl-10 px-4 py-3 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
+                  placeholder="What are you looking to achieve? What are your current challenges?" 
+                />
+              </div>
             </div>
           </div>
           
-          <div className="relative mt-6">
+          <div className="relative mt-8">
             {/* Button glow effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-orange-500 opacity-30 blur-lg -z-10 rounded-lg"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-orange-500 opacity-40 blur-lg -z-10 rounded-lg"></div>
             
             <button 
               type="submit" 
-              className="w-full gradient-bg text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl hover:brightness-110 transition-all text-center"
+              className="w-full gradient-bg text-white font-semibold py-4 rounded-lg shadow-xl hover:shadow-2xl hover:brightness-110 transition-all text-center text-lg"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
                 <div className="flex items-center justify-center">
-                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
                   Submitting...
                 </div>
               ) : (
-                "Request My Free Audit"
+                <>
+                  <span>Request My Free Audit</span>
+                  <span className="absolute right-4 top-1/2 transform -translate-y-1/2">
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </span>
+                </>
               )}
             </button>
           </div>
           
           {variant === "footer" && (
-            <p className="text-gray-500 text-xs text-center mt-4">
-              No obligation. You can use our recommendations with any marketing provider.
-            </p>
+            <div className="mt-4 bg-orange-50/50 rounded-lg p-3 border border-orange-100/50">
+              <p className="text-gray-600 text-xs text-center">
+                No obligation. You can use our recommendations with any marketing provider.
+              </p>
+            </div>
           )}
         </form>
       )}
@@ -263,11 +322,51 @@ export default function AuditLanding() {
         {/* Background elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-orange-200 rounded-full opacity-20 blur-3xl -z-10"></div>
         <div className="absolute bottom-20 left-0 w-80 h-80 bg-orange-300 rounded-full opacity-20 blur-3xl -z-10"></div>
+        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-gradient-to-br from-orange-300/30 to-orange-400/20 rounded-full opacity-30 blur-2xl -z-10"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-72 h-72 bg-gradient-to-tl from-orange-400/20 to-orange-300/30 rounded-full opacity-30 blur-2xl -z-10"></div>
         
-        <div className="container mx-auto px-4">
+        {/* Floating UI Elements */}
+        <motion.div 
+          className="absolute top-32 right-[10%] hidden lg:block"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 1 }}
+        >
+          <div className="bg-white p-3 rounded-lg shadow-xl">
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+              <div className="text-xs font-medium">New lead captured</div>
+            </div>
+          </div>
+        </motion.div>
+        
+        <motion.div 
+          className="absolute bottom-32 left-[10%] hidden lg:block"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 1.3 }}
+        >
+          <div className="bg-white p-3 rounded-lg shadow-xl w-32">
+            <div className="h-3 w-full bg-gray-100 rounded-full mb-1">
+              <div className="h-full w-3/4 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full"></div>
+            </div>
+            <div className="text-xs font-medium text-gray-600">Leads +75%</div>
+          </div>
+        </motion.div>
+        
+        <div className="container max-w-6xl mx-auto px-4">
+          <motion.div 
+            className="text-center mb-4"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full">FREE MARKETING AUDIT</span>
+          </motion.div>
+        
           <div className="max-w-4xl mx-auto mb-16 text-center">
             <motion.h1 
-              className="font-poppins font-bold text-4xl md:text-5xl mb-6 leading-tight"
+              className="font-poppins font-bold text-4xl md:text-[44px] mb-6 leading-tight tracking-tight text-gray-900"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
@@ -288,175 +387,254 @@ export default function AuditLanding() {
           
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
+              className="relative"
             >
+              {/* Form glow effect */}
+              <div className="absolute -inset-6 bg-gradient-to-r from-orange-200/40 to-orange-400/30 opacity-60 blur-3xl -z-10 rounded-xl"></div>
+              
+              {/* Floating elements */}
+              <motion.div 
+                className="absolute -right-4 -top-4 hidden md:block z-10"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.8 }}
+              >
+                <div className="bg-white p-2 rounded-full shadow-lg">
+                  <svg className="w-5 h-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  </svg>
+                </div>
+              </motion.div>
+              
               {renderAuditForm("hero")}
             </motion.div>
             
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
               className="space-y-4"
             >
-              <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
+              <motion.div 
+                className="bg-white border border-gray-200 rounded-lg p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:translate-y-[-2px]"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
                 <div className="flex items-start">
-                  <div className="bg-orange-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0">
+                  <div className="bg-orange-100 rounded-full p-2 mr-3 mt-1 flex-shrink-0 shadow-inner">
                     <svg className="w-5 h-5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <p className="text-gray-700 text-lg">Still relying on word-of-mouth?</p>
+                  <p className="text-gray-800 text-lg font-medium">Still relying on word-of-mouth?</p>
                 </div>
-              </div>
+              </motion.div>
               
-              <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
+              <motion.div 
+                className="bg-white border border-gray-200 rounded-lg p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:translate-y-[-2px]"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
                 <div className="flex items-start">
-                  <div className="bg-orange-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0">
+                  <div className="bg-orange-100 rounded-full p-2 mr-3 mt-1 flex-shrink-0 shadow-inner">
                     <svg className="w-5 h-5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <p className="text-gray-700 text-lg">Site looks outdated on mobile?</p>
+                  <p className="text-gray-800 text-lg font-medium">Site looks outdated on mobile?</p>
                 </div>
-              </div>
+              </motion.div>
               
-              <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
+              <motion.div 
+                className="bg-white border border-gray-200 rounded-lg p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:translate-y-[-2px]"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
                 <div className="flex items-start">
-                  <div className="bg-orange-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0">
+                  <div className="bg-orange-100 rounded-full p-2 mr-3 mt-1 flex-shrink-0 shadow-inner">
                     <svg className="w-5 h-5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <p className="text-gray-700 text-lg">No real marketing strategy?</p>
+                  <p className="text-gray-800 text-lg font-medium">No real marketing strategy?</p>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
       </section>
       
       {/* The Best Businesses Often Have the Worst Funnels */}
-      <section className="py-20 bg-gray-50 relative">
-        <div className="container mx-auto px-4">
+      <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+        {/* Background patterns */}
+        <div className="absolute inset-0 opacity-10" style={{ 
+          backgroundImage: `linear-gradient(45deg, rgba(251, 146, 60, 0.05) 25%, transparent 25%, transparent 50%, 
+                          rgba(251, 146, 60, 0.05) 50%, rgba(251, 146, 60, 0.05) 75%, transparent 75%, transparent)`,
+          backgroundSize: '64px 64px',
+          backgroundPosition: 'center center'
+        }}></div>
+        
+        <div className="container max-w-6xl mx-auto px-4">
           <motion.div 
-            className="max-w-4xl mx-auto mb-12 text-center"
+            className="text-center mb-4"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full">CONVERSION CHALLENGES</span>
+          </motion.div>
+          
+          <motion.div 
+            className="max-w-4xl mx-auto mb-16 text-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-4">
+            <h2 className="font-poppins font-bold text-3xl md:text-[42px] mb-4 leading-tight tracking-tight text-gray-900">
               The Best Businesses Often Have the <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Worst</span> Funnels. We Fix That.
             </h2>
           </motion.div>
           
           <div className="grid md:grid-cols-2 gap-8">
             <motion.div
-              className="bg-white rounded-xl p-6 shadow-xl border border-gray-100"
+              className="bg-white rounded-xl p-8 shadow-xl border border-gray-100 relative transition-all duration-500 hover:shadow-2xl hover:border-orange-100"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
+              whileHover={{ y: -5 }}
             >
-              <h3 className="font-poppins font-semibold text-xl mb-4 text-gray-800">What's Costing You</h3>
+              {/* Red tint gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-red-50 to-white rounded-xl opacity-40"></div>
               
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <div className="bg-red-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0">
-                    <svg className="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-medium">Confused visitors leave your site</p>
-                    <p className="text-gray-600 text-sm">They don't understand what you offer or why they should choose you</p>
-                  </div>
-                </li>
+              <div className="relative">
+                <h3 className="font-poppins font-semibold text-xl md:text-2xl mb-6 text-gray-800">What's Costing You</h3>
                 
-                <li className="flex items-start">
-                  <div className="bg-red-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0">
-                    <svg className="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-medium">Money wasted on low-quality traffic</p>
-                    <p className="text-gray-600 text-sm">Your ads bring the wrong people who don't convert</p>
-                  </div>
-                </li>
-                
-                <li className="flex items-start">
-                  <div className="bg-red-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0">
-                    <svg className="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-medium">Leads disappear into the ether</p>
-                    <p className="text-gray-600 text-sm">No proper follow-up system to nurture potential customers</p>
-                  </div>
-                </li>
-              </ul>
+                <ul className="space-y-6">
+                  <li className="flex items-start">
+                    <div className="bg-red-100 rounded-full p-2 mr-4 mt-1 flex-shrink-0 shadow-md border border-red-200">
+                      <svg className="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-medium text-lg text-gray-800 mb-1">Confused visitors leave your site</p>
+                      <p className="text-gray-600">They don't understand what you offer or why they should choose you</p>
+                    </div>
+                  </li>
+                  
+                  <li className="flex items-start">
+                    <div className="bg-red-100 rounded-full p-2 mr-4 mt-1 flex-shrink-0 shadow-md border border-red-200">
+                      <svg className="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-medium text-lg text-gray-800 mb-1">Money wasted on low-quality traffic</p>
+                      <p className="text-gray-600">Your ads bring the wrong people who don't convert</p>
+                    </div>
+                  </li>
+                  
+                  <li className="flex items-start">
+                    <div className="bg-red-100 rounded-full p-2 mr-4 mt-1 flex-shrink-0 shadow-md border border-red-200">
+                      <svg className="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-medium text-lg text-gray-800 mb-1">Leads disappear into the ether</p>
+                      <p className="text-gray-600">No proper follow-up system to nurture potential customers</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </motion.div>
             
             <motion.div
-              className="bg-white rounded-xl p-6 shadow-xl border border-gray-100"
+              className="bg-white rounded-xl p-8 shadow-xl border border-gray-100 relative transition-all duration-500 hover:shadow-2xl hover:border-orange-100"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
+              whileHover={{ y: -5 }}
             >
-              <h3 className="font-poppins font-semibold text-xl mb-4 text-gray-800">What You Could Have</h3>
-              
-              <ul className="space-y-4 mb-6">
-                <li className="flex items-start">
-                  <div className="bg-green-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0">
-                    <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-medium">Clear messaging that converts</p>
-                    <p className="text-gray-600 text-sm">Visitors immediately understand your value proposition</p>
-                  </div>
-                </li>
-                
-                <li className="flex items-start">
-                  <div className="bg-green-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0">
-                    <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-medium">Targeted traffic that's ready to buy</p>
-                    <p className="text-gray-600 text-sm">Your ads attract the right people at the right time</p>
-                  </div>
-                </li>
-                
-                <li className="flex items-start">
-                  <div className="bg-green-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0">
-                    <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-medium">Automated lead nurturing</p>
-                    <p className="text-gray-600 text-sm">Leads automatically followed up with and converted</p>
-                  </div>
-                </li>
-              </ul>
+              {/* Green tint gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-white rounded-xl opacity-40"></div>
               
               <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-orange-500 opacity-30 blur-lg -z-10 rounded-lg"></div>
-                <Link 
-                  href="#audit-form" 
-                  className="block w-full gradient-bg text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl hover:brightness-110 transition-all text-center"
-                >
-                  Get Your Free Audit
-                </Link>
+                <h3 className="font-poppins font-semibold text-xl md:text-2xl mb-6 text-gray-800">What You Could Have</h3>
+                
+                <ul className="space-y-6 mb-10">
+                  <li className="flex items-start">
+                    <div className="bg-green-100 rounded-full p-2 mr-4 mt-1 flex-shrink-0 shadow-md border border-green-200">
+                      <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-medium text-lg text-gray-800 mb-1">Clear messaging that converts</p>
+                      <p className="text-gray-600">Visitors immediately understand your value proposition</p>
+                    </div>
+                  </li>
+                  
+                  <li className="flex items-start">
+                    <div className="bg-green-100 rounded-full p-2 mr-4 mt-1 flex-shrink-0 shadow-md border border-green-200">
+                      <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-medium text-lg text-gray-800 mb-1">Targeted traffic that's ready to buy</p>
+                      <p className="text-gray-600">Your ads attract the right people at the right time</p>
+                    </div>
+                  </li>
+                  
+                  <li className="flex items-start">
+                    <div className="bg-green-100 rounded-full p-2 mr-4 mt-1 flex-shrink-0 shadow-md border border-green-200">
+                      <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-medium text-lg text-gray-800 mb-1">Automated lead nurturing</p>
+                      <p className="text-gray-600">Leads automatically followed up with and converted</p>
+                    </div>
+                  </li>
+                </ul>
+                
+                <div className="relative">
+                  {/* Floating arrow */}
+                  <motion.div 
+                    className="absolute -right-4 -top-4 hidden md:block z-10"
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.8 }}
+                  >
+                    <div className="bg-white p-2 rounded-full shadow-lg">
+                      <svg className="w-5 h-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+                  </motion.div>
+                  
+                  {/* Button with glow */}
+                  <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-orange-500 opacity-40 blur-lg -z-10 rounded-xl"></div>
+                  <Link 
+                    href="#audit-form" 
+                    className="block w-full gradient-bg text-white font-semibold py-3 px-6 rounded-lg shadow-xl hover:shadow-2xl hover:brightness-110 transition-all text-center flex items-center justify-center space-x-2"
+                  >
+                    <span>Get Your Free Audit</span>
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -464,55 +642,142 @@ export default function AuditLanding() {
       </section>
       
       {/* Our Audit Process */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4">
+      <section className="py-24 relative overflow-hidden">
+        {/* Background decorative wave */}
+        <div className="absolute bottom-0 left-0 right-0 h-64 overflow-hidden -z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="absolute bottom-0 w-full h-64 text-gray-50" preserveAspectRatio="none">
+            <path fill="currentColor" fillOpacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,202.7C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+          </svg>
+        </div>
+        
+        {/* Floating elements */}
+        <motion.div 
+          className="absolute top-1/4 right-[10%] hidden lg:block"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 1 }}
+        >
+          <div className="bg-white p-3 rounded-full shadow-xl">
+            <svg className="w-6 h-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+        </motion.div>
+        
+        <motion.div 
+          className="absolute bottom-1/4 left-[8%] hidden lg:block"
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 1.3 }}
+        >
+          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400/20 to-orange-300/10 backdrop-blur-sm border border-orange-200/30"></div>
+        </motion.div>
+        
+        <div className="container max-w-6xl mx-auto px-4 relative">
           <motion.div 
-            className="max-w-4xl mx-auto mb-12 text-center"
+            className="text-center mb-4"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full shadow-sm">SIMPLE & EFFECTIVE</span>
+          </motion.div>
+          
+          <motion.div 
+            className="max-w-4xl mx-auto mb-16 text-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full">SIMPLE & EFFECTIVE</span>
-            <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-4">Our Audit Process</h2>
-            <p className="text-gray-600 text-lg">
-              We make it easy to discover what's holding your marketing back.
+            <h2 className="font-poppins font-bold text-3xl md:text-[42px] mb-4 leading-tight tracking-tight text-gray-900">Our Audit Process</h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              We make it easy to discover what's holding your marketing back and provide clear steps to improve.
             </p>
           </motion.div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-10">
             {auditProcess.map((step, index) => (
               <motion.div
                 key={step.id}
-                className="bg-white rounded-xl p-6 shadow-xl border border-gray-100 text-center"
-                initial={{ opacity: 0, y: 30 }}
+                className="bg-white rounded-xl p-8 shadow-xl border border-gray-100 text-center relative transition-all duration-500 hover:shadow-2xl hover:border-orange-100"
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                whileHover={{ y: -5 }}
               >
-                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 shadow-orange-100/50 shadow-lg">
-                  {step.icon}
+                {/* Number badge */}
+                <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full text-white flex items-center justify-center text-sm font-bold shadow-lg z-10">
+                  {step.id}
                 </div>
-                <h3 className="font-poppins font-semibold text-xl mb-2">{step.title}</h3>
-                <p className="text-gray-600">{step.description}</p>
+                
+                {/* Light gradient background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 to-white rounded-xl opacity-50"></div>
+                
+                <div className="relative">
+                  <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl border border-orange-200">
+                    <div className="text-orange-500 w-10 h-10">
+                      {step.icon}
+                    </div>
+                  </div>
+                  
+                  <h3 className="font-poppins font-semibold text-xl md:text-2xl mb-3 text-gray-800">{step.title}</h3>
+                  <p className="text-gray-600">{step.description}</p>
+                </div>
+                
+                {/* Card bottom highlight */}
+                <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-orange-400 to-orange-500 rounded-b-xl"></div>
               </motion.div>
             ))}
+          </div>
+          
+          {/* Process connector (desktop only) */}
+          <div className="hidden md:block absolute top-1/2 left-[33%] right-[33%] h-0.5 bg-gradient-to-r from-orange-300 to-orange-400 -translate-y-28 z-0">
+            <div className="absolute -left-1 -top-1.5 w-4 h-4 bg-orange-400 rounded-full"></div>
+            <div className="absolute -right-1 -top-1.5 w-4 h-4 bg-orange-400 rounded-full"></div>
           </div>
         </div>
       </section>
       
       {/* Why Trust ReachFlow */}
-      <section className="py-20 bg-gray-50 relative">
-        <div className="container mx-auto px-4">
+      <section className="py-24 bg-gray-50 relative overflow-hidden">
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-5" style={{ 
+          backgroundImage: `radial-gradient(circle, rgba(251, 146, 60, 0.3) 1px, transparent 1px)`,
+          backgroundSize: '30px 30px',
+          backgroundPosition: 'center center'
+        }}></div>
+        
+        {/* Background gradient */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-orange-300/10 to-orange-400/5 rounded-full opacity-80 blur-3xl -z-10"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-br from-orange-200/10 to-orange-300/5 rounded-full opacity-80 blur-3xl -z-10"></div>
+        
+        <div className="container max-w-6xl mx-auto px-4 relative">
           <motion.div 
-            className="max-w-4xl mx-auto mb-12 text-center"
+            className="text-center mb-4"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full shadow-sm">EXPERIENCED TEAM</span>
+          </motion.div>
+          
+          <motion.div 
+            className="max-w-4xl mx-auto mb-16 text-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full">EXPERIENCED TEAM</span>
-            <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-4">Why Trust ReachFlow</h2>
+            <h2 className="font-poppins font-bold text-3xl md:text-[42px] mb-4 leading-tight tracking-tight text-gray-900">Why Trust ReachFlow</h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Our team brings proven experience and a data-driven approach to marketing.
+            </p>
           </motion.div>
           
           <div className="grid lg:grid-cols-4 gap-8">
@@ -520,76 +785,123 @@ export default function AuditLanding() {
               {trustItems.map((item, index) => (
                 <motion.div
                   key={item.title}
-                  className="bg-white rounded-xl p-6 shadow-xl border border-gray-100"
+                  className="bg-white rounded-xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl hover:border-orange-100 transition-all duration-300"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  whileHover={{ y: -5 }}
                 >
-                  <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                    {item.icon}
+                  <div className="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mb-6 shadow-lg border border-orange-200/50">
+                    <div className="text-orange-500 w-8 h-8">
+                      {item.icon}
+                    </div>
                   </div>
-                  <h3 className="font-poppins font-semibold text-xl mb-2">{item.title}</h3>
-                  <p className="text-gray-600 text-sm">{item.description}</p>
+                  <h3 className="font-poppins font-semibold text-xl mb-3 text-gray-800">{item.title}</h3>
+                  <p className="text-gray-600">{item.description}</p>
                 </motion.div>
               ))}
             </div>
             
             <motion.div
-              className="bg-white rounded-xl p-6 shadow-xl border border-gray-100"
+              className="bg-gradient-to-br from-white to-orange-50/50 rounded-xl p-8 shadow-xl border border-orange-100/50 relative overflow-hidden"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
+              whileHover={{ y: -5 }}
             >
-              <h3 className="font-poppins font-bold text-xl mb-4 text-orange-600">10,000+ Leads Generated</h3>
+              {/* Decorative elements */}
+              <div className="absolute -top-12 -right-12 w-24 h-24 bg-gradient-to-br from-orange-300/20 to-orange-200/10 rounded-full blur-xl"></div>
+              <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-gradient-to-tr from-orange-300/20 to-orange-200/10 rounded-full blur-xl"></div>
               
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-start">
-                  <div className="bg-orange-100 rounded-full p-1 mr-3 mt-0.5 flex-shrink-0">
-                    <svg className="w-4 h-4 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <span className="text-gray-700">24/7 Lead Gen</span>
-                </li>
+              <motion.div
+                initial={{ scale: 0.9 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="relative"
+              >
+                <h3 className="font-poppins font-bold text-2xl mb-4 bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">10,000+ Leads Generated</h3>
                 
-                <li className="flex items-start">
-                  <div className="bg-orange-100 rounded-full p-1 mr-3 mt-0.5 flex-shrink-0">
-                    <svg className="w-4 h-4 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <span className="text-gray-700">Modern Website</span>
-                </li>
+                <ul className="space-y-4 mb-6">
+                  <li className="flex items-start">
+                    <div className="bg-gradient-to-br from-orange-400 to-orange-500 rounded-full p-1.5 mr-3 mt-0.5 flex-shrink-0 shadow-lg">
+                      <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <span className="text-gray-700 font-medium">24/7 Lead Gen</span>
+                  </li>
+                  
+                  <li className="flex items-start">
+                    <div className="bg-gradient-to-br from-orange-400 to-orange-500 rounded-full p-1.5 mr-3 mt-0.5 flex-shrink-0 shadow-lg">
+                      <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <span className="text-gray-700 font-medium">Modern Website</span>
+                  </li>
+                  
+                  <li className="flex items-start">
+                    <div className="bg-gradient-to-br from-orange-400 to-orange-500 rounded-full p-1.5 mr-3 mt-0.5 flex-shrink-0 shadow-lg">
+                      <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <span className="text-gray-700 font-medium">Traffic Control</span>
+                  </li>
+                </ul>
                 
-                <li className="flex items-start">
-                  <div className="bg-orange-100 rounded-full p-1 mr-3 mt-0.5 flex-shrink-0">
-                    <svg className="w-4 h-4 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <span className="text-gray-700">Traffic Control</span>
-                </li>
-              </ul>
-              
-              <p className="text-gray-600 text-sm">Backed by results, not geography. We've helped brands grow in the UK and globally.</p>
+                <div className="p-4 bg-white/80 backdrop-blur-sm rounded-lg border border-orange-100 shadow-sm">
+                  <p className="text-gray-700">Backed by results, not geography. We've helped brands grow in the UK and globally.</p>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
       </section>
       
       {/* No More Leads Left on the Table */}
-      <section id="audit-form" className="py-20 relative">
-        <div className="container mx-auto px-4">
+      <section id="audit-form" className="py-24 relative overflow-hidden">
+        {/* Background elements */}
+        <div className="absolute -top-20 -right-20 w-80 h-80 bg-gradient-to-br from-orange-300/10 to-orange-200/5 rounded-full opacity-80 blur-3xl -z-10"></div>
+        <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-gradient-to-br from-orange-200/10 to-orange-300/5 rounded-full opacity-80 blur-3xl -z-10"></div>
+        
+        {/* Floating UI elements */}
+        <motion.div 
+          className="absolute top-1/4 left-[8%] hidden lg:block"
+          initial={{ opacity: 0, scale: 0 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 1 }}
+        >
+          <div className="bg-white p-2 rounded-full shadow-xl opacity-70">
+            <svg className="w-5 h-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+          </div>
+        </motion.div>
+        
+        <div className="container max-w-6xl mx-auto px-4 relative">
           <motion.div 
-            className="max-w-4xl mx-auto mb-12 text-center"
+            className="text-center mb-4"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full shadow-sm">TAKE ACTION NOW</span>
+          </motion.div>
+          
+          <motion.div 
+            className="max-w-4xl mx-auto mb-16 text-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-4">No More Leads Left on the Table</h2>
+            <h2 className="font-poppins font-bold text-3xl md:text-[42px] mb-4 leading-tight tracking-tight text-gray-900">No More Leads Left on the Table</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               You don't need to learn funnels or hire a team. Just let us show you what's broken.
             </p>
@@ -606,12 +918,12 @@ export default function AuditLanding() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
                 >
-                  <div className="flex-shrink-0 w-14 h-14 bg-orange-500 text-white rounded-full flex items-center justify-center text-xl font-bold mr-4">
+                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-500 text-white rounded-full flex items-center justify-center text-xl font-bold mr-5 shadow-xl">
                     {step.number}
                   </div>
                   <div>
-                    <h3 className="font-poppins font-semibold text-xl mb-1">{step.title}</h3>
-                    <p className="text-gray-600">{step.caption}</p>
+                    <h3 className="font-poppins font-semibold text-xl md:text-2xl mb-2 text-gray-800">{step.title}</h3>
+                    <p className="text-gray-600 text-lg">{step.caption}</p>
                   </div>
                 </motion.div>
               ))}
@@ -622,36 +934,61 @@ export default function AuditLanding() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
+              className="relative"
             >
+              {/* Form glow */}
+              <div className="absolute -inset-6 bg-gradient-to-r from-orange-200/40 to-orange-400/30 opacity-70 blur-3xl -z-10 rounded-xl"></div>
+              
               {renderAuditForm("footer")}
               
-              <div className="flex justify-center items-center space-x-8 mt-8">
-                <div className="text-center">
-                  <div className="bg-orange-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
-                    <svg className="w-6 h-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="flex justify-center items-center space-x-6 mt-8">
+                <motion.div 
+                  className="text-center"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  whileHover={{ y: -3 }}
+                >
+                  <div className="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border border-orange-200/50">
+                    <svg className="w-7 h-7 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                     </svg>
                   </div>
                   <p className="text-gray-700 text-sm font-medium">10K+ Leads Generated</p>
-                </div>
+                </motion.div>
                 
-                <div className="text-center">
-                  <div className="bg-orange-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
-                    <svg className="w-6 h-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <motion.div 
+                  className="text-center"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  whileHover={{ y: -3 }}
+                >
+                  <div className="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border border-orange-200/50">
+                    <svg className="w-7 h-7 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                   </div>
-                  <p className="text-gray-700 text-sm font-medium">Trusted by brands</p>
-                </div>
+                  <p className="text-gray-700 text-sm font-medium">Trusted by Brands</p>
+                </motion.div>
                 
-                <div className="text-center">
-                  <div className="bg-orange-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
-                    <svg className="w-6 h-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <motion.div 
+                  className="text-center"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                  whileHover={{ y: -3 }}
+                >
+                  <div className="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border border-orange-200/50">
+                    <svg className="w-7 h-7 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                     </svg>
                   </div>
                   <p className="text-gray-700 text-sm font-medium">5-Star Rated Agency</p>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           </div>
