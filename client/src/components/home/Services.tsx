@@ -249,7 +249,7 @@ export default function Services() {
         </svg>
       </div>
       
-      <div className="container mx-auto px-4 relative">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 relative">
         <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 20 }}
@@ -264,7 +264,7 @@ export default function Services() {
         </motion.div>
         
         {/* Services in Zig-Zag Layout */}
-        <div className="space-y-24 mb-32">
+        <div className="space-y-32 mb-32">
           {services.map((service, index) => (
             <motion.div
               key={service.id}
