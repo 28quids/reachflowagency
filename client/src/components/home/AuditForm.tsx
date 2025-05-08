@@ -89,13 +89,16 @@ export default function AuditForm() {
         </motion.div>
         
         <motion.div 
-          className="max-w-4xl mx-auto"
+          className="max-w-4xl mx-auto relative"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <div className="bg-white rounded-xl shadow-xl overflow-hidden">
+          {/* Form glow effect */}
+          <div className="absolute -inset-4 bg-orange-300/10 blur-2xl rounded-xl -z-10"></div>
+          
+          <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-orange-100/50">
             {isSubmitted ? (
               <div className="p-10 text-center">
                 <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -121,7 +124,7 @@ export default function AuditForm() {
                       type="text" 
                       id="name" 
                       {...form.register("name")} 
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
+                      className="w-full px-4 py-3 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 hover:border-orange-300 transition-all" 
                       placeholder="John Smith" 
                     />
                     {form.formState.errors.name && (
@@ -135,7 +138,7 @@ export default function AuditForm() {
                       type="email" 
                       id="email" 
                       {...form.register("email")} 
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
+                      className="w-full px-4 py-3 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 hover:border-orange-300 transition-all" 
                       placeholder="john@yourcompany.com" 
                     />
                     {form.formState.errors.email && (
@@ -149,7 +152,7 @@ export default function AuditForm() {
                       type="tel" 
                       id="phone" 
                       {...form.register("phone")} 
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
+                      className="w-full px-4 py-3 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 hover:border-orange-300 transition-all" 
                       placeholder="(555) 123-4567" 
                     />
                   </div>
@@ -160,7 +163,7 @@ export default function AuditForm() {
                       type="url" 
                       id="website" 
                       {...form.register("website")} 
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
+                      className="w-full px-4 py-3 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 hover:border-orange-300 transition-all" 
                       placeholder="https://yourcompany.com" 
                     />
                     {form.formState.errors.website && (
@@ -175,7 +178,7 @@ export default function AuditForm() {
                     id="business" 
                     {...form.register("business")} 
                     rows={3} 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all" 
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 hover:border-orange-300 transition-all" 
                     placeholder="What products/services do you offer? Who is your target audience?" 
                   />
                 </div>
@@ -226,25 +229,30 @@ export default function AuditForm() {
                   </div>
                 </div>
                 
-                <button 
-                  type="submit" 
-                  className="w-full gradient-bg text-white font-medium py-4 rounded-lg shadow-lg hover:shadow-xl hover:brightness-110 transition-all text-center"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <div className="flex items-center justify-center">
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Submitting...
-                    </div>
-                  ) : (
-                    <>
-                      Get My Free Audit – Delivered in 48hrs
-                    </>
-                  )}
-                </button>
+                <div className="relative">
+                  {/* Button glow effect */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-orange-500 opacity-30 blur-lg -z-10 rounded-lg"></div>
+                  
+                  <button 
+                    type="submit" 
+                    className="w-full gradient-bg text-white font-semibold py-4 rounded-lg shadow-xl hover:shadow-2xl hover:brightness-110 transition-all text-center text-lg hover:translate-y-[-2px]"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <div className="flex items-center justify-center">
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Submitting...
+                      </div>
+                    ) : (
+                      <>
+                        Get My Free Audit – Delivered in 48hrs
+                      </>
+                    )}
+                  </button>
+                </div>
               </form>
             )}
           </div>
