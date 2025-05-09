@@ -129,7 +129,10 @@ export default function FeaturedCaseStudy() {
               const mobileLayout = isMobile || windowWidth < 768;
               // Calculate position for the fan-out effect with 3 cards on desktop
               const xPos = mobileLayout ? 0 : ((index - 1) * 270); // Even wider spacing for cleaner fan-out
-              const yPos = mobileLayout ? (index * 70) - 60 : 0; // Vertical stacking on mobile, centered
+              // On desktop, lift the middle card up slightly to enhance its prominence
+              const yPos = mobileLayout 
+                ? (index * 70) - 60 // Vertical stacking on mobile, centered
+                : index === 1 ? -15 : 0; // Middle card higher on desktop
               const zPos = -Math.abs((index - 1) * 5); // Very subtle z-depth
               // Use less dramatic angles on mobile
               const calculatedRotate = mobileLayout ? (index === 0 ? -5 : index === 1 ? 0 : 5) : card.rotate;
@@ -137,7 +140,7 @@ export default function FeaturedCaseStudy() {
               return (
                 <motion.div
                   key={card.id}
-                  className={`absolute shadow-2xl rounded-xl overflow-hidden w-[280px] h-[200px] sm:w-[300px] sm:h-[220px] md:w-[330px] md:h-[240px]`}
+                  className={`absolute ${index === 1 ? 'shadow-[0_15px_35px_-10px_rgba(249,115,22,0.3)]' : 'shadow-2xl'} rounded-xl overflow-hidden w-[280px] h-[200px] sm:w-[300px] sm:h-[220px] md:w-[330px] md:h-[240px]`}
                   style={{
                     transformStyle: 'preserve-3d',
                     perspective: '1600px',
@@ -161,8 +164,8 @@ export default function FeaturedCaseStudy() {
                       x: xPos,
                       rotateY: calculatedRotate,
                       z: zPos,
-                      scale: 1,
-                      zIndex: index === 1 ? 30 : index === 0 ? 20 : 40, // Middle card on top for desktop
+                      scale: index === 1 ? 1.08 : 1, // Middle card slightly larger
+                      zIndex: index === 1 ? 40 : index === 0 ? 20 : 30, // Middle card (index 1) on top for desktop
                       transition: { 
                         duration: 0.8,
                         type: "spring",
