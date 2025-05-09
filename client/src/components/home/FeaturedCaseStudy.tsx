@@ -85,7 +85,7 @@ export default function FeaturedCaseStudy() {
           <p className="text-gray-500 text-sm uppercase tracking-wider font-medium mb-3">FEATURED CASE STUDY</p>
           <h2 className="font-poppins font-bold text-3xl md:text-4xl lg:text-5xl mb-4 max-w-4xl mx-auto">
             <span className="relative">
-              Examples Of Our <span className="bg-indigo-500 text-white px-4 py-1 rounded-md relative inline-block">Best Performing</span>
+              Examples Of Our <span className="bg-orange-500 text-white px-4 py-1 rounded-md relative inline-block">Best Performing</span>
             </span>
             <br/>Ad Creatives
           </h2>
@@ -96,17 +96,26 @@ export default function FeaturedCaseStudy() {
         
         {/* 3D Angled Cards Display - Inspired by reference image */}
         <motion.div 
-          className="relative h-[340px] sm:h-[380px] md:h-[400px]"
+          className="relative h-[420px] sm:h-[380px] md:h-[400px]"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.3 }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.1
+              }
+            }
+          }}
         >
           <div className="absolute inset-0 flex items-center justify-center perspective">
             {caseStudyCards.map((card, index) => {
-              // Calculate position based on index for the 3D effect
-              const xPos = ((index - 1.5) * 65); // Distribute cards horizontally
-              const zPos = -Math.abs((index - 1.5) * 30); // Pull cards further from center back in z-space
-              const calculatedRotate = card.rotate;
+              // Calculate position for the fan-out effect
+              const xPos = ((index - 1.5) * 140); // More spacing for fan-out
+              const zPos = -Math.abs((index - 1.5) * 10); // Less z-depth difference
+              const calculatedRotate = index === 0 ? -25 : index === 1 ? -8 : index === 2 ? 8 : 25; // More dramatic fan angles
               
               return (
                 <motion.div
@@ -115,18 +124,34 @@ export default function FeaturedCaseStudy() {
                   style={{
                     transformStyle: 'preserve-3d',
                     perspective: '1600px',
-                    transform: `translateX(${xPos}px) translateZ(${zPos}px) rotateY(${calculatedRotate}deg)`,
-                    zIndex: index === 1 ? 30 : index === 2 ? 40 : index === 3 ? 20 : 10,
                     background: card.bgImage,
                     backgroundSize: 'cover',
-                    backgroundPosition: 'center'
+                    backgroundPosition: 'center',
+                    originX: index < 2 ? 0.65 : 0.35 // Origin point for rotation
                   }}
                   variants={{
-                    hidden: { opacity: 0, y: 60 },
+                    hidden: { 
+                      opacity: 0, 
+                      y: 30,
+                      x: 0, 
+                      rotateY: 0,
+                      scale: 0.8,
+                      zIndex: 10
+                    },
                     visible: { 
                       opacity: 1, 
                       y: 0,
-                      transition: { duration: 0.8, delay: index * 0.1 }
+                      x: xPos,
+                      rotateY: calculatedRotate,
+                      z: zPos,
+                      scale: 1,
+                      zIndex: index === 1 ? 30 : index === 2 ? 40 : index === 3 ? 20 : 10,
+                      transition: { 
+                        duration: 0.8,
+                        type: "spring",
+                        stiffness: 80,
+                        damping: 20
+                      }
                     }
                   }}
                   whileHover={{ 
