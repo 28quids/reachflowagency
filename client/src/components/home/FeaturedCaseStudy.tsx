@@ -89,12 +89,11 @@ export default function FeaturedCaseStudy() {
           <p className="text-gray-500 text-sm uppercase tracking-wider font-medium mb-3">FEATURED CASE STUDY</p>
           <h2 className="font-poppins font-bold text-3xl md:text-4xl lg:text-5xl mb-4 max-w-4xl mx-auto">
             <span className="relative">
-              Examples Of Our <span className="bg-orange-500 text-white px-4 py-1 rounded-md relative inline-block">Best Performing</span>
+              Examples Of Our <span className="bg-orange-500 text-white px-4 py-1 rounded-md relative inline-block">Best Projects</span>
             </span>
-            <br/>Ad Creatives
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg mt-4">
-            Real ad creatives that delivered exceptional lead generation results for our clients.
+            Real marketing projects that delivered exceptional lead generation results for our clients.
           </p>
         </motion.div>
         
