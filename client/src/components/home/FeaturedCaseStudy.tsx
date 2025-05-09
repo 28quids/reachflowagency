@@ -1,13 +1,8 @@
 import { motion } from "framer-motion";
-import { fadeInUp, staggerContainer } from "@/lib/utils";
+import { fadeInUp } from "@/lib/utils";
 import { Link } from "wouter";
 import { useRef, useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
-
-// New client project images for the case study cards
-const greenHomePathImage = "/assets/images/GreenHomePath.png";
-const tradingIQImage = "/assets/images/TradingIQ.png";
-const greenHomePath2Image = "/assets/images/GreenHomePath2.png";
 
 export default function FeaturedCaseStudy() {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -50,19 +45,19 @@ export default function FeaturedCaseStudy() {
       id: 1,
       title: "GREENHOMEPATH",
       rotate: -30, // Increased angle for more dramatic fan effect
-      imageUrl: greenHomePathImage,
+      imageUrl: "/assets/images/GreenHomePath.png",
     },
     { 
       id: 2,
       title: "TRADINGIQ",
       rotate: 0, // Middle card stays straight
-      imageUrl: tradingIQImage,
+      imageUrl: "/assets/images/TradingIQ.png",
     },
     { 
       id: 3,
       title: "REAL ESTATE CAMPAIGN",
       rotate: 30, // Increased angle for more dramatic fan effect
-      imageUrl: greenHomePath2Image,
+      imageUrl: "/assets/images/GreenHomePath2.png",
     }
   ];
 
@@ -195,7 +190,7 @@ export default function FeaturedCaseStudy() {
                   <img 
                     src={card.imageUrl} 
                     alt={card.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain bg-white"
                   />
                   
                   {/* Optional title overlay at bottom */}
