@@ -49,19 +49,19 @@ export default function FeaturedCaseStudy() {
     { 
       id: 1,
       title: "LEAD AUTOMATION FLOW",
-      rotate: -20,
+      rotate: -30, // Increased angle for more dramatic fan effect
       imageUrl: leadGenAutomationImage,
     },
     { 
       id: 2,
       title: "CAMPAIGN DASHBOARD",
-      rotate: 0,
+      rotate: 0, // Middle card stays straight
       imageUrl: adCampaignDashboardImage,
     },
     { 
       id: 3,
       title: "CLIENT LANDING PAGES",
-      rotate: 20,
+      rotate: 30, // Increased angle for more dramatic fan effect
       imageUrl: caseStudyCollageImage,
     }
   ];
@@ -120,13 +120,15 @@ export default function FeaturedCaseStudy() {
           <div className="absolute right-1/3 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-orange-500/20 blur-3xl opacity-60 pointer-events-none"></div>
           
           <div className="absolute inset-0 flex items-center justify-center perspective">
-            {/* Sort the cards so that the middle card (index 1) is rendered last and appears on top */}
+            {/* IMPORTANT: For proper z-stacking we must ensure the middle card (id 2) is rendered LAST */}
             {[...caseStudyCards]
+              // First sort ensures correct position in the DOM for proper stacking context
               .sort((a, b) => {
-                // Put the middle card (id 2) at the end so it renders last (on top)
-                if (a.id === 2) return 1;
-                if (b.id === 2) return -1;
-                return 0;
+                // Force middle card (id 2) to be rendered absolutely last in the DOM tree
+                if (a.id === 2) return 1; // Push card 2 to the end
+                if (b.id === 2) return -1; // Keep other cards before card 2
+                // Any other cards maintain their original order
+                return a.id - b.id;
               })
               .map((card, index) => {
                 // Recalculate the index based on the original position for proper fan layout
@@ -135,7 +137,8 @@ export default function FeaturedCaseStudy() {
               // On small screens, stack the cards vertically
               const mobileLayout = isMobile || windowWidth < 768;
               // Calculate position for the fan-out effect with 3 cards on desktop
-              const xPos = mobileLayout ? 0 : ((originalIndex - 1) * 270); // Even wider spacing for cleaner fan-out
+              // Wider spacing for the side cards to create a more pronounced fan effect
+              const xPos = mobileLayout ? 0 : ((originalIndex - 1) * 320); // Extra wide spacing for dramatic fan-out
               // On desktop, lift the middle card up slightly to enhance its prominence
               const yPos = mobileLayout 
                 ? (originalIndex * 70) - 60 // Vertical stacking on mobile, centered
@@ -147,7 +150,11 @@ export default function FeaturedCaseStudy() {
               return (
                 <motion.div
                   key={card.id}
-                  className={`absolute ${card.id === 2 ? 'shadow-[0_15px_35px_-10px_rgba(249,115,22,0.3)]' : 'shadow-2xl'} rounded-xl overflow-hidden w-[280px] h-[200px] sm:w-[300px] sm:h-[220px] md:w-[330px] md:h-[240px]`}
+                  className={`absolute ${
+                    card.id === 2 
+                      ? 'shadow-[0_20px_50px_-5px_rgba(249,115,22,0.5)] ring-2 ring-orange-400/50' 
+                      : 'shadow-2xl'
+                  } rounded-xl overflow-hidden w-[280px] h-[200px] sm:w-[300px] sm:h-[220px] md:w-[330px] md:h-[240px]`}
                   style={{
                     transformStyle: 'preserve-3d',
                     perspective: '1600px',
@@ -169,7 +176,7 @@ export default function FeaturedCaseStudy() {
                       rotateY: calculatedRotate,
                       z: zPos,
                       scale: card.id === 2 ? 1.08 : 1, // Middle card slightly larger
-                      zIndex: card.id === 2 ? 100 : 10, // Much higher z-index for middle card to ensure it's in front
+                      zIndex: card.id === 2 ? 999 : (card.id === 1 ? 10 : 20), // Extremely high z-index for middle card to ensure it's in front
                       transition: { 
                         duration: 0.8,
                         type: "spring",
