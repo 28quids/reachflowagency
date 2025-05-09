@@ -123,31 +123,41 @@ export default function FeaturedCaseStudy() {
           <div className="absolute right-1/3 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-orange-500/20 blur-3xl opacity-60 pointer-events-none"></div>
           
           <div className="absolute inset-0 flex items-center justify-center perspective">
-            {caseStudyCards.map((card, index) => {
+            {/* Sort the cards so that the middle card (index 1) is rendered last and appears on top */}
+            {[...caseStudyCards]
+              .sort((a, b) => {
+                // Put the middle card (id 2) at the end so it renders last (on top)
+                if (a.id === 2) return 1;
+                if (b.id === 2) return -1;
+                return 0;
+              })
+              .map((card, index) => {
+                // Recalculate the index based on the original position for proper fan layout
+                const originalIndex = caseStudyCards.findIndex(c => c.id === card.id);
               // Different positioning for mobile vs desktop
               // On small screens, stack the cards vertically
               const mobileLayout = isMobile || windowWidth < 768;
               // Calculate position for the fan-out effect with 3 cards on desktop
-              const xPos = mobileLayout ? 0 : ((index - 1) * 270); // Even wider spacing for cleaner fan-out
+              const xPos = mobileLayout ? 0 : ((originalIndex - 1) * 270); // Even wider spacing for cleaner fan-out
               // On desktop, lift the middle card up slightly to enhance its prominence
               const yPos = mobileLayout 
-                ? (index * 70) - 60 // Vertical stacking on mobile, centered
-                : index === 1 ? -15 : 0; // Middle card higher on desktop
-              const zPos = -Math.abs((index - 1) * 5); // Very subtle z-depth
+                ? (originalIndex * 70) - 60 // Vertical stacking on mobile, centered
+                : originalIndex === 1 ? -15 : 0; // Middle card higher on desktop
+              const zPos = -Math.abs((originalIndex - 1) * 5); // Very subtle z-depth
               // Use less dramatic angles on mobile
-              const calculatedRotate = mobileLayout ? (index === 0 ? -5 : index === 1 ? 0 : 5) : card.rotate;
+              const calculatedRotate = mobileLayout ? (originalIndex === 0 ? -5 : originalIndex === 1 ? 0 : 5) : card.rotate;
               
               return (
                 <motion.div
                   key={card.id}
-                  className={`absolute ${index === 1 ? 'shadow-[0_15px_35px_-10px_rgba(249,115,22,0.3)]' : 'shadow-2xl'} rounded-xl overflow-hidden w-[280px] h-[200px] sm:w-[300px] sm:h-[220px] md:w-[330px] md:h-[240px]`}
+                  className={`absolute ${card.id === 2 ? 'shadow-[0_15px_35px_-10px_rgba(249,115,22,0.3)]' : 'shadow-2xl'} rounded-xl overflow-hidden w-[280px] h-[200px] sm:w-[300px] sm:h-[220px] md:w-[330px] md:h-[240px]`}
                   style={{
                     transformStyle: 'preserve-3d',
                     perspective: '1600px',
                     backgroundImage: card.bgImage,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    originX: index < 2 ? 0.65 : 0.35 // Origin point for rotation
+                    originX: originalIndex < 2 ? 0.65 : 0.35 // Origin point for rotation
                   }}
                   variants={{
                     hidden: { 
@@ -164,8 +174,8 @@ export default function FeaturedCaseStudy() {
                       x: xPos,
                       rotateY: calculatedRotate,
                       z: zPos,
-                      scale: index === 1 ? 1.08 : 1, // Middle card slightly larger
-                      zIndex: index === 1 ? 40 : index === 0 ? 20 : 30, // Middle card (index 1) on top for desktop
+                      scale: card.id === 2 ? 1.08 : 1, // Middle card slightly larger
+                      zIndex: card.id === 2 ? 100 : 10, // Much higher z-index for middle card to ensure it's in front
                       transition: { 
                         duration: 0.8,
                         type: "spring",
