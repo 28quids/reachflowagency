@@ -151,9 +151,6 @@ export default function FeaturedCaseStudy() {
                   style={{
                     transformStyle: 'preserve-3d',
                     perspective: '1600px',
-                    backgroundImage: card.bgImage,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
                     originX: originalIndex < 2 ? 0.65 : 0.35 // Origin point for rotation
                   }}
                   variants={{
@@ -188,54 +185,16 @@ export default function FeaturedCaseStudy() {
                     transition: { duration: 0.3 } 
                   }}
                 >
-                  {/* Card Content */}
-                  <div className={`absolute inset-0 bg-gradient-to-b ${card.bgColor} flex flex-col p-5 text-white`}>
-                    <div className="flex-1 flex flex-col">
-                      {/* Conditional rendering based on card type */}
-                      {card.id === 1 && (
-                        <>
-                          <div className="absolute top-3 left-3 bg-yellow-500 rounded-full p-1.5 shadow-lg">
-                            <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
-                              <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                            </svg>
-                          </div>
-                          <div className="mt-auto">
-                            <h3 className="text-lg font-semibold">{card.title}</h3>
-                            <p className="text-2xl font-bold mt-1">{card.price}</p>
-                          </div>
-                        </>
-                      )}
-                      
-                      {card.id === 2 && (
-                        <>
-                          <h3 className="text-lg font-semibold text-center mb-1">{card.title}</h3>
-                          <p className="text-2xl font-bold text-center mb-3">{card.price}</p>
-                          <ul className="space-y-1.5 text-xs">
-                            {card.features?.map((feature, i) => (
-                              <li key={i} className="bg-white/20 px-2 py-1 rounded">{feature}</li>
-                            ))}
-                          </ul>
-                        </>
-                      )}
-                      
-                      {card.id === 3 && (
-                        <>
-                          <h3 className="text-xl font-bold">{card.title}</h3>
-                          <p className="text-sm font-medium mt-1 mb-auto">{card.subtitle}</p>
-                          <div className="mt-auto">
-                            <button className="bg-white text-orange-700 text-sm font-semibold py-1.5 px-3 rounded-md hover:bg-orange-50 transition-colors">
-                              {card.cta}
-                            </button>
-                          </div>
-                        </>
-                      )}
-                      
-                      {card.id === 4 && (
-                        <div className="mt-auto">
-                          <h3 className="text-xl font-bold">{card.title}</h3>
-                        </div>
-                      )}
-                    </div>
+                  {/* Display actual image */}
+                  <img 
+                    src={card.imageUrl} 
+                    alt={card.title}
+                    className="w-full h-full object-cover"
+                  />
+                  
+                  {/* Optional title overlay at bottom */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                    <h3 className="text-white text-lg font-semibold text-center">{card.title}</h3>
                   </div>
                 </motion.div>
               );
