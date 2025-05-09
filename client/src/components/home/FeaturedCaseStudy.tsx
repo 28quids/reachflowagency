@@ -4,6 +4,11 @@ import { Link } from "wouter";
 import { useRef, useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
+// Import actual images for the case study cards
+import leadGenAutomationImage from "@assets/Untitled design - 2025-05-08T171047.826.png";
+import adCampaignDashboardImage from "@assets/Untitled design - 2025-05-08T171057.736.png";
+import caseStudyCollageImage from "@assets/Untitled design - 2025-05-08T171321.401.png";
+
 export default function FeaturedCaseStudy() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
@@ -39,33 +44,25 @@ export default function FeaturedCaseStudy() {
     </svg>
   );
   
-  // Reduced to 3 cards with better spacing for fan effect
+  // Actual image cards for case study
   const caseStudyCards = [
     { 
-      id: 1, 
-      title: "FACEBOOK CAROUSEL ADS",
-      price: "3.2x ROI INCREASE",
-      bgColor: "from-orange-500/90 to-orange-700/90",
-      bgImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"%3E%3Crect width=\"100\" height=\"100\" fill=\"%23f97316\"%3E%3C/rect%3E%3C/svg%3E')",
-      rotate: -20
+      id: 1,
+      title: "LEAD AUTOMATION FLOW",
+      rotate: -20,
+      imageUrl: leadGenAutomationImage,
     },
     { 
-      id: 2, 
-      title: "LEAD MAGNET OFFER",
-      price: "$8.40 COST PER LEAD",
-      features: ["Optimized landing page", "Multi-step form", "Re-engagement sequence", "Custom audience targeting", "A/B tested headlines"],
-      bgColor: "from-orange-400/90 to-orange-600/90",
-      bgImage: "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"%3E%3Crect width=\"100\" height=\"100\" fill=\"%23f97316\"%3E%3C/rect%3E%3C/svg%3E')",
-      rotate: 0
+      id: 2,
+      title: "CAMPAIGN DASHBOARD",
+      rotate: 0,
+      imageUrl: adCampaignDashboardImage,
     },
     { 
-      id: 3, 
-      title: "LOCAL SERVICE ADS",
-      subtitle: "EXCLUSIVE CLIENT OFFER",
-      cta: "VIEW CASE STUDY",
-      bgColor: "from-orange-600/90 to-orange-800/90",
-      bgImage: "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"%3E%3Crect width=\"100\" height=\"100\" fill=\"%23f97316\"%3E%3C/rect%3E%3C/svg%3E')",
-      rotate: 20
+      id: 3,
+      title: "CLIENT LANDING PAGES",
+      rotate: 20,
+      imageUrl: caseStudyCollageImage,
     }
   ];
 
