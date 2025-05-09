@@ -45,7 +45,7 @@ export default function FeaturedCaseStudy() {
       id: 1,
       title: "GREENHOMEPATH",
       rotate: -30, // Increased angle for more dramatic fan effect
-      imageUrl: "/assets/images/GreenHomePath.png",
+      imageUrl: "/assets/images/content/GreenHomePath.png",
     },
     { 
       id: 2,
@@ -57,7 +57,7 @@ export default function FeaturedCaseStudy() {
       id: 3,
       title: "REAL ESTATE CAMPAIGN",
       rotate: 30, // Increased angle for more dramatic fan effect
-      imageUrl: "/assets/images/GreenHomePath2.png",
+      imageUrl: "/assets/images/content/GreenHomePath2.png",
     }
   ];
 

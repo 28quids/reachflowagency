@@ -7,6 +7,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
 import Navbar from "@/components/layout/Navbar";
+import ExitIntentPopup from "@/components/home/ExitIntentPopup";
 
 // AuditForm Schema
 const auditFormSchema = z.object({
@@ -319,6 +320,8 @@ export default function AuditLanding() {
   return (
     <div className="grid-pattern-bg relative">
       <Navbar />
+      <ExitIntentPopup />
+      
       {/* Floating UI elements - site-wide */}
       <div className="fixed top-1/3 left-[5%] w-8 h-8 opacity-20 hidden lg:block z-0">
         <div className="w-full h-full rounded-full bg-orange-100 animate-float"></div>

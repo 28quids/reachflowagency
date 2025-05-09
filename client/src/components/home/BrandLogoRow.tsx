@@ -24,18 +24,43 @@ const projects: Project[] = [
 const duplicatedProjects = [...projects, ...projects];
 
 // Brand Logo Item component for the scrolling display
-const BrandLogoItem = ({ project }: { project: Project }) => (
-  <div className="flex flex-col items-center justify-center mx-6 whitespace-nowrap grayscale hover:grayscale-0 transition-all duration-300 opacity-80 hover:opacity-100 group w-48">
-    <div className="text-center">
-      <h3 className="font-poppins font-semibold text-gray-800 text-lg mb-1 group-hover:text-orange-500 transition-colors">
-        {project.name}
-      </h3>
-      <span className="inline-block bg-gray-100 text-gray-600 text-xs font-medium px-3 py-1 rounded-full group-hover:bg-orange-100 group-hover:text-orange-600 transition-colors">
-        {project.label}
-      </span>
+const BrandLogoItem = ({ project }: { project: Project }) => {
+  const isYou = project.name === "You?";
+  return (
+    <div
+      className={
+        `flex flex-col items-center justify-center mx-6 whitespace-nowrap transition-all duration-300 group w-48 ` +
+        (isYou
+          ? "opacity-100 grayscale-0"
+          : "grayscale hover:grayscale-0 opacity-80 hover:opacity-100")
+      }
+    >
+      <div className="text-center">
+        {isYou ? (
+          <>
+            <h3 className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative font-bold font-poppins text-lg mb-1">
+              {project.name}
+            </h3>
+            <div className="mt-2">
+              <span className="inline-block text-xs font-medium px-3 py-1 rounded-full bg-orange-50 text-orange-600">
+                {project.label}
+              </span>
+            </div>
+          </>
+        ) : (
+          <>
+            <h3 className="font-poppins font-semibold text-gray-800 text-lg mb-1 group-hover:text-orange-500 transition-colors">
+              {project.name}
+            </h3>
+            <span className="inline-block text-xs font-medium px-3 py-1 rounded-full transition-colors bg-gray-100 text-gray-600 group-hover:bg-orange-100 group-hover:text-orange-600">
+              {project.label}
+            </span>
+          </>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default function BrandLogoRow() {
   // Animation controls for the scrolling effect

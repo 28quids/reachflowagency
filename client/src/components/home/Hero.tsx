@@ -1,34 +1,36 @@
 import { Link } from "wouter";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/utils";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence } from "framer-motion";
 
-// Notification data
-const notifications = [
-  {
-    id: 1,
-    title: "REACHFLOW",
-    message: "New lead qualified",
-    time: "now",
-    color: "bg-orange-600",
-    delay: 0.2
-  },
-  {
-    id: 2,
-    title: "REACHFLOW",
-    message: "You've booked a new meeting",
-    time: "1m ago",
-    color: "bg-rose-500",
-    delay: 0.4
-  },
-  {
-    id: 3,
-    title: "REACHFLOW",
-    message: "Meeting confirmed with Sarah for 2pm",
-    time: "2m ago",
-    color: "bg-purple-600",
-    delay: 0.6
-  }
+// Notification color palette
+const notificationColors = [
+  "bg-teal-600",
+  "bg-rose-500",
+  "bg-purple-600",
+  "bg-orange-600",
+  "bg-blue-600",
+  "bg-green-600",
+  "bg-pink-600",
+  "bg-yellow-500",
+  "bg-indigo-600",
+  "bg-red-600",
+  "bg-cyan-600"
+];
+
+// Notification pool (10 unique events)
+const notificationPool = [
+  { message: "New lead qualified", color: "bg-teal-600" },
+  { message: "You've booked a new meeting", color: "bg-rose-500" },
+  { message: "Meeting confirmed with Sarah for 2pm", color: "bg-purple-600" },
+  { message: "Payment received from client", color: "bg-orange-600" },
+  { message: "Follow-up scheduled for tomorrow", color: "bg-blue-600" },
+  { message: "Lead replied to your email", color: "bg-green-600" },
+  { message: "Proposal sent to prospect", color: "bg-pink-600" },
+  { message: "Contract signed!", color: "bg-yellow-500" },
+  { message: "Demo requested by lead", color: "bg-indigo-600" },
+  { message: "Call scheduled with Alex", color: "bg-cyan-600" }
 ];
 
 export default function Hero() {
@@ -48,9 +50,55 @@ export default function Hero() {
   const notificationY2 = useTransform(scrollYProgress, [0.1, 0.4], [100, 0]);
   const notificationY3 = useTransform(scrollYProgress, [0.2, 0.5], [100, 0]);
   
-  const notificationOpacity1 = useTransform(scrollYProgress, [0, 0.3, 0.6], [0, 1, 0.8]);
-  const notificationOpacity2 = useTransform(scrollYProgress, [0.1, 0.4, 0.7], [0, 1, 0.8]);
-  const notificationOpacity3 = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0, 1, 0.8]);
+  const notificationOpacity1 = useTransform(scrollYProgress, [0, 0.3, 0.6], [0, 1, 0]);
+  const notificationOpacity2 = useTransform(scrollYProgress, [0.1, 0.4, 0.7], [0, 1, 0]);
+  const notificationOpacity3 = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0, 1, 0]);
+
+  // Notifications fade out one by one on scroll, each with its own transform
+  const notificationFadeTransforms = [
+    {
+      opacity: useTransform(scrollYProgress, [0, 0.38, 0.58], [1, 1, 0]),
+      y: useTransform(scrollYProgress, [0, 0.38, 0.58], [0, 0, -40])
+    },
+    {
+      opacity: useTransform(scrollYProgress, [0.18, 0.48, 0.68], [1, 1, 0]),
+      y: useTransform(scrollYProgress, [0.18, 0.48, 0.68], [0, 0, -40])
+    },
+    {
+      opacity: useTransform(scrollYProgress, [0.32, 0.62, 0.82], [1, 1, 0]),
+      y: useTransform(scrollYProgress, [0.32, 0.62, 0.82], [0, 0, -40])
+    }
+  ];
+
+  // Only 3 notifications visible, cycling through 10 events
+  const [visibleNotifications, setVisibleNotifications] = useState([
+    { id: 1, title: "REACHFLOW", message: notificationPool[0].message, time: "now", color: notificationPool[0].color },
+    { id: 2, title: "REACHFLOW", message: notificationPool[1].message, time: "1m ago", color: notificationPool[1].color },
+    { id: 3, title: "REACHFLOW", message: notificationPool[2].message, time: "2m ago", color: notificationPool[2].color }
+  ]);
+  const poolIndex = useRef(3);
+  const notificationId = useRef(4);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Get next notification from pool
+      const next = notificationPool[poolIndex.current % notificationPool.length];
+      const newNotification = {
+        id: notificationId.current++,
+        title: "REACHFLOW",
+        message: next.message,
+        time: "now",
+        color: next.color
+      };
+      poolIndex.current++;
+      setVisibleNotifications(prev => {
+        const updated = [...prev, newNotification];
+        // Only keep the last 3
+        return updated.length > 3 ? updated.slice(updated.length - 3) : updated;
+      });
+    }, 2000); // 2 seconds per notification
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section ref={containerRef} className="pt-28 pb-24 md:pt-36 md:pb-32 relative overflow-hidden">
@@ -76,10 +124,20 @@ export default function Hero() {
           {/* Top right calendar icon */}
           <motion.div 
             className="absolute top-10 right-10 md:right-20 lg:right-[10%] hidden md:block"
-            style={{ y: y1 }}
+            style={{}}
             initial={{ opacity: 0, rotate: 10 }}
-            animate={{ opacity: 0.9, rotate: 4 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            animate={{ 
+              opacity: 1, 
+              rotate: [4, 6, 4, 2, 4],
+              y: [0, -18, 0, 18, 0], 
+              x: [0, 10, 0, -10, 0] 
+            }}
+            transition={{ 
+              opacity: { duration: 0.8 }, 
+              rotate: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 7, repeat: Infinity, ease: "easeInOut" }, 
+              x: { duration: 7, repeat: Infinity, ease: "easeInOut" } 
+            }}
           >
             <div className="bg-white rounded-lg shadow-lg p-2 border border-orange-100 shadow-orange-100/50">
               <div className="flex justify-between items-center mb-1 pb-1 border-b border-gray-100">
@@ -100,10 +158,20 @@ export default function Hero() {
           {/* Bottom left booked slot */}
           <motion.div 
             className="absolute bottom-20 left-8 md:left-[15%] hidden md:block"
-            style={{ y: y2 }}
+            style={{}}
             initial={{ opacity: 0, rotate: -5 }}
-            animate={{ opacity: 0.8, rotate: -8 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            animate={{ 
+              opacity: 1, 
+              rotate: [-8, -6, -8, -10, -8],
+              y: [0, -30, 0, 30, 0], 
+              x: [0, 20, 0, -20, 0] 
+            }}
+            transition={{ 
+              opacity: { duration: 0.8 }, 
+              rotate: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 8, repeat: Infinity, ease: "easeInOut" }, 
+              x: { duration: 8, repeat: Infinity, ease: "easeInOut" } 
+            }}
           >
             <div className="bg-white rounded-lg shadow-lg p-2 border border-orange-100 shadow-orange-100/50 transform rotate-12">
               <div className="flex items-center mb-1">
@@ -119,10 +187,20 @@ export default function Hero() {
           {/* Top left calendar icon */}
           <motion.div 
             className="absolute top-24 left-4 md:left-[5%] lg:left-[15%] hidden md:block"
-            style={{ y: y3 }}
+            style={{}}
             initial={{ opacity: 0, rotate: -15 }}
-            animate={{ opacity: 0.85, rotate: -12 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            animate={{ 
+              opacity: 1, 
+              rotate: [-12, -10, -12, -14, -12],
+              y: [0, -25, 0, 25, 0], 
+              x: [0, 15, 0, -15, 0] 
+            }}
+            transition={{ 
+              opacity: { duration: 0.8 }, 
+              rotate: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 7, repeat: Infinity, ease: "easeInOut" }, 
+              x: { duration: 7, repeat: Infinity, ease: "easeInOut" } 
+            }}
           >
             <div className="bg-white rounded-lg shadow-lg p-1.5 border border-orange-100 shadow-orange-100/50 transform -rotate-6">
               <div className="flex space-x-1 mb-1">
@@ -143,11 +221,21 @@ export default function Hero() {
           
           {/* Bottom right marketing icon - graph chart */}
           <motion.div 
-            className="absolute bottom-32 right-8 md:right-[8%] lg:right-[18%] hidden md:block"
-            style={{ y: y2 }}
+            className="absolute bottom-40 right-8 md:right-[8%] lg:right-[18%] hidden md:block"
+            style={{}}
             initial={{ opacity: 0, rotate: 8 }}
-            animate={{ opacity: 0.9, rotate: 6 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            animate={{ 
+              opacity: 1, 
+              rotate: [6, 8, 6, 4, 6],
+              y: [0, -22, 0, 22, 0], 
+              x: [0, 12, 0, -12, 0] 
+            }}
+            transition={{ 
+              opacity: { duration: 0.8 }, 
+              rotate: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 8, repeat: Infinity, ease: "easeInOut" }, 
+              x: { duration: 8, repeat: Infinity, ease: "easeInOut" } 
+            }}
           >
             <div className="bg-white rounded-lg shadow-lg p-2 border border-orange-100 shadow-orange-100/50 transform rotate-3">
               <div className="flex justify-between items-center mb-2">
@@ -166,15 +254,25 @@ export default function Hero() {
             </div>
           </motion.div>
           
-          {/* Top center marketing icon - user profiles */}
+          {/* Moved '+5' icon to below the bar chart (bottom right), with slight angle */}
           <motion.div 
-            className="absolute top-5 left-1/2 transform -translate-x-1/2 hidden md:block"
-            style={{ y: y1 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.85 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            className="absolute bottom-8 right-8 md:right-[8%] lg:right-[18%] hidden md:block"
+            style={{}}
+            initial={{ opacity: 0, rotate: 6 }}
+            animate={{ 
+              opacity: 1, 
+              rotate: [6, 8, 6, 4, 6],
+              y: [0, -18, 0, 18, 0], 
+              x: [0, 12, 0, -12, 0] 
+            }}
+            transition={{ 
+              opacity: { duration: 0.8 }, 
+              rotate: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 8, repeat: Infinity, ease: "easeInOut" }, 
+              x: { duration: 8, repeat: Infinity, ease: "easeInOut" } 
+            }}
           >
-            <div className="bg-white rounded-lg shadow-lg p-2 border border-orange-100 shadow-orange-100/50">
+            <div className="bg-white rounded-lg shadow-lg p-2 border border-orange-100 shadow-orange-100/50 transform rotate-6">
               <div className="flex space-x-2 mb-1">
                 <div className="w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center">
                   <span className="text-[8px] text-white font-bold">+5</span>
@@ -190,10 +288,20 @@ export default function Hero() {
           {/* Bottom left marketing icon - engagement metrics */}
           <motion.div 
             className="absolute bottom-48 left-8 md:left-[12%] hidden md:block"
-            style={{ y: y3 }}
+            style={{}}
             initial={{ opacity: 0, rotate: -5 }}
-            animate={{ opacity: 0.9, rotate: -3 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            animate={{ 
+              opacity: 1, 
+              rotate: [-3, -1, -3, -5, -3],
+              y: [0, -18, 0, 18, 0], 
+              x: [0, 10, 0, -10, 0] 
+            }}
+            transition={{ 
+              opacity: { duration: 0.8 }, 
+              rotate: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 7, repeat: Infinity, ease: "easeInOut" }, 
+              x: { duration: 7, repeat: Infinity, ease: "easeInOut" } 
+            }}
           >
             <div className="bg-white rounded-lg shadow-lg p-2 border border-orange-100 shadow-orange-100/50 transform rotate-3">
               <div className="flex mb-1">
@@ -220,14 +328,14 @@ export default function Hero() {
             className="font-poppins font-bold text-4xl md:text-5xl lg:text-[56px] leading-tight mb-8 relative tracking-tight"
             variants={fadeInUp}
           >
-            We deliver the customers you <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">actually want</span>
+            Not Just More Leads. <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">The Ones That Actually Close.</span>
           </motion.h1>
           
           <motion.p 
             className="text-xl text-gray-600 mb-10 max-w-2xl"
             variants={fadeInUp}
           >
-            Not the ones that waste your time.
+            We'll show you exactly where your funnel is leaking and how to fix it.
           </motion.p>
           
           <motion.div 
@@ -245,46 +353,68 @@ export default function Hero() {
               <span className="block text-sm mt-1 opacity-90 font-medium">(in less than 48hrs)</span>
             </Link>
           </motion.div>
-        </div>
-        
-        {/* Animated iPhone Notifications that appear when scrolling */}
-        <div className="max-w-md mx-auto mt-8 relative flex flex-col items-end z-10">
-          {notifications.map((notification, index) => {
-            const yValue = index === 0 ? notificationY1 : index === 1 ? notificationY2 : notificationY3;
-            const opacityValue = index === 0 ? notificationOpacity1 : index === 1 ? notificationOpacity2 : notificationOpacity3;
-            
-            return (
-              <motion.div 
-                key={notification.id}
-                className={`mb-3 max-w-[85%] ${index === 0 ? 'self-end' : index === 1 ? 'self-start' : 'self-end'}`}
-                style={{ 
-                  y: yValue,
-                  opacity: opacityValue,
-                  x: index === 1 ? -10 : 10
-                }}
-              >
-                <div className={`${notification.color} bg-opacity-95 backdrop-blur-sm rounded-xl p-3 shadow-xl border border-white/20 relative`}>
-                  {/* Glow Effect */}
-                  <div className={`absolute -inset-1 ${notification.color.replace('bg-', 'bg-')} opacity-30 blur-md -z-10 rounded-xl`}></div>
-                  
-                  <div className="flex items-start text-white">
-                    <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 shadow-inner">
-                      <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                      </svg>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex justify-between">
-                        <div className="font-bold text-sm">{notification.title}</div>
-                        <div className="text-xs text-white/80">{notification.time}</div>
+          {/* Notification stack: fixed height, absolute notifications for smooth, non-stretching animation */}
+          <div className="relative mt-2 mb-4" style={{ height: '84px', width: '320px', maxWidth: '100%' }}>
+            <AnimatePresence initial={false}>
+              {visibleNotifications.map((notification, index) => {
+                // Fixed positions: first on left, second on right, third on left
+                const positions = [
+                  { x: -8 },  // First notification: left
+                  { x: 8 },   // Second notification: right
+                  { x: -8 }   // Third notification: left
+                ];
+                const position = positions[index];
+                const y = index * 28; // notification height + margin
+                
+                return (
+                  <motion.div
+                    key={notification.id}
+                    className="absolute left-0 right-0 mx-auto max-w-xs w-full"
+                    style={{ top: y }}
+                    initial={{ 
+                      opacity: 0, 
+                      y: y + 40 
+                    }}
+                    animate={{ 
+                      opacity: 1, 
+                      x: position.x,
+                      y: y 
+                    }}
+                    exit={{ 
+                      opacity: 0, 
+                      y: y - 40,
+                      transition: { duration: 0.3 }
+                    }}
+                    transition={{ 
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 20,
+                      mass: 0.5
+                    }}
+                  >
+                    <div className={`${notification.color} bg-opacity-95 backdrop-blur-sm rounded-xl p-3 shadow-xl border border-white/20 relative`}>
+                      {/* Glow Effect */}
+                      <div className={`absolute -inset-1 ${notification.color.replace('bg-', 'bg-')} opacity-30 blur-md -z-10 rounded-xl`}></div>
+                      <div className="flex items-start text-white">
+                        <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 shadow-inner">
+                          <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                          </svg>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex justify-between">
+                            <div className="font-bold text-sm">{notification.title}</div>
+                            <div className="text-xs text-white/80">{notification.time}</div>
+                          </div>
+                          <div className="text-sm font-medium mt-0.5">{notification.message}</div>
+                        </div>
                       </div>
-                      <div className="text-sm font-medium mt-0.5">{notification.message}</div>
                     </div>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </div>
         </div>
       </motion.div>
     </section>

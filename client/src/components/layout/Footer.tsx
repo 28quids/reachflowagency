@@ -29,14 +29,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 relative">
         <div className="flex flex-col md:flex-row justify-between items-center mb-6">
           <Link href="/" className="flex items-center space-x-2 mb-6 md:mb-0">
-            <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 10C3 9.05719 3 8.58579 3.29289 8.29289C3.58579 8 4.05719 8 5 8H19C19.9428 8 20.4142 8 20.7071 8.29289C21 8.58579 21 9.05719 21 10V16C21 16.9428 21 17.4142 20.7071 17.7071C20.4142 18 19.9428 18 19 18H5C4.05719 18 3.58579 18 3.29289 17.7071C3 17.4142 3 16.9428 3 16V10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M3 14C6.6 14 8.4 17 12 17C15.6 17 17.4 14 21 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M3 11C6.6 11 8.4 8 12 8C15.6 8 17.4 11 21 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <span className="font-poppins font-bold text-xl">Reach<span className="text-gradient">Flow</span></span>
+            <img src="/assets/images/logo.png" alt="ReachFlow Logo" className="h-12 w-auto" />
           </Link>
           
           <div className="flex flex-wrap justify-center gap-6">

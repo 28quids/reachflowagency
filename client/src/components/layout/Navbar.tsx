@@ -15,21 +15,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center space-x-1">
           {/* ReachFlow Logo */}
-          <div className="flex items-center">
-            <span className="font-poppins font-bold text-xl text-[#112D32]">reach</span>
-            <span className="font-poppins font-bold text-xl text-gradient">flow</span>
-            
-            {/* Arrow and wave icon similar to the attached logo */}
-            <div className="relative ml-0.5">
-              <svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" className="overflow-visible">
-                {/* Orange arrow */}
-                <path d="M15 6L22 12L15 18" stroke="#FF5E3A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                
-                {/* Teal wave */}
-                <path d="M3 14C6.6 14 8.4 17 12 17C14 17 15.5 16 17 14" stroke="#2DCCD3" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-              </svg>
-            </div>
-          </div>
+          <img src="/assets/images/logo.png" alt="ReachFlow Logo" className="h-12 w-auto" />
         </Link>
         
         <div className="hidden md:flex items-center space-x-8">

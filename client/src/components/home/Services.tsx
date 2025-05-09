@@ -1,15 +1,11 @@
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/utils";
-// Import the images
-import facebookCampaignsImage from "../../assets/images/facebook-campaigns.png";
-import landingPagesImage from "../../assets/images/landing-pages.png";
-import leadNurtureImage from "../../assets/images/lead-nurture.png";
 
 // Service card data with phone mockups
 const services = [
   {
     id: 1,
-    title: "Landing Page & Funnel Design",
+    title: "Pages That Turn Clicks Into Clients",
     description: "We design high-converting landing pages and sales funnels that turn visitors into customers.",
     alignment: "left",
     phoneContent: (
@@ -42,7 +38,7 @@ const services = [
   },
   {
     id: 2,
-    title: "Targeted Paid Traffic",
+    title: "Traffic That Actually Converts",
     description: "We drive qualified leads to your business through strategic ad campaigns across multiple platforms.",
     alignment: "right",
     phoneContent: (
@@ -79,7 +75,7 @@ const services = [
   },
   {
     id: 3,
-    title: "Lead Nurturing",
+    title: "Turn Cold Leads Into Booked Calls",
     description: "We help you build relationships with prospects through personalized communication that guides them toward purchase.",
     alignment: "left",
     phoneContent: (
@@ -315,7 +311,7 @@ export default function Services() {
               </div>
               
               {/* Image or Phone Mockup Side */}
-              <div className="w-full md:w-1/2 flex justify-center">
+              <div className="w-full md:w-1/2 flex items-center justify-center">
                 {index === 0 ? (
                   // Landing Pages image for Landing Page & Funnel Design section
                   <motion.div 
@@ -329,10 +325,10 @@ export default function Services() {
                     <div className="relative">
                       {/* Landing Pages Image */}
                       <div className="bg-white rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(249,115,22,0.15)]">
-                        <img 
-                          src={landingPagesImage} 
-                          alt="Landing Page & Funnel Design Examples" 
-                          className="w-full h-auto"
+                        <img
+                          src="/assets/images/content/landing-pages.png"
+                          className="w-full h-full object-cover rounded-lg"
+                          alt="Landing Pages"
                         />
                       </div>
                       
@@ -350,18 +346,6 @@ export default function Services() {
                           </svg>
                         </div>
                       </motion.div>
-                      
-                      <motion.div 
-                        className="absolute -right-6 top-1/3 bg-orange-500 w-7 h-7 rounded-full flex items-center justify-center shadow-lg z-10"
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.7 }}
-                      >
-                        <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </motion.div>
                     </div>
                   </motion.div>
                 ) : index === 1 ? (
@@ -377,16 +361,16 @@ export default function Services() {
                     <div className="relative">
                       {/* Facebook Ads Image */}
                       <div className="bg-white rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(249,115,22,0.15)]">
-                        <img 
-                          src={facebookCampaignsImage} 
-                          alt="Facebook Campaigns Manager" 
-                          className="w-full h-auto"
+                        <img
+                          src="/assets/images/content/facebook-campaigns.png"
+                          className="w-full h-full object-cover rounded-lg"
+                          alt="Facebook Campaigns"
                         />
                       </div>
                       
                       {/* Floating elements */}
                       <motion.div 
-                        className="absolute -left-8 -bottom-4 bg-white p-2 rounded-lg shadow-lg z-10 shadow-orange-100/30"
+                        className="absolute -right-8 -bottom-4 bg-white p-2 rounded-lg shadow-lg z-10 shadow-orange-100/30"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -394,21 +378,9 @@ export default function Services() {
                       >
                         <div className="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center text-orange-500">
                           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                           </svg>
                         </div>
-                      </motion.div>
-                      
-                      <motion.div 
-                        className="absolute -left-6 top-1/3 bg-orange-500 w-7 h-7 rounded-full flex items-center justify-center shadow-lg z-10"
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.7 }}
-                      >
-                        <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
                       </motion.div>
                     </div>
                   </motion.div>
@@ -425,10 +397,10 @@ export default function Services() {
                     <div className="relative">
                       {/* Lead Nurture Image */}
                       <div className="bg-white rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(249,115,22,0.15)]">
-                        <img 
-                          src={leadNurtureImage} 
-                          alt="Email Marketing Automation Flow" 
-                          className="w-full h-auto"
+                        <img
+                          src="/assets/images/content/lead-nurture.png"
+                          className="w-full h-full object-cover rounded-lg"
+                          alt="Lead Nurture"
                         />
                       </div>
                       
@@ -445,18 +417,6 @@ export default function Services() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                           </svg>
                         </div>
-                      </motion.div>
-                      
-                      <motion.div 
-                        className="absolute -right-6 top-1/3 bg-orange-500 w-7 h-7 rounded-full flex items-center justify-center shadow-lg z-10"
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.7 }}
-                      >
-                        <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
                       </motion.div>
                     </div>
                   </motion.div>
