@@ -43,28 +43,28 @@ export default function FeaturedCaseStudy() {
   const caseStudyCards = [
     { 
       id: 1, 
-      title: "TRANSFORM YOUR LOFT",
-      price: "$13.45 PER WEEK",
-      bgColor: "from-blue-500/90 to-blue-700/90",
-      bgImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"%3E%3Crect width=\"100\" height=\"100\" fill=\"%23b78d3b\"%3E%3C/rect%3E%3C/svg%3E')",
+      title: "FACEBOOK CAROUSEL ADS",
+      price: "3.2x ROI INCREASE",
+      bgColor: "from-orange-500/90 to-orange-700/90",
+      bgImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"%3E%3Crect width=\"100\" height=\"100\" fill=\"%23f97316\"%3E%3C/rect%3E%3C/svg%3E')",
       rotate: -20
     },
     { 
       id: 2, 
-      title: "FROM ONLY",
-      price: "£1.91 PER DAY",
-      features: ["Transparent pricing", "Zero interest", "Easy installation in 1 day", "Guaranteed Fixed Repayments", "No deposit needed - Pay As You Go"],
-      bgColor: "from-red-500/90 to-red-600/90",
-      bgImage: "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"%3E%3Crect width=\"100\" height=\"100\" fill=\"%23a93333\"%3E%3C/rect%3E%3C/svg%3E')",
+      title: "LEAD MAGNET OFFER",
+      price: "$8.40 COST PER LEAD",
+      features: ["Optimized landing page", "Multi-step form", "Re-engagement sequence", "Custom audience targeting", "A/B tested headlines"],
+      bgColor: "from-orange-400/90 to-orange-600/90",
+      bgImage: "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"%3E%3Crect width=\"100\" height=\"100\" fill=\"%23f97316\"%3E%3C/rect%3E%3C/svg%3E')",
       rotate: 0
     },
     { 
       id: 3, 
-      title: "TRANSFORM YOUR GARDEN",
-      subtitle: "EXCLUSIVE SUMMER OFFER",
-      cta: "GET STARTED TODAY",
-      bgColor: "from-green-500/90 to-green-700/90",
-      bgImage: "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"%3E%3Crect width=\"100\" height=\"100\" fill=\"%23338a33\"%3E%3C/rect%3E%3C/svg%3E')",
+      title: "LOCAL SERVICE ADS",
+      subtitle: "EXCLUSIVE CLIENT OFFER",
+      cta: "VIEW CASE STUDY",
+      bgColor: "from-orange-600/90 to-orange-800/90",
+      bgImage: "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"%3E%3Crect width=\"100\" height=\"100\" fill=\"%23f97316\"%3E%3C/rect%3E%3C/svg%3E')",
       rotate: 20
     }
   ];
@@ -117,6 +117,11 @@ export default function FeaturedCaseStudy() {
             }
           }}
         >
+          {/* Orange glow effects behind the cards */}
+          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full bg-orange-400/10 blur-3xl opacity-70 pointer-events-none"></div>
+          <div className="absolute left-1/3 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-orange-500/20 blur-3xl opacity-60 pointer-events-none"></div>
+          <div className="absolute right-1/3 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-orange-500/20 blur-3xl opacity-60 pointer-events-none"></div>
+          
           <div className="absolute inset-0 flex items-center justify-center perspective">
             {caseStudyCards.map((card, index) => {
               // Different positioning for mobile vs desktop
@@ -136,7 +141,7 @@ export default function FeaturedCaseStudy() {
                   style={{
                     transformStyle: 'preserve-3d',
                     perspective: '1600px',
-                    background: card.bgImage,
+                    backgroundImage: card.bgImage,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     originX: index < 2 ? 0.65 : 0.35 // Origin point for rotation
@@ -168,7 +173,8 @@ export default function FeaturedCaseStudy() {
                   }}
                   whileHover={{ 
                     y: -15, 
-                    scale: 1.05,
+                    scale: 1.08,
+                    boxShadow: "0 10px 30px -5px rgba(249, 115, 22, 0.4)",
                     transition: { duration: 0.3 } 
                   }}
                 >
@@ -207,7 +213,7 @@ export default function FeaturedCaseStudy() {
                           <h3 className="text-xl font-bold">{card.title}</h3>
                           <p className="text-sm font-medium mt-1 mb-auto">{card.subtitle}</p>
                           <div className="mt-auto">
-                            <button className="bg-white text-green-700 text-sm font-semibold py-1.5 px-3 rounded">
+                            <button className="bg-white text-orange-700 text-sm font-semibold py-1.5 px-3 rounded-md hover:bg-orange-50 transition-colors">
                               {card.cta}
                             </button>
                           </div>
