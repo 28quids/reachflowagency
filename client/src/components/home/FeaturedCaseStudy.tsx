@@ -1,10 +1,26 @@
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/utils";
 import { Link } from "wouter";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function FeaturedCaseStudy() {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+  // Fallback to window size if hook fails
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+  
+  useEffect(() => {
+    // Update window width on resize
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   // Animation variants
   const fadeUpVariant = {
@@ -23,7 +39,7 @@ export default function FeaturedCaseStudy() {
     </svg>
   );
   
-  // Placeholder images for the carousel with updated content to match the reference image
+  // Reduced to 3 cards with better spacing for fan effect
   const caseStudyCards = [
     { 
       id: 1, 
@@ -31,7 +47,7 @@ export default function FeaturedCaseStudy() {
       price: "$13.45 PER WEEK",
       bgColor: "from-blue-500/90 to-blue-700/90",
       bgImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"%3E%3Crect width=\"100\" height=\"100\" fill=\"%23b78d3b\"%3E%3C/rect%3E%3C/svg%3E')",
-      rotate: 12
+      rotate: -20
     },
     { 
       id: 2, 
@@ -40,7 +56,7 @@ export default function FeaturedCaseStudy() {
       features: ["Transparent pricing", "Zero interest", "Easy installation in 1 day", "Guaranteed Fixed Repayments", "No deposit needed - Pay As You Go"],
       bgColor: "from-red-500/90 to-red-600/90",
       bgImage: "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"%3E%3Crect width=\"100\" height=\"100\" fill=\"%23a93333\"%3E%3C/rect%3E%3C/svg%3E')",
-      rotate: 4
+      rotate: 0
     },
     { 
       id: 3, 
@@ -49,16 +65,7 @@ export default function FeaturedCaseStudy() {
       cta: "GET STARTED TODAY",
       bgColor: "from-green-500/90 to-green-700/90",
       bgImage: "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"%3E%3Crect width=\"100\" height=\"100\" fill=\"%23338a33\"%3E%3C/rect%3E%3C/svg%3E')",
-      rotate: -4
-    },
-    { 
-      id: 4, 
-      title: "FIND YOUR DREAM DRESS",
-      subtitle: "",
-      cta: "",
-      bgColor: "from-purple-300/90 to-purple-500/90",
-      bgImage: "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"%3E%3Crect width=\"100\" height=\"100\" fill=\"%239672b8\"%3E%3C/rect%3E%3C/svg%3E')",
-      rotate: -12
+      rotate: 20
     }
   ];
 
@@ -96,7 +103,7 @@ export default function FeaturedCaseStudy() {
         
         {/* 3D Angled Cards Display - Inspired by reference image */}
         <motion.div 
-          className="relative h-[420px] sm:h-[380px] md:h-[400px]"
+          className="relative h-[500px] sm:h-[400px] md:h-[420px]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -104,7 +111,7 @@ export default function FeaturedCaseStudy() {
             hidden: {},
             visible: {
               transition: {
-                staggerChildren: 0.2,
+                staggerChildren: 0.3,
                 delayChildren: 0.1
               }
             }
@@ -112,10 +119,15 @@ export default function FeaturedCaseStudy() {
         >
           <div className="absolute inset-0 flex items-center justify-center perspective">
             {caseStudyCards.map((card, index) => {
-              // Calculate position for the fan-out effect
-              const xPos = ((index - 1.5) * 140); // More spacing for fan-out
-              const zPos = -Math.abs((index - 1.5) * 10); // Less z-depth difference
-              const calculatedRotate = index === 0 ? -25 : index === 1 ? -8 : index === 2 ? 8 : 25; // More dramatic fan angles
+              // Different positioning for mobile vs desktop
+              // On small screens, stack the cards vertically
+              const mobileLayout = isMobile || windowWidth < 768;
+              // Calculate position for the fan-out effect with 3 cards on desktop
+              const xPos = mobileLayout ? 0 : ((index - 1) * 270); // Even wider spacing for cleaner fan-out
+              const yPos = mobileLayout ? (index * 70) - 60 : 0; // Vertical stacking on mobile, centered
+              const zPos = -Math.abs((index - 1) * 5); // Very subtle z-depth
+              // Use less dramatic angles on mobile
+              const calculatedRotate = mobileLayout ? (index === 0 ? -5 : index === 1 ? 0 : 5) : card.rotate;
               
               return (
                 <motion.div
@@ -140,12 +152,12 @@ export default function FeaturedCaseStudy() {
                     },
                     visible: { 
                       opacity: 1, 
-                      y: 0,
+                      y: yPos, // Use yPos for vertical positioning on mobile
                       x: xPos,
                       rotateY: calculatedRotate,
                       z: zPos,
                       scale: 1,
-                      zIndex: index === 1 ? 30 : index === 2 ? 40 : index === 3 ? 20 : 10,
+                      zIndex: index === 1 ? 30 : index === 0 ? 20 : 40, // Middle card on top for desktop
                       transition: { 
                         duration: 0.8,
                         type: "spring",
