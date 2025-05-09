@@ -4,10 +4,10 @@ import { Link } from "wouter";
 import { useRef, useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-// Import actual images for the case study cards
-import leadGenAutomationImage from "@assets/Untitled design - 2025-05-08T171047.826.png";
-import adCampaignDashboardImage from "@assets/Untitled design - 2025-05-08T171057.736.png";
-import caseStudyCollageImage from "@assets/Untitled design - 2025-05-08T171321.401.png";
+// New client project images for the case study cards
+const greenHomePathImage = "/assets/images/GreenHomePath.png";
+const tradingIQImage = "/assets/images/TradingIQ.png";
+const greenHomePath2Image = "/assets/images/GreenHomePath2.png";
 
 export default function FeaturedCaseStudy() {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -44,25 +44,25 @@ export default function FeaturedCaseStudy() {
     </svg>
   );
   
-  // Actual image cards for case study
+  // Client project cards for showcase
   const caseStudyCards = [
     { 
       id: 1,
-      title: "LEAD AUTOMATION FLOW",
+      title: "GREENHOMEPATH",
       rotate: -30, // Increased angle for more dramatic fan effect
-      imageUrl: leadGenAutomationImage,
+      imageUrl: greenHomePathImage,
     },
     { 
       id: 2,
-      title: "CAMPAIGN DASHBOARD",
+      title: "TRADINGIQ",
       rotate: 0, // Middle card stays straight
-      imageUrl: adCampaignDashboardImage,
+      imageUrl: tradingIQImage,
     },
     { 
       id: 3,
-      title: "CLIENT LANDING PAGES",
+      title: "REAL ESTATE CAMPAIGN",
       rotate: 30, // Increased angle for more dramatic fan effect
-      imageUrl: caseStudyCollageImage,
+      imageUrl: greenHomePath2Image,
     }
   ];
 
