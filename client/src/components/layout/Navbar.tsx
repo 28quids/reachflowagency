@@ -1,30 +1,119 @@
 import { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [location, setLocation] = useLocation();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const handleLogoClick = () => {
+    // Logo just goes to home page relative to where you left off
+    window.location.href = '/';
+  };
+
+  const handleServicesClick = () => {
+    if (location !== '/') {
+      // If not on home page, navigate to home first
+      setLocation('/');
+      // Wait for navigation to complete before scrolling
+      setTimeout(() => {
+        const element = document.getElementById('services');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // If already on home page, scroll to services section
+      const element = document.getElementById('services');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleWorkClick = () => {
+    if (location !== '/') {
+      // If not on home page, navigate to home first
+      setLocation('/');
+      // Wait for navigation to complete before scrolling
+      setTimeout(() => {
+        const element = document.getElementById('featured-case-study');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // If already on home page, scroll to featured case study section
+      const element = document.getElementById('featured-case-study');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleAuditClick = () => {
+    // Free audit always goes to top of audit page
+    window.location.href = '/audit';
+  };
+
+  const handleContactClick = () => {
+    if (location !== '/audit') {
+      // If not on audit page, navigate to audit page first
+      setLocation('/audit');
+      // Wait for navigation to complete before scrolling
+      setTimeout(() => {
+        const element = document.getElementById('audit-form');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // If already on audit page, scroll to audit form section
+      const element = document.getElementById('audit-form');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-lg shadow-sm border-b border-gray-100/30">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link href="/" className="flex items-center space-x-1">
+        <button onClick={handleLogoClick} className="flex items-center space-x-1">
           {/* ReachFlow Logo */}
           <img src="/assets/images/logo.png" alt="ReachFlow Logo" className="h-12 w-auto" />
-        </Link>
+        </button>
         
         <div className="hidden md:flex items-center space-x-8">
-          <a href="#services" className="font-medium text-gray-700 hover:text-orange-600 transition-colors">Services</a>
-          <a href="#work" className="font-medium text-gray-700 hover:text-orange-600 transition-colors">Our Work</a>
-          <Link href="/audit" className="font-medium text-gray-700 hover:text-orange-600 transition-colors">Free Audit</Link>
-          <Link href="/audit" className="gradient-bg text-white px-4 py-2 rounded-lg font-medium hover:shadow-lg hover:brightness-110 transition-all">
+          <button 
+            onClick={handleServicesClick}
+            className="font-medium text-gray-700 hover:text-orange-600 transition-colors"
+          >
+            Services
+          </button>
+          <button 
+            onClick={handleWorkClick}
+            className="font-medium text-gray-700 hover:text-orange-600 transition-colors"
+          >
+            Our Work
+          </button>
+          <button 
+            onClick={handleAuditClick}
+            className="font-medium text-gray-700 hover:text-orange-600 transition-colors"
+          >
+            Free Audit
+          </button>
+          <button 
+            onClick={handleContactClick}
+            className="gradient-bg text-white px-4 py-2 rounded-lg font-medium hover:shadow-lg hover:brightness-110 transition-all"
+          >
             Contact Us
-          </Link>
+          </button>
         </div>
         
         <div className="md:hidden">
@@ -48,16 +137,42 @@ export default function Navbar() {
         }}
       >
         <div className="flex flex-col space-y-4">
-          <a href="#services" className="font-medium text-gray-700 hover:text-orange-600 transition-colors" onClick={() => setMobileMenuOpen(false)}>Services</a>
-          <a href="#work" className="font-medium text-gray-700 hover:text-orange-600 transition-colors" onClick={() => setMobileMenuOpen(false)}>Our Work</a>
-          <Link href="/audit" className="font-medium text-gray-700 hover:text-orange-600 transition-colors" onClick={() => setMobileMenuOpen(false)}>Free Audit</Link>
-          <Link 
-            href="/audit" 
-            className="gradient-bg text-white px-4 py-2 rounded-lg font-medium text-center hover:shadow-lg hover:brightness-110 transition-all" 
-            onClick={() => setMobileMenuOpen(false)}
+          <button 
+            onClick={() => {
+              handleServicesClick();
+              setMobileMenuOpen(false);
+            }} 
+            className="font-medium text-gray-700 hover:text-orange-600 transition-colors text-left"
+          >
+            Services
+          </button>
+          <button 
+            onClick={() => {
+              handleWorkClick();
+              setMobileMenuOpen(false);
+            }} 
+            className="font-medium text-gray-700 hover:text-orange-600 transition-colors text-left"
+          >
+            Our Work
+          </button>
+          <button 
+            onClick={() => {
+              handleAuditClick();
+              setMobileMenuOpen(false);
+            }}
+            className="font-medium text-gray-700 hover:text-orange-600 transition-colors text-left"
+          >
+            Free Audit
+          </button>
+          <button 
+            onClick={() => {
+              handleContactClick();
+              setMobileMenuOpen(false);
+            }} 
+            className="gradient-bg text-white px-4 py-2 rounded-lg font-medium text-center hover:shadow-lg hover:brightness-110 transition-all"
           >
             Contact Us
-          </Link>
+          </button>
         </div>
       </motion.div>
     </nav>
