@@ -59,7 +59,14 @@ app.use((req, res, next) => {
   // Use port from environment or default to 5001
   // this serves both the API and the client
   const port = process.env.PORT || 5001;
-  server.listen(port, () => {
-    log(`serving on port ${port}`);
-  });
+  
+  // Only start the server if we're not in a serverless environment
+  if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    server.listen(port, () => {
+      log(`serving on port ${port}`);
+    });
+  }
+
+  // Export the Express app for Vercel
+  export default app;
 })();
