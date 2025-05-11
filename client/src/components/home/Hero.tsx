@@ -96,7 +96,7 @@ export default function Hero() {
         // Only keep the last 3
         return updated.length > 3 ? updated.slice(updated.length - 3) : updated;
       });
-    }, 2000); // 2 seconds per notification
+    }, 1700); // 1.7 seconds per notification
     return () => clearInterval(interval);
   }, []);
 
@@ -357,14 +357,9 @@ export default function Hero() {
           <div className="relative mt-2 mb-4" style={{ height: '84px', width: '320px', maxWidth: '100%' }}>
             <AnimatePresence initial={false}>
               {visibleNotifications.map((notification, index) => {
-                // Fixed positions: first on left, second on right, third on left
-                const positions = [
-                  { x: -8 },  // First notification: left
-                  { x: 8 },   // Second notification: right
-                  { x: -8 }   // Third notification: left
-                ];
-                const position = positions[index];
                 const y = index * 28; // notification height + margin
+                // Subtle left-right-left pattern
+                const xOffset = index === 0 ? -4 : index === 1 ? 4 : -4;
                 
                 return (
                   <motion.div
@@ -373,34 +368,48 @@ export default function Hero() {
                     style={{ top: y }}
                     initial={{ 
                       opacity: 0, 
-                      y: y + 40 
+                      y: y + 40,
+                      x: xOffset * 2,
+                      scale: 0.95
                     }}
                     animate={{ 
                       opacity: 1, 
-                      x: position.x,
-                      y: y 
+                      y: y,
+                      x: xOffset,
+                      scale: 1
                     }}
                     exit={{ 
                       opacity: 0, 
                       y: y - 40,
-                      transition: { duration: 0.3 }
+                      x: xOffset * 2,
+                      scale: 0.95,
+                      transition: { duration: 0.25 }
+                    }}
+                    whileHover={{
+                      scale: 1.02,
+                      transition: { duration: 0.15 }
                     }}
                     transition={{ 
                       type: "spring",
                       stiffness: 200,
                       damping: 20,
-                      mass: 0.5
+                      mass: 0.5,
+                      delay: index * 0.08
                     }}
                   >
-                    <div className={`${notification.color} bg-opacity-95 backdrop-blur-sm rounded-xl p-3 shadow-xl border border-white/20 relative`}>
-                      {/* Glow Effect */}
-                      <div className={`absolute -inset-1 ${notification.color.replace('bg-', 'bg-')} opacity-30 blur-md -z-10 rounded-xl`}></div>
+                    <div className={`${notification.color} bg-opacity-95 backdrop-blur-sm rounded-xl p-3 shadow-xl border border-white/20 relative hover:shadow-2xl transition-shadow duration-300`}>
+                      {/* Enhanced Glow Effect */}
+                      <div className={`absolute -inset-1 ${notification.color.replace('bg-', 'bg-')} opacity-30 blur-md -z-10 rounded-xl animate-pulse-subtle`}></div>
                       <div className="flex items-start text-white">
-                        <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 shadow-inner">
+                        <motion.div 
+                          className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 shadow-inner"
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                        >
                           <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                           </svg>
-                        </div>
+                        </motion.div>
                         <div className="flex-1">
                           <div className="flex justify-between">
                             <div className="font-bold text-sm">{notification.title}</div>
